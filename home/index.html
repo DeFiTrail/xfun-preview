@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+<title>X.FUN — Home</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap">
+
+<style>
+/* ============================================================
+   X.FUN — Home 换皮稿 v2
+   皮肤：OBSIDIAN 黑曜紫电（已定稿，单一皮肤）
+   结构：严格对齐原源码 home 的五段式营销骨架
+         hero → 三张理念卡 → How it Works → 孵化 → 生态 CTA → 合作方
+   新增：聪明钱造血（精简版展示板块）+ 引擎质押入口（仅入口，不含参数）
+   原则：首页不承载任何机制参数。档位、比例、费率、周期、名单
+         一律不外露，全部留在连接钱包后的内页。
+   ============================================================ */
+
+:root{
+  /* 品牌字 —— X.FUN 这个词在哪都长一样，logo 是品牌资产不是排版元素 */
+  --font-brand:"Instrument Sans","Noto Sans SC",system-ui,sans-serif;
+  --tr-brand:-.045em;
+
+  --bg:#000000;
+  --bg-2:#060409;
+  --surface:#0C0913;
+  --surface-2:#130F1E;
+  --line:rgba(160,120,255,.22);
+  --line-soft:rgba(255,255,255,.07);
+  --ink:#F5F2FC;
+  --ink-2:#CBC2E2;
+  --muted:#948BAE;
+  --accent:#9B6BFF;
+  --accent-2:#DDA9FF;
+  --accent-ink:#0B0612;
+  --accent-soft:rgba(155,107,255,.13);
+  --pos:#5CE1A6;
+  --neg:#FF5C8A;
+  --warn:#F5B841;
+  --warn-soft:rgba(245,184,65,.10);
+  --radius:16px;
+  --radius-lg:22px;
+  --pad-card:28px;
+  --card-shadow:0 26px 62px -40px rgba(155,107,255,.5);
+  --font-display:"Syne","Noto Sans SC",system-ui,sans-serif;
+  --font-body:"Outfit","Noto Sans SC",system-ui,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --font-zh:"Noto Sans SC","PingFang SC",sans-serif;
+  --w-display:800;
+  --tr-display:-.022em;
+  --tr-eyebrow:.18em;
+  --h1-size:clamp(34px,4.1vw,56px);
+  --h2-size:clamp(27px,3.2vw,44px);
+  --lh-display:1.05;
+}
+
+/* ============================ base ============================ */
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--bg);-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--font-body);font-size:15px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+.wrap{width:100%;max-width:1240px;margin-inline:auto;padding-inline:22px}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.zh{font-family:var(--font-zh);font-weight:400}
+.pos{color:var(--pos)}
+
+/* eyebrow ------------------------------------------------ */
+.eyebrow{
+  display:inline-flex;align-self:flex-start;align-items:center;gap:9px;
+  font-family:var(--font-mono);font-size:10.5px;font-weight:500;
+  letter-spacing:var(--tr-eyebrow);text-transform:uppercase;
+  background:var(--accent-soft);border:1px solid var(--line);
+  padding:5px 13px;border-radius:999px;color:var(--accent-2);
+}
+.eyebrow::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent-2);flex:none}
+
+/* headings ----------------------------------------------- */
+h1,h2,h3{margin:0;font-family:var(--font-display);font-weight:var(--w-display);letter-spacing:var(--tr-display);line-height:var(--lh-display);text-wrap:balance}
+.h1{font-size:var(--h1-size)}
+.h2{font-size:var(--h2-size)}
+.h3{font-family:var(--font-body);font-size:16px;font-weight:600;letter-spacing:.005em;line-height:1.35}
+.accent-line{
+  background:linear-gradient(96deg,var(--accent) 6%,var(--accent-2) 58%,#FF7AC8 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.brand{font-family:var(--font-brand);font-weight:700;font-style:normal;letter-spacing:var(--tr-brand)}
+.h1 .brand{font-size:.94em}
+.logo .brand{font-size:inherit;letter-spacing:var(--tr-brand)}
+
+.lead{color:var(--ink-2);font-size:15.5px;line-height:1.75;max-width:60ch}
+.sub-zh{color:var(--muted);font-size:13.5px;line-height:1.85}
+
+/* section ------------------------------------------------ */
+.section{padding-block:clamp(64px,7vw,112px);position:relative}
+.section + .section{border-top:1px solid var(--line-soft)}
+[id]{scroll-margin-top:84px}
+.section-head{display:flex;flex-direction:column;align-items:flex-start;gap:0;margin-bottom:clamp(30px,3.4vw,52px)}
+.section-head .eyebrow{margin-bottom:18px}
+.section-head .h2{margin-bottom:16px}
+.section-head .lead{margin:0}
+.section-head .sub-zh{margin-top:9px}
+
+/* cards -------------------------------------------------- */
+.card{
+  background:linear-gradient(158deg,rgba(155,107,255,.09),transparent 46%),var(--surface);
+  border:1px solid var(--line-soft);border-radius:var(--radius);
+  padding:var(--pad-card);box-shadow:var(--card-shadow);
+  position:relative;min-width:0;
+}
+.card-title{position:relative;padding-left:13px}
+.card-title::before{content:"";position:absolute;left:0;top:.16em;bottom:.16em;width:2px;border-radius:2px;background:var(--accent)}
+
+/* buttons ------------------------------------------------ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 26px;border-radius:var(--radius);
+  font-size:14px;font-weight:600;letter-spacing:.01em;
+  border:1px solid transparent;transition:.18s ease;white-space:nowrap;
+}
+.btn-primary{background:linear-gradient(100deg,var(--accent),#C77BFF);color:var(--accent-ink);box-shadow:0 10px 26px -16px rgba(155,107,255,.7)}
+.btn-primary:hover{filter:brightness(1.08)}
+.btn-ghost{border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent-2)}
+.btn-sm{padding:10px 18px;font-size:13px}
+
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-mono);font-size:10px;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;
+  padding:4px 9px;border-radius:999px;
+  border:1px solid var(--line);color:var(--accent);background:var(--accent-soft);
+  white-space:nowrap;
+}
+.chip-demo{color:var(--muted);border-color:var(--line-soft);background:none}
+.chip-new{background:var(--accent);color:var(--accent-ink);border-color:transparent;letter-spacing:.14em}
+
+.dot{width:6px;height:6px;border-radius:50%;background:var(--pos);box-shadow:0 0 0 3px color-mix(in srgb,var(--pos) 22%,transparent);flex:none}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.28}}
+.dot-live{animation:blink 1.9s ease-in-out infinite}
+
+/* ============================ nav ============================ */
+.nav{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft)}
+.nav-in{display:flex;align-items:center;gap:26px;height:70px}
+.logo{font-family:var(--font-brand);font-size:22px;font-weight:700;letter-spacing:var(--tr-brand);display:flex;align-items:center;gap:9px}
+.logo b{color:var(--accent);font-weight:inherit;margin-inline:-.02em}
+.logo-mark{width:22px;height:22px;flex:none}
+.nav-links{display:none;gap:5px;margin-left:8px}
+.nav-links a{padding:7px 13px;border-radius:var(--radius);font-size:13.5px;color:var(--ink-2);transition:.16s}
+.nav-links a:hover{color:var(--ink);background:var(--accent-soft)}
+.nav-links a.on{color:var(--accent-2)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.nav-lang{font-family:var(--font-mono);font-size:11.5px;color:var(--muted);letter-spacing:.1em}
+@media(min-width:1000px){.nav-links{display:flex}}
+
+/* ============================ hero ============================ */
+.hero{position:relative;padding-block:clamp(52px,5.4vw,88px) clamp(38px,3.8vw,62px);overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:-160px -10% auto;height:700px;pointer-events:none;
+  background:
+    radial-gradient(40% 44% at 26% 8%,rgba(155,107,255,.26),transparent 68%),
+    radial-gradient(38% 40% at 78% 22%,rgba(255,90,180,.15),transparent 66%);
+  filter:blur(14px);
+}
+.hero-grid{position:relative;display:grid;gap:clamp(28px,4vw,54px);grid-template-columns:minmax(0,1fr);text-align:center;justify-items:center}
+.hero-copy{display:flex;flex-direction:column;gap:0;align-items:center;max-width:940px}
+.hero-copy .eyebrow{margin-bottom:20px;align-self:center}
+.hero-copy .h1{margin-bottom:24px}
+.hero-copy .lead{margin:0;max-width:58ch}
+.hero-copy .sub-zh{margin-top:12px;max-width:680px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:34px}
+
+/* stat strip --------------------------------------------- */
+.stats{width:100%;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:clamp(30px,3.4vw,46px)}
+.stat{
+  background:linear-gradient(160deg,rgba(155,107,255,.12),transparent 60%),var(--surface);
+  border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--card-shadow);
+  padding:20px 18px;display:flex;flex-direction:column;gap:6px;text-align:left;
+}
+.stat-k{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.stat-v{font-family:var(--font-mono);font-size:clamp(21px,2.3vw,29px);font-weight:500;color:var(--accent-2);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.stat-n{font-size:11.5px;color:var(--muted)}
+@media(min-width:820px){.stats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* ============================ 理念三卡（原 homeTop 下半段） ============================ */
+.cards-3{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+.cards-3 .card{display:flex;flex-direction:column}
+@media(min-width:820px){.cards-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.idea-n{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.18em;color:var(--accent);margin-bottom:16px;display:block}
+.idea-t{font-family:var(--font-display);font-size:20px;font-weight:var(--w-display);letter-spacing:var(--tr-display);line-height:1.2;margin-bottom:10px}
+.idea-p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.8}
+
+/* ============================ 造血看板（移植自 FLC / Fulcrum SmartMoneyView，首页精简版） ============================ */
+.hema{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:1000px){
+  .hema{grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);align-items:start}
+  .hema .span2{grid-column:1 / -1}
+}
+.scope{font-size:10px;color:var(--muted);opacity:.8;margin-top:3px;line-height:1.4;font-family:var(--font-mono);letter-spacing:.06em}
+.lb2{font-family:var(--font-mono);font-size:9.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.rowb{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+.addr-box{display:flex;align-items:center;gap:10px;margin-top:12px;padding:11px 13px;background:rgba(0,0,0,.34);border:1px solid var(--line-soft);border-radius:var(--radius);font-family:var(--font-mono);font-size:12.5px;color:var(--ink-2);cursor:pointer;transition:.16s}
+.addr-box:hover{border-color:var(--line);color:var(--ink)}
+.addr-box .go{color:var(--accent-2);margin-left:auto;font-size:11px;white-space:nowrap}
+.vault-meta{display:flex;gap:9px;margin-top:12px}
+.vault-meta > div{flex:1;background:rgba(0,0,0,.3);border-radius:var(--radius);padding:11px 12px;min-width:0}
+
+.warn{background:var(--warn-soft);border:1px solid color-mix(in srgb,var(--warn) 34%,transparent);border-radius:var(--radius);padding:13px 15px;display:flex;gap:10px;align-items:flex-start}
+.warn__i{color:var(--warn);font-size:13px;line-height:1.35;flex:none}
+.warn__t{color:var(--warn);font-weight:600}
+.warn p{margin:0;font-size:11.5px;line-height:1.7;color:var(--ink-2)}
+
+.eq{display:block;width:100%;height:108px;overflow:visible;margin-top:16px}
+.tri{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;text-align:center;min-width:0;margin-top:16px;padding-top:16px;border-top:1px solid var(--line-soft)}
+
+.wr-bar{display:flex;height:8px;border-radius:99px;overflow:hidden;gap:2px;margin-top:14px}
+.wr-bar i{display:block;border-radius:99px}
+
+.loop2{display:block;width:100%;min-width:620px;height:auto;overflow:visible}
+.loop2-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:0}
+.lp-ring{fill:var(--accent-soft);stroke:var(--accent);stroke-opacity:.5}
+.lp-n{fill:var(--accent);font-family:var(--font-mono);font-size:15px;font-weight:500}
+.lp-t{fill:var(--ink);font-family:var(--font-body);font-size:14px;font-weight:650}
+.lp-s{fill:var(--muted);font-family:var(--font-zh);font-size:11px}
+.lp-line{stroke:var(--line);stroke-width:1.4;fill:none}
+.lp-back{stroke:var(--accent);stroke-opacity:.3;stroke-width:1.2;stroke-dasharray:4 5;fill:none}
+.lp-dot{fill:var(--accent-2)}
+
+.loop-m{display:none;list-style:none;margin:16px 0 0;padding:0}
+.loop-m li{display:flex;gap:14px;position:relative;padding-bottom:20px}
+.loop-m li:last-child{padding-bottom:4px}
+.loop-m li::before{
+  content:"";position:absolute;left:15px;top:34px;bottom:2px;width:1px;
+  background:linear-gradient(180deg,var(--line),transparent);
+}
+.loop-m li:last-child::before{display:none}
+.loop-m .n{
+  width:31px;height:31px;flex:none;border-radius:50%;display:grid;place-items:center;
+  background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 50%,transparent);
+  font-family:var(--font-mono);font-size:13px;color:var(--accent-2);position:relative;z-index:1;
+}
+.loop-m .t{font-size:14.5px;font-weight:650;color:var(--ink);line-height:1.3}
+.loop-m .s{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.6}
+.loop-back{
+  display:none;gap:9px;align-items:center;margin-top:2px;padding:11px 13px;
+  border:1px dashed color-mix(in srgb,var(--accent) 34%,transparent);border-radius:var(--radius);
+  font-size:12px;color:var(--muted);line-height:1.6;
+}
+.loop-back i{color:var(--accent-2);font-style:normal;flex:none}
+
+.dashed{border:1px dashed var(--line-soft);border-radius:var(--radius);padding:16px 18px;background:none}
+.scope-tbl{display:grid;gap:9px;margin-top:12px}
+.scope-tbl > div{display:flex;gap:12px;align-items:baseline;font-size:11.5px;color:var(--muted);line-height:1.6}
+.scope-tbl b{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2);font-weight:500;flex:none;width:76px}
+.link{color:var(--accent-2);cursor:pointer;font-size:12px}
+.link:hover{color:var(--accent)}
+
+/* ============================ 引擎质押入口（只有入口，参数在内页） ============================ */
+.gate{
+  display:grid;gap:clamp(24px,3vw,44px);grid-template-columns:minmax(0,1fr);align-items:center;
+  border:1px solid var(--line);border-radius:var(--radius-lg);
+  background:radial-gradient(74% 130% at 6% 0%,rgba(155,107,255,.17),transparent 62%),var(--surface);
+  padding:clamp(26px,3.4vw,44px);box-shadow:var(--card-shadow);
+}
+@media(min-width:960px){.gate{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}}
+.gate-h{font-family:var(--font-display);font-size:clamp(24px,2.7vw,34px);font-weight:var(--w-display);letter-spacing:var(--tr-display);line-height:1.15;margin:14px 0 14px}
+.rules{display:flex;flex-direction:column;gap:16px}
+.rule{display:flex;gap:14px;align-items:flex-start}
+.rule-n{font-family:var(--font-mono);font-size:11px;color:var(--accent-2);padding-top:3px;letter-spacing:.1em;flex:none}
+.rule .h3{font-size:15px}
+.rule p{margin:5px 0 0;font-size:13px;color:var(--muted);line-height:1.7}
+.note{font-size:12px;color:var(--muted);line-height:1.7;margin-top:18px;padding-top:16px;border-top:1px dashed var(--line-soft)}
+
+/* ============================ How it works ============================ */
+.mech{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:900px){.mech{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.mech .card{display:flex;flex-direction:column}
+.bul{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:13px}
+.bul li{display:flex;gap:11px;font-size:13.5px;color:var(--ink-2);line-height:1.7}
+.bul li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);flex:none;margin-top:.62em}
+.bul b{color:var(--ink);font-weight:600}
+
+/* ============================ 孵化项目 ============================ */
+.avatars{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.av{
+  width:58px;height:58px;border-radius:50%;flex:none;
+  border:1px solid var(--line);display:grid;place-items:center;
+  font-family:var(--font-mono);font-size:13px;letter-spacing:.02em;color:var(--accent-2);
+  background:linear-gradient(150deg,rgba(155,107,255,.22),rgba(255,90,180,.08));
+}
+.av.more{background:none;border-style:dashed;color:var(--muted);font-size:11px}
+
+/* ============================ 生态 CTA ============================ */
+.cta{
+  border:1px solid var(--line);border-radius:var(--radius-lg);
+  background:radial-gradient(60% 150% at 50% 0%,rgba(155,107,255,.20),transparent 66%),var(--surface);
+  padding:clamp(34px,4.4vw,64px) clamp(22px,3vw,44px);text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:0;box-shadow:var(--card-shadow);
+}
+.cta .eyebrow{align-self:center;margin-bottom:20px}
+.cta .h2{margin-bottom:16px}
+.cta .lead{max-width:52ch;margin:0}
+
+/* ============================ 合作方 ============================ */
+.logos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden}
+@media(min-width:700px){.logos{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:1000px){.logos{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.logos span{
+  background:var(--bg);display:grid;place-items:center;min-height:84px;padding:14px 10px;
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--muted);
+  text-align:center;transition:.2s;
+}
+.logos span:hover{color:var(--accent-2);background:var(--surface)}
+
+/* ============================ footer ============================ */
+.foot{border-top:1px solid var(--line-soft);padding-block:52px 12px;margin-top:24px}
+.foot-in{display:flex;flex-wrap:wrap;gap:26px 40px;justify-content:space-between;align-items:flex-start}
+.foot-links{display:flex;flex-wrap:wrap;gap:20px;font-size:13px;color:var(--muted)}
+.foot-links a{transition:.16s}
+.foot-links a:hover{color:var(--accent-2)}
+.foot-bottom{display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between;align-items:flex-end;
+  margin-top:40px;padding-top:22px;border-top:1px solid var(--line-soft)}
+.foot-note{font-size:11.5px;color:var(--muted);max-width:640px;line-height:1.85;margin:0}
+.foot-meta{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);opacity:.7;white-space:nowrap}
+
+/* ============================ H5 适配（≤640px） ============================ */
+@media (max-width:640px){
+  .wrap{padding-inline:16px}
+  .section{padding-block:clamp(46px,9vw,64px)}
+  :root{--pad-card:18px}
+
+  /* 字号下限 11px —— 移动端 10px 以下基本读不了 */
+  .eyebrow{font-size:11px;letter-spacing:.16em}
+  .eyebrow .brand{font-size:1em}
+  .foot-meta{font-size:11px}
+  .chip{font-size:11px;letter-spacing:.1em;padding:4px 10px}
+  .stat-k,.lb2,.scope{font-size:11px}
+  .rule p,.sub-zh,.foot-note,.idea-p{font-size:12.5px}
+  .idea-n{font-size:11px;letter-spacing:.16em}
+  .lead{font-size:14.5px}
+  .bul li{font-size:13px}
+
+  /* 闭环图在手机上改竖排流程，不做横向滚动 */
+  .loop2-wrap{display:none}
+  .loop-m{display:block}
+  .loop-back{display:flex}
+
+  .stat-v{font-size:clamp(18px,5.2vw,23px);letter-spacing:-.03em}
+  .stat{padding:16px 14px}
+  /* 两列并排时标签折行长度不一，给个两行的下限让数字基线对齐 */
+  .stat-k{min-height:2.8em;display:flex;align-items:flex-start}
+
+  /* 三列信息在窄屏改两列，避免每格只剩 90px */
+  .tri{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 10px}
+  .tri > :last-child{grid-column:1 / -1}
+
+  /* 点击目标 ≥44px */
+  .foot-links{gap:2px 18px}
+  .foot-links a{padding-block:11px;display:inline-block}
+  .nav-links a{padding-block:11px}
+  .link,.addr-box{min-height:44px}
+  .addr-box{align-items:center}
+  .btn{padding:14px 18px;width:100%}
+  /* 主标题在窄屏收一档，四行压成三行 */
+  :root{--h1-size:30px}
+  /* Builder / Launch / Stake 三个短标签并排，Buy 单独一行 —— 避免四个满宽按钮把首屏撑没 */
+  .hero-cta{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:28px}
+  .hero-cta .btn{padding:14px 8px;font-size:13.5px}
+  .hero-cta .btn:last-child{grid-column:1 / -1}
+  /* 引擎区的按钮组仍然竖排 */
+  #engine .hero-cta{grid-template-columns:minmax(0,1fr)}
+  #engine .hero-cta .btn:last-child{grid-column:auto}
+  .cta .hero-cta{grid-template-columns:minmax(0,1fr)}
+  .cta .hero-cta .btn:last-child{grid-column:auto}
+
+  .nav-in{height:60px;gap:12px}
+  .logo{font-size:20px}
+  .nav-lang{display:none}
+
+  .rowb{gap:12px}
+  .card .rowb{gap:10px}
+  .scope-tbl b{width:auto;min-width:58px;font-size:11px}
+  .av{width:50px;height:50px;font-size:12px}
+}
+
+/* 超窄屏（≤360px） */
+@media (max-width:360px){
+  .wrap{padding-inline:13px}
+  .tri{grid-template-columns:minmax(0,1fr)}
+  .tri > :last-child{grid-column:auto}
+  .stats{grid-template-columns:minmax(0,1fr)}
+  .vault-meta{flex-direction:column}
+}
+
+/* 触屏设备：不管宽度多少，点击目标都要够大 */
+@media (hover:none){
+  .foot-links{gap:2px 18px}
+  .foot-links a{padding-block:11px;display:inline-block}
+  .nav-links a{padding-block:11px}
+  .link{display:inline-block;padding-block:11px}
+  .addr-box{min-height:44px;align-items:center}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+</style>
+
+</head>
+<body>
+<div id="app">
+
+  <!-- ============================ NAV ============================ -->
+  <header class="nav">
+    <div class="wrap nav-in">
+      <a href="#" class="logo" aria-label="X.FUN 首页">
+        <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 3 L21 21 M21 3 L3 21" stroke="var(--accent)" stroke-width="2.1" stroke-linecap="round"/>
+          <circle cx="12" cy="12" r="3.1" fill="var(--bg)" stroke="var(--accent-2)" stroke-width="1.5"/>
+        </svg>
+        <span class="brand">X<b>.</b>FUN</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#loop" class="on">造血引擎</a>
+        <a href="#engine">引擎质押</a>
+        <a href="#works">运作机制</a>
+        <a href="#projects">孵化项目</a>
+        <a href="#eco">生态</a>
+      </nav>
+      <div class="nav-right">
+        <span class="nav-lang">EN / 中文</span>
+        <button class="btn btn-primary btn-sm">连接钱包</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================ HERO ============================
+       对应原源码 homeTop.vue 上半段：标题 + 副文案 + Builder/Launch/Stake 三按钮。
+       叙事扩展到「AI 聪明钱套利 + 闪电贷套利」，但只走文案，不落任何参数。
+  ================================================================= -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Fair Launch × On-chain Arbitrage</span>
+        <h1 class="h1">
+          Make meme greater —<br>
+          <span class="accent-line">now the engine pays for it.</span>
+        </h1>
+        <p class="lead">
+          <span class="brand">X.FUN</span> is a community-driven fair launch platform for BSC meme coins.
+          Behind it runs an on-chain arbitrage engine — smart-money strategies executed with flash loans,
+          settled atomically, recorded block by block.
+        </p>
+        <p class="sub-zh zh">
+          发射器负责让好项目公平地上线，套利引擎负责让这套生态自己造血。
+          两件事在同一条链上完成，每一笔都留痕、可查。
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#">Builder 共建</a>
+          <a class="btn btn-ghost" href="#">Launch 发射</a>
+          <a class="btn btn-ghost" href="#">Stake 质押</a>
+          <a class="btn btn-ghost" href="#">Buy <span class="brand" style="font-size:.94em">X.FUN</span> ↗</a>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-k">Engine Vault</span>
+          <span class="stat-v">$51.06M</span>
+          <span class="stat-n zh">引擎金库净值 · 当前时点</span>
+        </div>
+        <div class="stat">
+          <span class="stat-k">Cumulative Profit</span>
+          <span class="stat-v">+$8.47M</span>
+          <span class="stat-n zh">累计套利净利 · 全周期</span>
+        </div>
+        <div class="stat">
+          <span class="stat-k">Projects Launched</span>
+          <span class="stat-v">36</span>
+          <span class="stat-n zh">已通过审核并发射</span>
+        </div>
+        <div class="stat">
+          <span class="stat-k">LP Lock</span>
+          <span class="stat-v">1 Year</span>
+          <span class="stat-n zh">流动性强制锁仓期</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ 理念三卡 ============================
+       对应原源码 homeTop.vue 下半段 a14–a19，三条理念，措辞保持定性、不带参数。
+  ================================================================= -->
+  <section class="section" style="background:var(--bg-2)">
+    <div class="wrap">
+      <div class="cards-3">
+        <div class="card">
+          <span class="idea-n">01 / FAIRNESS</span>
+          <div class="idea-t">Radical Fairness</div>
+          <p class="idea-p zh">
+            动态额度上限（反巨鲸机制）+ 全程透明看板。把传统发射里那些先手优势拿掉，
+            让每一个参与者面对同一套规则。
+          </p>
+        </div>
+        <div class="card">
+          <span class="idea-n">02 / GOVERNANCE</span>
+          <div class="idea-t">Community-Centric Governance</div>
+          <p class="idea-p zh">
+            绝大部分代币通过 DAO 质押池释放，而不是团队预留。
+            经济模型由社区设计，也由社区承担后果。
+          </p>
+        </div>
+        <div class="card">
+          <span class="idea-n">03 / PROTECTION</span>
+          <div class="idea-t">Anti-Rug Pull Protection</div>
+          <p class="idea-p zh">
+            三层审核 + 流动性一年锁仓。把纯粹的短线套壳项目挡在门外，
+            让「meme 发射」这件事重新值得被信任。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ 聪明钱造血（首页精简版） ============================
+       结构移植自 FLC / Fulcrum 的 SmartMoneyView。
+       首页只举证「引擎会不会赚钱」四件事：金库、净值、执行记录、利润去向。
+       活跃路径、逐笔价差、单笔规模 —— 全部下沉到 dApp 内页，首页不展示。
+  ================================================================================= -->
+  <section class="section" id="loop">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Smart Money Hematopoiesis</span>
+        <h2 class="h2">The engine <span class="accent-line">earns it.</span></h2>
+        <p class="lead">
+          Yield is not printed. This board is the evidence: the engine's own vault,
+          its net value curve, its execution record, and where the profit goes.
+        </p>
+        <p class="sub-zh zh">聪明钱造血 —— 本板块只负责举证引擎的赚钱能力。逐笔链路、活跃路径与执行明细在 dApp 内查看。</p>
+      </div>
+
+      <div class="hema">
+
+        <!-- 引擎金库 -->
+        <div class="card">
+          <div class="rowb">
+            <span class="chip">链上数据 On-chain</span>
+            <span class="chip chip-demo">快照 · 09-05 06:10 UTC</span>
+          </div>
+          <div class="h3 card-title" style="font-size:19px;margin-top:14px"><span class="brand">X.FUN</span> 套利引擎金库</div>
+          <div class="addr-box">
+            <span>0x7C1f9a…4bA93E</span>
+            <span class="go">复制地址 ›</span>
+          </div>
+          <div class="vault-meta">
+            <div>
+              <div class="mono pos" style="font-size:15px">+112.4%</div>
+              <div class="lb2" style="margin-top:4px">年化 APR</div>
+            </div>
+            <div>
+              <div class="mono" style="font-size:15px">$48.21M</div>
+              <div class="lb2" style="margin-top:4px">引擎本金规模</div>
+            </div>
+          </div>
+          <p class="sub-zh zh" style="margin-top:13px;font-size:12px">
+            持仓、执行与盈亏来自链上公开数据，逐笔链路可在 dApp 内查看。本板块仅作举证，不提供质押入口。
+          </p>
+        </div>
+
+        <!-- 引擎净值 -->
+        <div class="card">
+          <div class="rowb">
+            <div>
+              <div class="lb2 card-title">引擎净值 Net Value</div>
+              <div class="mono" style="font-size:clamp(28px,3.4vw,38px);margin-top:6px;letter-spacing:-.03em">$51.06M</div>
+              <div class="scope">当前时点 · As of last sync</div>
+            </div>
+            <div style="text-align:right">
+              <div class="lb2">近 30 日</div>
+              <div class="mono pos" style="font-size:19px;margin-top:6px">+9.42%</div>
+            </div>
+          </div>
+
+          <svg class="eq" viewBox="0 0 600 108" preserveAspectRatio="none" role="img" aria-label="引擎净值 30 日曲线，期末高于期初">
+            <defs>
+              <linearGradient id="eqf" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="var(--accent)" stop-opacity=".26"></stop>
+                <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"></stop>
+              </linearGradient>
+            </defs>
+            <polygon id="eqArea" points="" fill="url(#eqf)"></polygon>
+            <polyline id="eqLine" points="" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline>
+            <circle id="eqDot" r="3.4" fill="var(--accent-2)" cx="0" cy="0"></circle>
+            <circle id="eqHalo" r="8" fill="var(--accent-2)" opacity=".2" cx="0" cy="0">
+              <animate attributeName="r" values="4;11;4" dur="2.6s" repeatCount="indefinite"></animate>
+              <animate attributeName="opacity" values=".3;0;.3" dur="2.6s" repeatCount="indefinite"></animate>
+            </circle>
+          </svg>
+
+          <div class="tri">
+            <div>
+              <div class="mono pos" style="font-size:16px">+$8.47M</div>
+              <div class="lb2" style="margin-top:4px">累计套利净利</div>
+              <div class="scope">全周期</div>
+            </div>
+            <div>
+              <div class="mono" style="font-size:16px">$1.94B</div>
+              <div class="lb2" style="margin-top:4px">闪电贷本金量</div>
+              <div class="scope">近 30 日内</div>
+            </div>
+            <div>
+              <div class="mono" style="font-size:16px">4,682</div>
+              <div class="lb2" style="margin-top:4px">执行笔数</div>
+              <div class="scope">索引区间</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 示例数据警示（接口未连通时的降级形态，按 FLC 规范保留） -->
+        <div class="warn span2">
+          <span class="warn__i" aria-hidden="true">⚠</span>
+          <p>
+            <span class="warn__t">当前为示例数据</span>：未能连接链上数据接口，本板块数值仅用于演示页面布局，并非真实业绩。
+            接口连通后会自动替换为链上实时数据。
+          </p>
+        </div>
+
+        <!-- 执行成功率 -->
+        <div class="card">
+          <div class="rowb">
+            <div>
+              <div class="h3 card-title" style="font-size:15px">执行成功率 Execution Record</div>
+              <div class="scope" style="margin-top:5px">最近 4,682 笔执行 · 08-29 ~ 09-05</div>
+            </div>
+            <span class="mono" style="font-size:23px">93.6<span style="font-size:13px;color:var(--muted)">%</span></span>
+          </div>
+          <div class="wr-bar" aria-hidden="true">
+            <i style="width:93.6%;background:linear-gradient(90deg,var(--accent),var(--accent-2))"></i>
+            <i style="width:6.4%;background:var(--neg)"></i>
+          </div>
+          <div class="rowb" style="margin-top:15px">
+            <div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted)">
+                <i class="dot" style="background:var(--accent);box-shadow:none"></i>成交 4,382
+              </div>
+              <div class="mono pos" style="font-size:15px;margin-top:5px">+$412,880.44</div>
+            </div>
+            <div style="text-align:right">
+              <div style="display:flex;align-items:center;gap:7px;justify-content:flex-end;font-size:12px;color:var(--muted)">
+                <i class="dot" style="background:var(--neg);box-shadow:none"></i>回滚 300
+              </div>
+              <div class="mono" style="font-size:15px;margin-top:5px;color:var(--neg)">−$1,904.20</div>
+            </div>
+          </div>
+          <p class="sub-zh zh" style="margin-top:13px;font-size:11.5px;opacity:.85">
+            ＊闪电贷未达阈值即原子回滚，只损耗 gas，不损耗本金。成功率基于接口返回的最近执行统计，非全历史。
+          </p>
+        </div>
+
+        <!-- 造血闭环 -->
+        <div class="card">
+          <div class="lb2 card-title">盈利造血闭环 The Profit Loop</div>
+          <div class="loop2-wrap" style="margin-top:14px">
+            <svg class="loop2" viewBox="0 0 660 176" role="img" aria-label="造血闭环四步：执行、留痕、核验、回流，费流回到引擎本金">
+              <g>
+                <circle class="lp-ring" cx="72"  cy="46" r="27"></circle>
+                <text class="lp-n" x="72"  y="52" text-anchor="middle">1</text>
+                <text class="lp-t" x="72"  y="100" text-anchor="middle">执行</text>
+                <text class="lp-s" x="72"  y="120" text-anchor="middle">单区块原子成交</text>
+
+                <circle class="lp-ring" cx="248" cy="46" r="27"></circle>
+                <text class="lp-n" x="248" y="52" text-anchor="middle">2</text>
+                <text class="lp-t" x="248" y="100" text-anchor="middle">留痕</text>
+                <text class="lp-s" x="248" y="120" text-anchor="middle">逐笔写入链上</text>
+
+                <circle class="lp-ring" cx="424" cy="46" r="27"></circle>
+                <text class="lp-n" x="424" y="52" text-anchor="middle">3</text>
+                <text class="lp-t" x="424" y="100" text-anchor="middle">核验</text>
+                <text class="lp-s" x="424" y="120" text-anchor="middle">站内逐笔链路可查</text>
+
+                <circle class="lp-ring" cx="600" cy="46" r="27"></circle>
+                <text class="lp-n" x="600" y="52" text-anchor="middle">4</text>
+                <text class="lp-t" x="600" y="100" text-anchor="middle">回流</text>
+                <text class="lp-s" x="600" y="120" text-anchor="middle">利润回到引擎与生态</text>
+              </g>
+              <g>
+                <path class="lp-line" d="M101 46 H219"></path>
+                <path class="lp-line" d="M277 46 H395"></path>
+                <path class="lp-line" d="M453 46 H571"></path>
+                <circle class="lp-dot" r="2.6"><animateMotion dur="1.9s" repeatCount="indefinite" path="M101 46 H219"></animateMotion></circle>
+                <circle class="lp-dot" r="2.6"><animateMotion dur="2.1s" repeatCount="indefinite" path="M277 46 H395"></animateMotion></circle>
+                <circle class="lp-dot" r="2.6"><animateMotion dur="2.3s" repeatCount="indefinite" path="M453 46 H571"></animateMotion></circle>
+              </g>
+              <path class="lp-back" d="M627 62 Q660 118 336 152 Q12 118 45 62"></path>
+              <text class="lp-s" x="336" y="170" text-anchor="middle">费流回到引擎本金 · 规模变大 · 下一轮单笔更大</text>
+            </svg>
+          </div>
+
+          <ol class="loop-m zh">
+            <li><span class="n">1</span><div><div class="t">执行</div><div class="s">单区块内完成借入、成交、归还，原子结算</div></div></li>
+            <li><span class="n">2</span><div><div class="t">留痕</div><div class="s">每一笔逐笔写入链上，不依赖后台记账</div></div></li>
+            <li><span class="n">3</span><div><div class="t">核验</div><div class="s">站内可逐笔查看链路，地址与哈希可复制</div></div></li>
+            <li><span class="n">4</span><div><div class="t">回流</div><div class="s">利润回到引擎本金与生态</div></div></li>
+          </ol>
+          <div class="loop-back"><i>↺</i><span>费流回到引擎本金 · 规模变大 · 下一轮单笔更大</span></div>
+
+          <p class="sub-zh zh" style="margin-top:14px;font-size:12px">
+            每一笔执行都在链上留痕。利润的具体分配比例以合约与公告为准，在 dApp 内可查。
+          </p>
+        </div>
+
+        <!-- 口径说明 -->
+        <div class="dashed span2">
+          <div class="rowb">
+            <div class="lb2">统计口径 Reporting Scope</div>
+            <span class="link">刷新</span>
+          </div>
+          <div class="scope-tbl">
+            <div><b>当前时点</b><span>引擎净值、金库规模 —— 取最近一次同步时的状态</span></div>
+            <div><b>全周期</b><span>累计套利净利 —— 覆盖引擎上线至今的全部执行</span></div>
+            <div><b>近 30 日</b><span>净值曲线、30 日收益率、闪电贷本金量</span></div>
+            <div><b>索引区间</b><span>执行成功率与笔数 —— 仅覆盖接口返回的最近 4,682 笔，非全历史</span></div>
+          </div>
+          <p class="sub-zh zh" style="margin-top:14px;font-size:11.5px;opacity:.85">
+            所有链路在站内呈现，地址与哈希提供复制，不外跳第三方区块浏览器。
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ 引擎质押 · 入口 ============================
+       脑图里标为「新增」的部分。首页只放入口与定性说明。
+       额度、周期、费率、批次、名单 —— 一律不在首页出现，连接钱包后在 /engine 内页展示。
+  ===================================================================== -->
+  <section class="section" id="engine" style="background:var(--bg-2)">
+    <div class="wrap">
+      <div class="gate">
+        <div>
+          <span class="chip chip-new">New · 新增</span>
+          <h2 class="gate-h">把引擎的赚钱能力<br><span class="accent-line">开放给持币人。</span></h2>
+          <p class="lead" style="font-size:15px">
+            引擎质押是 <span class="brand">X.FUN</span> 新增的参与方式：你把资产质押进套利引擎，
+            引擎拿去跑链上套利，收益按合约约定回到你的地址。
+          </p>
+          <p class="note zh">
+            额度、周期、费率与开放批次以合约和站内公告为准，连接钱包后在引擎页展示。
+            本页不承载任何具体参数。
+          </p>
+          <div class="hero-cta" style="justify-content:flex-start;margin-top:24px">
+            <a class="btn btn-primary" href="#">进入引擎质押 ›</a>
+            <a class="btn btn-ghost" href="#loop">先看引擎战绩</a>
+          </div>
+        </div>
+
+        <div class="rules">
+          <div class="rule">
+            <span class="rule-n">01</span>
+            <div>
+              <div class="h3">本金不进单边仓位</div>
+              <p class="zh">引擎只做闪电贷套利，单区块内完成借入、成交、归还。未达阈值即原子回滚，只损耗 gas。</p>
+            </div>
+          </div>
+          <div class="rule">
+            <span class="rule-n">02</span>
+            <div>
+              <div class="h3">每一笔都在链上留痕</div>
+              <p class="zh">执行记录、盈亏与金库变动都写在链上，站内逐笔可查，不需要相信任何一张后台截图。</p>
+            </div>
+          </div>
+          <div class="rule">
+            <span class="rule-n">03</span>
+            <div>
+              <div class="h3">名额分批开放</div>
+              <p class="zh">引擎的承载规模有上限，名额按批次释放。当前批次状态与你的可用额度在引擎页实时显示。</p>
+            </div>
+          </div>
+          <div class="rule">
+            <span class="rule-n">04</span>
+            <div>
+              <div class="h3">退出规则以合约为准</div>
+              <p class="zh">解除质押的等待时间与手续费由合约执行，前端只做展示。确认前会完整列出这一笔的成本。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ How X.FUN Works ============================
+       对应原源码 about.vue，三张机制卡。措辞与原文一致，保持定性、不带参数。
+  ===================================================================== -->
+  <section class="section" id="works">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2 class="h2">How <span class="brand">X.FUN</span> <span class="accent-line">works.</span></h2>
+        <p class="lead">
+          Three mechanisms hold the platform together: how a launch runs, how a project gets in,
+          and how the staking economy keeps it alive.
+        </p>
+      </div>
+
+      <div class="mech">
+        <div class="card">
+          <span class="idea-n">01 / LAUNCH</span>
+          <div class="idea-t">Launch Mechanics</div>
+          <ul class="bul zh">
+            <li><span><b>公平准入</b>　单钱包分阶段认购上限，杜绝一次性吃掉整轮</span></li>
+            <li><span><b>限时参与</b>　募集窗口有明确的开始与结束，不做无限期开放</span></li>
+            <li><span><b>忠诚回报</b>　长期社区成员在分配上优先</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="idea-n">02 / SCREENING</span>
+          <div class="idea-t">Project Screening</div>
+          <ul class="bul zh">
+            <li><span><b>社区投票</b>　提案通过 Snapshot 表决</span></li>
+            <li><span><b>技术审计</b>　合约由第三方审计机构验证</span></li>
+            <li><span><b>KOL 背书</b>　经核实的意见领袖提供信用背书</span></li>
+            <li><span><b>流动性锁仓</b>　LP 通过多签强制锁定</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="idea-n">03 / STAKING</span>
+          <div class="idea-t">Staking Ecosystem</div>
+          <ul class="bul zh">
+            <li><span><b>被动收益</b>　按质押量获得相应回报</span></li>
+            <li><span><b>灵活解锁</b>　到期免费提取，提前解锁按档计费</span></li>
+            <li><span><b>阶梯奖励</b>　高质押用户获得推荐加成，手续费回流生态建设</span></li>
+            <li><span><b>DAO 主权</b>　代币释放需要链上治理批准</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ 孵化项目 ============================
+       对应原源码 incubation.vue：头像墙 + 一句 slogan。
+  ================================================================= -->
+  <section class="section" id="projects" style="background:var(--bg-2)">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Incubation Projects</span>
+        <h2 class="h2">Build to launch<br><span class="accent-line">a successful project.</span></h2>
+        <p class="sub-zh zh">已在 <span class="brand">X.FUN</span> 上完成发射的社区项目。点开任意一个可以看到它的发射记录与流动性状态。</p>
+      </div>
+      <div class="avatars">
+        <span class="av">DGE</span><span class="av">PEP</span><span class="av">FLK</span>
+        <span class="av">BNX</span><span class="av">MMe</span><span class="av">CAT</span>
+        <span class="av">SHB</span><span class="av">WOJ</span><span class="av">BRT</span>
+        <span class="av">TST</span><span class="av">GRK</span><span class="av">MOO</span>
+        <span class="av more">+24</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ 生态 CTA ============================
+       对应原源码 ecosystem.vue。
+  ================================================================= -->
+  <section class="section" id="eco">
+    <div class="wrap">
+      <div class="cta">
+        <span class="eyebrow"><span class="brand">X.FUN</span> Ecosystem</span>
+        <h2 class="h2">Your stake,<br><span class="accent-line">your rules.</span></h2>
+        <p class="lead">
+          Democratizing meme launches — one <span class="brand" style="font-size:.94em">X.FUN</span> at a time.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#">提交你的项目</a>
+          <a class="btn btn-ghost" href="#">阅读文档 ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ 合作方 ============================
+       对应原源码 partner.vue：logo 墙。
+  ================================================================= -->
+  <section class="section" id="partners" style="background:var(--bg-2)">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Investors &amp; Partners</span>
+        <h2 class="h2">Who backs <span class="accent-line">the build.</span></h2>
+      </div>
+      <div class="logos">
+        <span>PANCAKESWAP</span><span>BNB CHAIN</span><span>THENA</span>
+        <span>DODO</span><span>CERTIK</span><span>SNAPSHOT</span>
+        <span>WOMBAT</span><span>VENUS</span><span>BITGET</span>
+        <span>ANKR</span><span>CHAINLINK</span><span>+ 更多</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot-in">
+        <div style="max-width:340px">
+          <div class="logo" style="margin-bottom:14px">
+            <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 3 L21 21 M21 3 L3 21" stroke="var(--accent)" stroke-width="2.1" stroke-linecap="round"/>
+              <circle cx="12" cy="12" r="3.1" fill="var(--bg)" stroke="var(--accent-2)" stroke-width="1.5"/>
+            </svg>
+            <span class="brand">X<b>.</b>FUN</span>
+          </div>
+          <p class="foot-note zh">
+            社区驱动的 BSC meme 发射平台，配套链上套利引擎。
+            本页为视觉打样，数据为演示用途。
+          </p>
+        </div>
+        <div class="foot-links">
+          <a href="#loop">造血引擎</a>
+          <a href="#engine">引擎质押</a>
+          <a href="#works">运作机制</a>
+          <a href="#projects">孵化项目</a>
+          <a href="#eco">生态</a>
+          <a href="#">文档</a>
+          <a href="#">审计报告</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <p class="foot-note zh">
+          加密资产存在价格波动与合约风险，参与前请自行评估。本页不构成投资建议。
+          链上数据以合约为准，前端展示可能存在同步延迟。
+        </p>
+        <span class="foot-meta">X.FUN — Home 换皮稿 v2 · OBSIDIAN</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+/* 净值曲线：一条有噪声但整体向上的路径。纯展示，不涉及任何业务逻辑。 */
+(function(){
+  var W=600,H=108,N=46,pts=[],v=0,seed=20250905;
+  function rnd(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;}
+  for(var i=0;i<N;i++){
+    v += (rnd()-0.34)*1.5 + 0.55;
+    pts.push(v);
+  }
+  var min=Math.min.apply(null,pts),max=Math.max.apply(null,pts),span=(max-min)||1;
+  var coords=pts.map(function(p,i){
+    var x=(i/(N-1))*W;
+    var y=H-8-((p-min)/span)*(H-22);
+    return [x,y];
+  });
+  var line=coords.map(function(c){return c[0].toFixed(1)+','+c[1].toFixed(1)}).join(' ');
+  var el=document.getElementById('eqLine');
+  if(!el) return;
+  el.setAttribute('points',line);
+  document.getElementById('eqArea').setAttribute('points','0,'+H+' '+line+' '+W+','+H);
+  var last=coords[coords.length-1];
+  ['eqDot','eqHalo'].forEach(function(id){
+    var n=document.getElementById(id);
+    n.setAttribute('cx',last[0]);n.setAttribute('cy',last[1]);
+  });
+})();
+
+/* 顶栏导航高亮跟随滚动 */
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.nav-links a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))}).filter(Boolean);
+  if(!('IntersectionObserver' in window)||!secs.length) return;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)});
+    });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(function(s){io.observe(s)});
+})();
+</script>
+
+</body>
+</html>

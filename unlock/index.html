@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>解锁弹窗换皮</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap">
+<style>
+:root{
+  --bg:#000; --surface:#0C0913; --surface-2:#130F1E;
+  --line:rgba(160,120,255,.22); --line-soft:rgba(255,255,255,.07);
+  --ink:#F5F2FC; --ink-2:#CBC2E2; --muted:#948BAE;
+  --ac:#9B6BFF; --ac-2:#DDA9FF; --ac-soft:rgba(155,107,255,.13);
+  --pos:#5CE1A6;
+  --f-display:"Syne","Noto Sans SC",system-ui,sans-serif;
+  --f-body:"Outfit","Noto Sans SC",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,monospace;
+  --f-brand:"Instrument Sans","Noto Sans SC",system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:1180px;margin-inline:auto;padding:clamp(40px,6vw,72px) 22px 80px}
+
+.brand{font-family:var(--f-brand);font-weight:700;letter-spacing:-.045em}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ac-2);
+  background:var(--ac-soft);border:1px solid var(--line);padding:5px 13px;border-radius:999px}
+.eyebrow::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--ac-2)}
+h1{font-family:var(--f-display);font-weight:800;letter-spacing:-.022em;line-height:1.06;
+  font-size:clamp(29px,4vw,46px);margin:18px 0 0;text-wrap:balance}
+.lead{color:var(--ink-2);font-size:15.5px;line-height:1.75;max-width:66ch;margin:16px 0 0}
+.sub{color:var(--muted);font-size:13.5px;line-height:1.85;margin:9px 0 0;max-width:72ch}
+
+section{margin-top:clamp(44px,5.5vw,68px)}
+.n{font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;color:var(--ac);display:block;margin-bottom:12px}
+h2{font-family:var(--f-display);font-weight:700;letter-spacing:-.02em;line-height:1.15;
+  font-size:clamp(20px,2.4vw,28px);margin:0 0 8px}
+
+/* ── 弹窗展示台 ── */
+.stage{display:grid;gap:20px;grid-template-columns:minmax(0,1fr);margin-top:26px}
+@media(min-width:900px){.stage{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.slot{border:1px solid var(--line-soft);border-radius:20px;padding:30px 22px 34px;
+  background:radial-gradient(120% 90% at 50% 0%,rgba(155,107,255,.09),transparent 62%),#050308;
+  display:flex;flex-direction:column;align-items:center;gap:20px}
+.slot-tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);border:1px solid var(--line-soft);padding:5px 12px;border-radius:999px}
+
+/* ── 解锁弹窗本体：结构与线上 1:1 ── */
+.modal{width:min(360px,100%);background:linear-gradient(168deg,var(--surface-2),var(--surface) 64%);
+  border:1px solid var(--line);border-radius:22px;padding:26px 24px 24px;position:relative;
+  box-shadow:0 30px 70px -40px rgba(155,107,255,.65)}
+.modal__x{position:absolute;top:20px;right:20px;width:30px;height:30px;border-radius:50%;
+  border:1px solid var(--line-soft);background:none;color:var(--muted);cursor:pointer;
+  display:grid;place-items:center;font-size:15px;line-height:1;transition:.16s}
+.modal__x:hover{color:var(--ink);border-color:var(--line)}
+.modal h3{margin:0;text-align:center;font-family:var(--f-display);font-weight:700;
+  font-size:21px;letter-spacing:-.015em}
+.modal__zh{display:block;margin-top:5px;font-family:var(--f-mono);font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:400}
+
+.orb{width:74px;height:74px;border-radius:50%;margin:22px auto 20px;display:grid;place-items:center;
+  background:conic-gradient(from 140deg,var(--ac),#C77BFF,#FF7AC8,var(--ac));
+  box-shadow:0 0 0 1px rgba(255,255,255,.08),0 12px 34px -14px rgba(155,107,255,.9)}
+.orb span{width:60px;height:60px;border-radius:50%;background:#0A0710;display:grid;place-items:center}
+.orb svg{width:26px;height:26px}
+
+.pair{display:grid;grid-template-columns:1fr 1px 1fr;align-items:center;gap:0;margin-top:4px}
+.pair .div{height:38px;background:var(--line-soft)}
+.cell{text-align:center;padding:2px 8px}
+.cell .lb{font-size:12.5px;color:var(--muted)}
+.cell .v{font-family:var(--f-mono);font-size:23px;font-weight:500;margin-top:6px;
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+
+.claim{margin-top:22px;padding:16px;border-radius:14px;text-align:center;
+  background:var(--ac-soft);border:1px solid var(--line)}
+.claim .lb{font-size:12.5px;color:var(--ink-2)}
+.claim .v{font-family:var(--f-mono);font-size:32px;font-weight:500;margin-top:4px;
+  font-variant-numeric:tabular-nums;letter-spacing:-.03em;
+  background:linear-gradient(96deg,var(--ac) 8%,var(--ac-2) 60%,#FF7AC8 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.claim .v.zero{background:none;-webkit-text-fill-color:var(--muted);color:var(--muted)}
+
+.btn{display:block;width:100%;margin-top:20px;padding:15px;border:none;border-radius:14px;
+  font-family:var(--f-body);font-size:15px;font-weight:600;cursor:pointer;transition:.18s;
+  background:linear-gradient(100deg,var(--ac),#C77BFF);color:#0B0612;
+  box-shadow:0 10px 26px -16px rgba(155,107,255,.9)}
+.btn:hover{filter:brightness(1.08)}
+.btn:disabled{background:var(--surface-2);color:var(--muted);cursor:not-allowed;box-shadow:none;
+  border:1px solid var(--line-soft)}
+.foot-note{margin:15px 0 0;font-size:11.5px;line-height:1.75;color:var(--muted)}
+.detail{display:block;margin:16px auto 0;text-align:center;font-size:13px;color:var(--ac-2);
+  text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--ac-2) 45%,transparent);
+  width:fit-content;padding-bottom:2px;transition:.16s}
+.detail:hover{color:var(--ink);border-bottom-color:var(--ink)}
+
+/* ── 结构对照 ── */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);
+  border-radius:16px;background:var(--surface);margin-top:22px}
+table{width:100%;border-collapse:collapse;min-width:700px}
+th{font-family:var(--f-mono);font-size:10.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:14px 18px;border-bottom:1px solid var(--line-soft);font-size:13.5px;color:var(--ink-2);
+  vertical-align:top;line-height:1.65}
+tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:var(--ac-soft)}
+td.k{color:var(--ink);font-weight:600;white-space:nowrap}
+td.mono{font-family:var(--f-mono);font-size:12.5px;color:var(--muted)}
+.ok{color:var(--pos);font-family:var(--f-mono);font-size:12px;white-space:nowrap}
+
+.callout{margin-top:22px;border:1px solid color-mix(in srgb,#F5B841 34%,transparent);
+  background:rgba(245,184,65,.08);border-radius:16px;padding:20px 22px;display:flex;gap:12px;align-items:flex-start}
+.callout__i{color:#F5B841;font-size:14px;line-height:1.4;flex:none}
+.callout h3{margin:0 0 8px;font-size:15px;font-weight:700;color:#F5B841;text-align:left;font-family:var(--f-body)}
+.callout p{margin:0;font-size:13.5px;line-height:1.75;color:var(--ink-2)}
+
+footer{margin-top:clamp(50px,7vw,80px);padding-top:24px;border-top:1px solid var(--line-soft);
+  display:flex;flex-wrap:wrap;gap:14px 30px;justify-content:space-between;align-items:flex-end}
+footer p{margin:0;font-size:11.5px;color:var(--muted);line-height:1.85;max-width:60ch}
+.meta{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);opacity:.7;white-space:nowrap}
+a{color:var(--ac-2);text-decoration:none}
+
+@media(max-width:640px){
+  .wrap{padding-inline:16px}
+  th{font-size:11px;padding:12px} td{font-size:12.5px;padding:12px}
+  table{min-width:600px}
+  .tw{position:relative}
+  .tw::after{content:"← 左右滑动 →";position:absolute;right:10px;bottom:6px;font-family:var(--f-mono);
+    font-size:10px;letter-spacing:.1em;color:var(--muted);background:var(--surface);padding:2px 7px;
+    border-radius:99px;border:1px solid var(--line-soft);pointer-events:none}
+  .slot{padding:24px 16px 28px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div style="border:1px solid rgba(245,184,65,.34);background:rgba(245,184,65,.10);border-radius:12px;
+              padding:14px 16px;margin-bottom:26px;display:flex;gap:11px;align-items:flex-start">
+    <span style="color:#F5B841;flex:none;line-height:1.4">●</span>
+    <p style="margin:0;font-size:12.5px;line-height:1.75;color:#CBC2E2">
+      <b style="color:#F5B841">已归档 · 不在本次范围</b><br>
+      经确认，机构轮 /「解锁」这条线属于 FTOP，与 X.FUN 本次升级内容基本无关。
+      本稿保留备查，不排工作量。
+    </p>
+  </div>
+
+  <span class="eyebrow">FTOP · Component</span>
+  <h1>「解锁」弹窗换皮</h1>
+  <p class="lead">
+    线上的解锁交互是一个弹窗，不是页面。结构 1:1 保留 —— 同样的三个数字、同样一个提取按钮、同样的说明与详情入口，
+    <b style="color:var(--ink)">不增不减任何逻辑</b>，只换视觉。
+  </p>
+  <p class="sub">原型：fist.fdao.plus 的「解锁情况」弹窗。皮肤：黑曜紫电。</p>
+
+  <section>
+    <span class="n">01</span>
+    <h2>两种状态</h2>
+    <p class="sub">未连接钱包时全为 0、提取置灰；有可领取额度时提取可用。</p>
+
+    <div class="stage">
+      <!-- 空状态 -->
+      <div class="slot">
+        <span class="slot-tag">未连接钱包 / 无额度</span>
+        <div class="modal">
+          <button class="modal__x" type="button" aria-label="关闭">✕</button>
+          <h3>解锁情况<span class="modal__zh">Unlock Status</span></h3>
+          <div class="orb" aria-hidden="true"><span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#DDA9FF" stroke-width="1.7" stroke-linecap="round">
+              <rect x="4" y="10.5" width="16" height="10" rx="2.5"/><path d="M8 10.5V7a4 4 0 0 1 8 0"/>
+            </svg>
+          </span></div>
+          <div class="pair">
+            <div class="cell"><div class="lb">待解锁</div><div class="v" style="color:var(--muted)">0</div></div>
+            <div class="div"></div>
+            <div class="cell"><div class="lb">已解锁</div><div class="v" style="color:var(--muted)">0</div></div>
+          </div>
+          <div class="claim">
+            <div class="lb">可领取</div>
+            <div class="v zero">0</div>
+          </div>
+          <button class="btn" type="button" disabled>提取</button>
+          <p class="foot-note">＊释放将领取至钱包地址，也可以通过开源合约提取</p>
+          <a class="detail" href="#">解锁详情</a>
+        </div>
+      </div>
+
+      <!-- 有额度 -->
+      <div class="slot">
+        <span class="slot-tag">已连接 · 有可领取</span>
+        <div class="modal">
+          <button class="modal__x" type="button" aria-label="关闭">✕</button>
+          <h3>解锁情况<span class="modal__zh">Unlock Status</span></h3>
+          <div class="orb" aria-hidden="true"><span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#DDA9FF" stroke-width="1.7" stroke-linecap="round">
+              <rect x="4" y="10.5" width="16" height="10" rx="2.5"/><path d="M8 10.5V7a4 4 0 0 1 7.8-.8"/>
+            </svg>
+          </span></div>
+          <div class="pair">
+            <div class="cell"><div class="lb">待解锁</div><div class="v">128,000</div></div>
+            <div class="div"></div>
+            <div class="cell"><div class="lb">已解锁</div><div class="v">32,000</div></div>
+          </div>
+          <div class="claim">
+            <div class="lb">可领取</div>
+            <div class="v">8,400</div>
+          </div>
+          <button class="btn" type="button">提取</button>
+          <p class="foot-note">＊释放将领取至钱包地址，也可以通过开源合约提取</p>
+          <a class="detail" href="#">解锁详情</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="n">02</span>
+    <h2>结构对照</h2>
+    <p class="sub">左边是线上现有的元素，右边是换皮后的处理。没有新增项，也没有删减项。</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>线上元素</th><th>换皮处理</th><th>逻辑</th></tr></thead>
+        <tbody>
+          <tr><td class="k">标题「解锁情况」</td>
+            <td>保留，补一行 mono 英文副标 UNLOCK STATUS，与全站标题体例一致</td>
+            <td class="ok">不变</td></tr>
+          <tr><td class="k">圆形图标</td>
+            <td>换成紫电渐变环 + 内嵌锁形图标；空状态锁闭合，有额度时锁开启</td>
+            <td class="ok">不变</td></tr>
+          <tr><td class="k">待解锁 / 已解锁</td>
+            <td>并排两格，中间一道发丝分隔线；数字用等宽字体，千分位对齐</td>
+            <td class="ok">不变</td></tr>
+          <tr><td class="k">可领取</td>
+            <td>单独一块带底色的强调区 —— 它是用户唯一要看的数，值为 0 时不上渐变色</td>
+            <td class="ok">不变</td></tr>
+          <tr><td class="k">「提取」按钮</td>
+            <td>满宽紫电渐变；无额度时置灰不可点，而不是可点后报错</td>
+            <td class="ok">不变</td></tr>
+          <tr><td class="k">＊释放说明</td>
+            <td>原文保留，字号收到 11.5px 作为脚注</td>
+            <td class="ok">不变</td></tr>
+          <tr><td class="k">「解锁详情」</td>
+            <td>保留下划线文字链形态</td>
+            <td class="ok">不变</td></tr>
+          <tr><td class="k">关闭 ×</td>
+            <td>换成 30px 圆形描边按钮，点击区域从 ~16px 提到 30px</td>
+            <td class="ok">不变</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <span class="callout__i">●</span>
+      <div>
+        <h3>机构轮的分配逻辑不进这个弹窗</h3>
+        <p>
+          股东线映射比例、分档倍率、季度释放节奏——线下人工计算后直接空投，
+          用户在这里只看到「待解锁 / 已解锁 / 可领取」三个数和一个提取按钮。
+          弹窗里不出现任何倍率或考核规则，这是刻意的，不是没做完。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      本页为 X.FUN 换皮打样，数字为演示占位。<br>
+      <a href="./">← 返回打样索引</a> · <a href="./map/">新逻辑 × 老页面对照</a>
+    </p>
+    <span class="meta">X.FUN © 2026 · Internal Preview</span>
+  </footer>
+
+</div>
+</body>
+</html>
