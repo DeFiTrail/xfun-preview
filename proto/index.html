@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+<title>首页 · X.FUN</title>
+<script>try{var l=localStorage.getItem('xfun.lang')||'zh';var d=document.documentElement;
+d.dataset.lang=l;d.lang=({zh:'zh-CN',ft:'zh-TW',en:'en',ja:'ja',ko:'ko',vi:'vi',th:'th',id:'id'})[l]||'zh-CN';
+if(l!=='zh')d.className='i18n-wait';}catch(e){}</script>
+<style>html.i18n-wait body{visibility:hidden}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="./app.css">
+</head>
+<body data-page="home">
+<!-- ============================ HERO ============================
+     对应原源码 home/components/homeTop.vue。
+     叙事：发射器 + 链上套利引擎。固定利率如实说明，不做情绪渲染。
+================================================================= -->
+<section class="section" style="padding-block:clamp(44px,5vw,80px) clamp(28px,3vw,48px);position:relative;overflow:hidden">
+  <div style="position:absolute;inset:-170px -10% auto;height:660px;pointer-events:none;
+              background:radial-gradient(40% 44% at 26% 8%,rgba(155,107,255,.24),transparent 68%),
+                         radial-gradient(38% 40% at 78% 22%,rgba(255,90,180,.13),transparent 66%);
+              filter:blur(14px)"></div>
+  <div class="wrap" style="position:relative;text-align:center;display:flex;flex-direction:column;align-items:center">
+    <span class="eyebrow"><t-x data-i="k4a0ee77">公平发射 × 链上套利</t-x></span>
+    <h1 class="h1" style="margin:20px 0 20px;max-width:16ch">
+      <t-x data-i="ked51f49">发射器，<br><span class="accent-line">自带一台链上套利引擎。</span></t-x>
+    </h1>
+    <p class="lead" style="max-width:52ch">
+      <t-x data-i="k1e91796"><span class="brand">X.FUN</span> 是 BSC 上的社区 meme 发射平台，自带一台链上套利引擎。</t-x>
+    </p>
+    <div class="btn-row" style="justify-content:center;margin-top:30px">
+      <a class="btn btn-primary btn-lg" href="./engine/"><t-x data-i="k3714fde">引擎质押</t-x></a>
+      <a class="btn btn-ghost btn-lg" href="./stake/"><t-x data-i="k71cd7c3">质押</t-x></a>
+      <a class="btn btn-ghost btn-lg" href="./launch/"><t-x data-i="k3666c4a">发射板</t-x></a>
+    </div>
+
+    <div class="stats s4" style="margin-top:clamp(30px,3.4vw,46px);width:100%">
+      <div class="stat">
+        <span class="stat-k"><t-x data-i="kaded94d">引擎聚合本金</t-x></span>
+        <span class="stat-v mono">$5.12M</span>
+        <span class="stat-n"><t-x data-i="k7a8c8d1">6 个金库地址合计</t-x></span>
+      </div>
+      <div class="stat">
+        <span class="stat-k"><t-x data-i="kcc5562b">累计套利净利</t-x></span>
+        <span class="stat-v mono pos">+$8.47M</span>
+        <span class="stat-n"><t-x data-i="k1a9ae98">全周期</t-x></span>
+      </div>
+      <div class="stat">
+        <span class="stat-k"><t-x data-i="kee9c739">已发射项目</t-x></span>
+        <span class="stat-v mono">36</span>
+        <span class="stat-n"><t-x data-i="k798907f">已通过审核</t-x></span>
+      </div>
+      <div class="stat">
+        <span class="stat-k"><t-x data-i="k477be5a">项目审核</t-x></span>
+        <span class="stat-v mono"><t-x data-i="k00df5cc">三重</t-x></span>
+        <span class="stat-n"><t-x data-i="k8797f82">社区投票 · 合约审计 · KOL 核实</t-x></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 两条参与路径 ============================
+     用户第一眼要知道：站里能做两件事，它们是串起来的，不是并列的。
+================================================================= -->
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><t-x data-i="k40fe21e">两条路径</t-x></span>
+      <h2 class="h2"><t-x data-i="k71ca6ef">先质押拿额度，<span class="accent-line">再进引擎。</span></t-x></h2>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <span class="lb"><t-x data-i="k863a858">第一步</t-x></span>
+            <div class="h3 card-title" style="margin-top:8px"><t-x data-i="k8d30ab0">在质押板块建仓</t-x></div>
+          </div>
+          <span class="chip chip-quiet">/stake</span>
+        </div>
+        <p class="sub"><t-x data-i="k8e0be93">做 LP 流动性质押，按 1:1 获得引擎质押的排队额度。持仓每满 30 天，额度再增加一倍质押量。</t-x></p>
+        <dl class="kv" style="margin-top:18px">
+          <div class="kv-row"><dt><t-x data-i="k3cb0b98">LP 流动性质押</t-x></dt>
+            <dd><span class="chip chip-pos"><t-x data-i="k44b3099">开放中</t-x></span></dd></div>
+          <div class="kv-row"><dt><t-x data-i="k897f1f6">单币质押</t-x></dt>
+            <dd><span class="chip chip-off"><t-x data-i="k38db680">未开放</t-x></span></dd></div>
+          <div class="kv-row"><dt><t-x data-i="k5336415">可用代币</t-x></dt>
+            <dd>SHARE · SENTIS · FSD</dd></div>
+        </dl>
+        <a class="btn btn-ghost btn-block" style="margin-top:18px" href="./stake/">
+          <t-x data-i="k1e7a771">去质押</t-x> →</a>
+      </div>
+
+      <div class="card card-ac">
+        <div class="card-head">
+          <div>
+            <span class="lb"><t-x data-i="k9757f2c">第二步</t-x></span>
+            <div class="h3 card-title" style="margin-top:8px"><t-x data-i="k0bcb0bf">用额度进引擎</t-x></div>
+          </div>
+          <span class="chip chip-new">NEW</span>
+        </div>
+        <p class="sub"><t-x data-i="ka20c7e2">每天 18:00 平台开放一批额度，用你手上的排队额度参与分配。抢到即进入引擎质押，按合约约定的固定利率日结。</t-x></p>
+        <dl class="kv" style="margin-top:18px">
+          <div class="kv-row"><dt><t-x data-i="k4d0d2e1">结算方式</t-x></dt>
+            <dd><t-x data-i="k2a9e0d0">固定利率 · 日结</t-x></dd></div>
+          <div class="kv-row"><dt><t-x data-i="k0c56e35">开放时间</t-x></dt><dd>18:00 UTC+8</dd></div>
+          <div class="kv-row"><dt><t-x data-i="k66fd654">解除质押</t-x></dt>
+            <dd><t-x data-i="k73a53ec">可分批 · 48 小时到账</t-x></dd></div>
+        </dl>
+        <a class="btn btn-primary btn-block" style="margin-top:18px" href="./engine/">
+          <t-x data-i="k00b8abf">去引擎质押</t-x> →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================ 聪明钱造血（首页精简版） ============================
+     结构移植自 FLC / Fulcrum SmartMoneyView。
+     首页只举证四件事：金库、净值、执行记录、利润去向。
+     活跃路径 / 逐笔价差 / 单笔规模 —— 在内页，不上首页。
+================================================================================= -->
+<section class="section" id="loop">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><t-x data-i="k8f3d5db">聪明钱造血</t-x></span>
+      <h2 class="h2"><t-x data-i="k11853e8">引擎的<span class="accent-line">链上战绩。</span></t-x></h2>
+    </div>
+
+    <div class="grid g-side-l">
+      <div class="card">
+        <div class="card-head" style="margin-bottom:0">
+          <span class="chip"><t-x data-i="kba09f53">链上数据</t-x></span>
+          <span class="chip chip-quiet"><t-x data-i="k9f5e5b6">快照</t-x> 09-07 04:10 UTC</span>
+        </div>
+        <div class="h3 card-title" style="margin-top:14px"><span class="brand">X.FUN</span>
+          <t-x data-i="k9a4e4eb">套利引擎金库群</t-x></div>
+        <p class="scope" style="margin-top:6px"><t-x data-i="k939f7ed">6 个聪明钱地址聚合，每一个都能在链上查到</t-x></p>
+
+        <div style="display:flex;gap:9px;margin-top:14px">
+          <div style="flex:1;background:radial-gradient(80% 130% at 8% 0%,rgba(155,107,255,.18),transparent 62%),rgba(0,0,0,.3);
+                      border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 13px;min-width:0">
+            <div class="lb" style="color:var(--accent-2)"><t-x data-i="kdc41ef1">聚合本金</t-x></div>
+            <div class="mono" style="font-size:18px;margin-top:5px;letter-spacing:-.02em">$5,124,800</div>
+          </div>
+          <div style="flex:1;background:rgba(0,0,0,.3);border-radius:var(--radius-sm);padding:12px 13px;min-width:0">
+            <div class="lb"><t-x data-i="kdba3c02">年化 APR</t-x></div>
+            <div class="mono pos" style="font-size:18px;margin-top:5px">+112.4%</div>
+          </div>
+        </div>
+
+        <div class="vaults">
+          <div class="vault-row" data-open="m-vault" data-addr="0x7C1f9a4bA93E">
+            <span class="vault-i">01</span>
+            <span class="vault-a">0x7C1f9a…4bA93E</span>
+            <span class="vault-v mono">$1,284,600</span>
+            <span class="vault-go">›</span>
+          </div>
+          <div class="vault-row" data-open="m-vault" data-addr="0x3E90b7d1c204">
+            <span class="vault-i">02</span>
+            <span class="vault-a">0x3E90b7…d1c204</span>
+            <span class="vault-v mono">$1,046,200</span>
+            <span class="vault-go">›</span>
+          </div>
+          <div class="vault-row" data-open="m-vault" data-addr="0xB2740aEf5183">
+            <span class="vault-i">03</span>
+            <span class="vault-a">0xB2740a…Ef5183</span>
+            <span class="vault-v mono">$918,400</span>
+            <span class="vault-go">›</span>
+          </div>
+          <div class="vault-row" data-open="m-vault" data-addr="0x5aC618902bD7">
+            <span class="vault-i">04</span>
+            <span class="vault-a">0x5aC618…902bD7</span>
+            <span class="vault-v mono">$742,900</span>
+            <span class="vault-go">›</span>
+          </div>
+          <div class="vault-row" data-open="m-vault" data-addr="0xE4d8027fA615">
+            <span class="vault-i">05</span>
+            <span class="vault-a">0xE4d802…7fA615</span>
+            <span class="vault-v mono">$620,300</span>
+            <span class="vault-go">›</span>
+          </div>
+          <div class="vault-row is-new" data-open="m-vault" data-addr="0x18Bc4f60D392">
+            <span class="vault-i">06</span>
+            <span class="vault-a">0x18Bc4f…60D392</span>
+            <span class="vault-v mono">$512,400</span>
+            <span class="chip chip-pos vault-tag"><t-x data-i="k66ab5e9">新增</t-x></span>
+            <span class="vault-go">›</span>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="card" data-spark="20260906">
+        <div class="card-head" style="margin-bottom:0">
+          <div>
+            <div class="lb card-title"><t-x data-i="kcc5562b">累计套利净利</t-x></div>
+            <div class="mono pos" style="font-size:clamp(27px,3.2vw,36px);margin-top:6px;letter-spacing:-.03em">+$8,470,240</div>
+            <div class="scope"><t-x data-i="kf9a8b4e">全周期累计 · 只增不减，不受金库调仓影响</t-x></div>
+          </div>
+          <div style="text-align:right">
+            <div class="lb"><t-x data-i="kf0b5f80">近 30 日</t-x></div>
+            <div class="mono pos" style="font-size:19px;margin-top:6px">+9.42%</div>
+          </div>
+        </div>
+        <svg class="eq" viewBox="0 0 600 104" preserveAspectRatio="none" role="img"
+             aria-label="引擎净值 30 日曲线，期末高于期初">
+          <defs><linearGradient id="eqf" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--accent)" stop-opacity=".26"></stop>
+            <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"></stop></linearGradient></defs>
+          <polygon class="eq-area" points="" fill="url(#eqf)"></polygon>
+          <polyline class="eq-line" points="" fill="none" stroke="var(--accent)" stroke-width="2"
+                    stroke-linejoin="round" stroke-linecap="round"></polyline>
+          <circle class="eq-dot" r="3.4" fill="var(--accent-2)"></circle>
+          <circle class="eq-dot" r="8" fill="var(--accent-2)" opacity=".2">
+            <animate attributeName="r" values="4;11;4" dur="2.6s" repeatCount="indefinite"></animate>
+            <animate attributeName="opacity" values=".3;0;.3" dur="2.6s" repeatCount="indefinite"></animate>
+          </circle>
+        </svg>
+        <div class="tri" style="margin-top:14px">
+          <div><div class="mono" style="font-size:16px">$5.12M</div>
+            <div class="lb" style="margin-top:4px"><t-x data-i="kdc41ef1">聚合本金</t-x></div>
+            <div class="scope"><t-x data-i="kecb9702">6 个地址合计</t-x></div></div>
+          <div><div class="mono" style="font-size:16px">$1.94B</div>
+            <div class="lb" style="margin-top:4px"><t-x data-i="k67998d0">闪电贷本金量</t-x></div>
+            <div class="scope"><t-x data-i="kf0b5f80">近 30 日</t-x></div></div>
+          <div><div class="mono" style="font-size:16px">4,682</div>
+            <div class="lb" style="margin-top:4px"><t-x data-i="k374fb79">执行笔数</t-x></div>
+            <div class="scope"><t-x data-i="kd758333">索引区间</t-x></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="h3 card-title" style="font-size:15px"><t-x data-i="k76355ee">执行成功率</t-x></div>
+            <div class="scope" style="margin-top:5px"><t-x data-i="k02a3c79">最近 4,682 笔 · 08-30 ~ 09-06</t-x></div>
+          </div>
+          <span class="mono" style="font-size:23px">93.6<span style="font-size:13px;color:var(--muted)">%</span></span>
+        </div>
+        <div class="wr-bar" aria-hidden="true">
+          <i style="width:93.6%;background:linear-gradient(90deg,var(--accent),var(--accent-2))"></i>
+          <i style="width:6.4%;background:var(--neg)"></i>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:14px;margin-top:15px;flex-wrap:wrap">
+          <div>
+            <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted)">
+              <i class="dot" style="background:var(--accent);box-shadow:none"></i>
+              <t-x data-i="k9da1d4c">成交 4,382</t-x></div>
+            <div class="mono pos" style="font-size:15px;margin-top:5px">+$412,880.44</div>
+          </div>
+          <div style="text-align:right">
+            <div style="display:flex;align-items:center;gap:7px;justify-content:flex-end;font-size:12px;color:var(--muted)">
+              <i class="dot" style="background:var(--neg);box-shadow:none"></i>
+              <t-x data-i="k84021cd">回滚 300</t-x></div>
+            <div class="mono neg" style="font-size:15px;margin-top:5px">−$1,904.20</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="lb card-title" style="margin-bottom:14px"><t-x data-i="k3197bd4">盈利造血闭环</t-x></div>
+        <div class="loop2-wrap">
+          <svg class="loop2" viewBox="0 0 660 172" role="img" aria-label="造血闭环四步：执行、留痕、核验、回流">
+            <g>
+              <circle class="lp-ring" cx="72"  cy="44" r="26"></circle><text class="lp-n" x="72"  y="50" text-anchor="middle">1</text>
+              <text class="lp-t" x="72"  y="96" text-anchor="middle">执行</text><text class="lp-s" x="72"  y="115" text-anchor="middle">单区块原子成交</text>
+              <circle class="lp-ring" cx="248" cy="44" r="26"></circle><text class="lp-n" x="248" y="50" text-anchor="middle">2</text>
+              <text class="lp-t" x="248" y="96" text-anchor="middle">留痕</text><text class="lp-s" x="248" y="115" text-anchor="middle">逐笔写入链上</text>
+              <circle class="lp-ring" cx="424" cy="44" r="26"></circle><text class="lp-n" x="424" y="50" text-anchor="middle">3</text>
+              <text class="lp-t" x="424" y="96" text-anchor="middle">核验</text><text class="lp-s" x="424" y="115" text-anchor="middle">站内逐笔可查</text>
+              <circle class="lp-ring" cx="600" cy="44" r="26"></circle><text class="lp-n" x="600" y="50" text-anchor="middle">4</text>
+              <text class="lp-t" x="600" y="96" text-anchor="middle">回流</text><text class="lp-s" x="600" y="115" text-anchor="middle">利润回到引擎与生态</text>
+            </g>
+            <g>
+              <path class="lp-line" d="M100 44 H220"></path><path class="lp-line" d="M276 44 H396"></path><path class="lp-line" d="M452 44 H572"></path>
+              <circle class="lp-dot" r="2.6"><animateMotion dur="1.9s" repeatCount="indefinite" path="M100 44 H220"></animateMotion></circle>
+              <circle class="lp-dot" r="2.6"><animateMotion dur="2.1s" repeatCount="indefinite" path="M276 44 H396"></animateMotion></circle>
+              <circle class="lp-dot" r="2.6"><animateMotion dur="2.3s" repeatCount="indefinite" path="M452 44 H572"></animateMotion></circle>
+            </g>
+            <path class="lp-back" d="M627 60 Q660 114 336 148 Q12 114 45 60"></path>
+            <text class="lp-s" x="336" y="166" text-anchor="middle">费流回到引擎本金 · 规模变大 · 下一轮单笔更大</text>
+          </svg>
+        </div>
+        <ol class="loop-m">
+          <li><span class="n">1</span><div><div class="t"><t-x data-i="k1a6aa24">执行</t-x></div>
+            <div class="s"><t-x data-i="k8e17dbf">单区块内完成借入、成交、归还，原子结算</t-x></div></div></li>
+          <li><span class="n">2</span><div><div class="t"><t-x data-i="k03a604e">留痕</t-x></div>
+            <div class="s"><t-x data-i="kd3c72f3">每一笔逐笔写入链上，不依赖后台记账</t-x></div></div></li>
+          <li><span class="n">3</span><div><div class="t"><t-x data-i="k8682c87">核验</t-x></div>
+            <div class="s"><t-x data-i="k3ff1104">站内可逐笔查看链路，地址与哈希可复制</t-x></div></div></li>
+          <li><span class="n">4</span><div><div class="t"><t-x data-i="k6a13729">回流</t-x></div>
+            <div class="s"><t-x data-i="k7a8bcb2">利润回到引擎本金与生态</t-x></div></div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 运作机制（原 about.vue） ============================
+     三张机制卡，措辞保持定性、不带参数。
+================================================================================= -->
+<section class="section section-alt" id="works">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><t-x data-i="k0f091a2">运作机制</t-x></span>
+      <h2 class="h2"><span class="brand">X.FUN</span> <t-x data-i="kb244736">怎么<span class="accent-line">运作。</span></t-x></h2>
+      <p class="lead"><t-x data-i="k622dcc0">三套机制撑起这个平台：发射怎么跑通、项目怎么进来、质押经济怎么转起来。</t-x></p>
+    </div>
+    <div class="grid g3">
+      <div class="card">
+        <span class="lb" style="color:var(--accent)">01 / <t-x data-i="k5a41c84">发射</t-x></span>
+        <div class="h3" style="margin:12px 0 14px;font-family:var(--font-display);font-size:19px;font-weight:800">
+          <t-x data-i="k3bf0f14">发射机制</t-x></div>
+        <dl class="kv">
+          <div class="kv-row" style="display:block"><dt style="color:var(--ink);font-weight:600;margin-bottom:4px"><t-x data-i="kca56cb8">公平准入</t-x></dt>
+            <dd style="text-align:left;font-family:var(--font-body);color:var(--muted);font-size:12.5px"><t-x data-i="kf1d2324">单钱包分阶段认购上限</t-x></dd></div>
+          <div class="kv-row" style="display:block"><dt style="color:var(--ink);font-weight:600;margin-bottom:4px"><t-x data-i="kc520bd8">限时参与</t-x></dt>
+            <dd style="text-align:left;font-family:var(--font-body);color:var(--muted);font-size:12.5px"><t-x data-i="k703d5c6">募集窗口有明确起止</t-x></dd></div>
+          <div class="kv-row" style="display:block"><dt style="color:var(--ink);font-weight:600;margin-bottom:4px"><t-x data-i="kb17795e">忠诚回报</t-x></dt>
+            <dd style="text-align:left;font-family:var(--font-body);color:var(--muted);font-size:12.5px"><t-x data-i="kfa98d64">长期社区成员在分配上优先</t-x></dd></div>
+        </dl>
+      </div>
+      <div class="card">
+        <span class="lb" style="color:var(--accent)">02 / <t-x data-i="kcf13b1a">审核</t-x></span>
+        <div class="h3" style="margin:12px 0 14px;font-family:var(--font-display);font-size:19px;font-weight:800">
+          <t-x data-i="k477be5a">项目审核</t-x></div>
+        <dl class="kv">
+          <div class="kv-row" style="display:block"><dt style="color:var(--ink);font-weight:600;margin-bottom:4px"><t-x data-i="k0f5c706">社区投票</t-x></dt>
+            <dd style="text-align:left;font-family:var(--font-body);color:var(--muted);font-size:12.5px"><t-x data-i="kc963231">提案通过 Snapshot 表决</t-x></dd></div>
+          <div class="kv-row" style="display:block"><dt style="color:var(--ink);font-weight:600;margin-bottom:4px"><t-x data-i="k9f6c16c">技术审计</t-x></dt>
+            <dd style="text-align:left;font-family:var(--font-body);color:var(--muted);font-size:12.5px"><t-x data-i="kc5177ce">合约由第三方审计机构验证</t-x></dd></div>
+          <div class="kv-row" style="display:block"><dt style="color:var(--ink);font-weight:600;margin-bottom:4px"><t-x data-i="kfd5e73b">KOL 核实</t-x></dt>
+            <dd style="text-align:left;font-family:var(--font-body);color:var(--muted);font-size:12.5px"><t-x data-i="keb709d1">经核实的意见领袖提供信用背书</t-x></dd></div>
+        </dl>
+      </div>
+      <div class="card">
+        <span class="lb" style="color:var(--accent)">03 / <t-x data-i="k71cd7c3">质押</t-x></span>
+        <div class="h3" style="margin:12px 0 14px;font-family:var(--font-display);font-size:19px;font-weight:800">
+          <t-x data-i="k5214154">质押经济</t-x></div>
+        <dl class="kv">
+          <div class="kv-row" style="display:block"><dt style="color:var(--ink);font-weight:600;margin-bottom:4px"><t-x data-i="k2ba30f9">被动收益</t-x></dt>
+            <dd style="text-align:left;font-family:var(--font-body);color:var(--muted);font-size:12.5px"><t-x data-i="k273dc2f">按质押量获得相应回报</t-x></dd></div>
+          <div class="kv-row" style="display:block"><dt style="color:var(--ink);font-weight:600;margin-bottom:4px"><t-x data-i="kf8b6415">分级解锁</t-x></dt>
+            <dd style="text-align:left;font-family:var(--font-body);color:var(--muted);font-size:12.5px"><t-x data-i="ka7092a6">到期免费提取，提前解锁按档计费</t-x></dd></div>
+          <div class="kv-row" style="display:block"><dt style="color:var(--ink);font-weight:600;margin-bottom:4px"><t-x data-i="k01a712c">生态回流</t-x></dt>
+            <dd style="text-align:left;font-family:var(--font-body);color:var(--muted);font-size:12.5px"><t-x data-i="kff6593b">手续费回流生态建设与共建者</t-x></dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 孵化项目 ============================ -->
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><t-x data-i="k97ae8dc">孵化项目</t-x></span>
+      <h2 class="h2"><t-x data-i="k95455e9">已在平台上<span class="accent-line">完成发射。</span></t-x></h2>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <span class="tokdot" style="width:56px;height:56px;font-size:13px;font-family:var(--font-mono);background:linear-gradient(150deg,rgba(155,107,255,.24),rgba(255,90,180,.08));border:1px solid var(--line);color:var(--accent-2)">DGE</span>
+      <span class="tokdot" style="width:56px;height:56px;font-size:13px;font-family:var(--font-mono);background:linear-gradient(150deg,rgba(155,107,255,.24),rgba(255,90,180,.08));border:1px solid var(--line);color:var(--accent-2)">PEP</span>
+      <span class="tokdot" style="width:56px;height:56px;font-size:13px;font-family:var(--font-mono);background:linear-gradient(150deg,rgba(155,107,255,.24),rgba(255,90,180,.08));border:1px solid var(--line);color:var(--accent-2)">FLK</span>
+      <span class="tokdot" style="width:56px;height:56px;font-size:13px;font-family:var(--font-mono);background:linear-gradient(150deg,rgba(155,107,255,.24),rgba(255,90,180,.08));border:1px solid var(--line);color:var(--accent-2)">BNX</span>
+      <span class="tokdot" style="width:56px;height:56px;font-size:13px;font-family:var(--font-mono);background:linear-gradient(150deg,rgba(155,107,255,.24),rgba(255,90,180,.08));border:1px solid var(--line);color:var(--accent-2)">CAT</span>
+      <span class="tokdot" style="width:56px;height:56px;font-size:13px;font-family:var(--font-mono);background:linear-gradient(150deg,rgba(155,107,255,.24),rgba(255,90,180,.08));border:1px solid var(--line);color:var(--accent-2)">SHB</span>
+      <span class="tokdot" style="width:56px;height:56px;font-size:13px;font-family:var(--font-mono);background:linear-gradient(150deg,rgba(155,107,255,.24),rgba(255,90,180,.08));border:1px solid var(--line);color:var(--accent-2)">WOJ</span>
+      <span class="tokdot" style="width:56px;height:56px;font-size:13px;font-family:var(--font-mono);background:linear-gradient(150deg,rgba(155,107,255,.24),rgba(255,90,180,.08));border:1px solid var(--line);color:var(--accent-2)">MOO</span>
+      <span class="tokdot" style="width:56px;height:56px;font-size:11px;font-family:var(--font-mono);background:none;border:1px dashed var(--line-soft);color:var(--muted)">+28</span>
+    </div>
+    <a class="btn btn-ghost" style="margin-top:22px" href="./launch/"><t-x data-i="k0e9121a">看发射板</t-x> →</a>
+  </div>
+</section>
+
+<!-- ============================ 生态 CTA ============================ -->
+<section class="section section-alt" id="eco">
+  <div class="wrap">
+    <div class="card card-ac" style="text-align:center;padding:clamp(32px,4.2vw,58px) clamp(20px,3vw,40px);
+         display:flex;flex-direction:column;align-items:center">
+      <span class="eyebrow"><span class="brand">X.FUN</span> <t-x data-i="k2bbb08c">生态</t-x></span>
+      <h2 class="h2" style="margin:18px 0 14px"><t-x data-i="kf28edf6">你的质押，<span class="accent-line">你的规则。</span></t-x></h2>
+      <p class="lead" style="max-width:48ch"><t-x data-i="ka7f4f78">把 meme 发射这件事交还给社区 —— 一次一个项目。</t-x></p>
+      <div class="btn-row" style="justify-content:center;margin-top:26px">
+        <button class="btn btn-primary" data-act="soon"><t-x data-i="kf2a79df">提交你的项目</t-x></button>
+        <a class="btn btn-ghost" href="./builder/"><t-x data-i="k76ce055">加入社区共建</t-x></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 弹窗 ============================ -->
+<!-- 单个金库地址的套利记录 -->
+<div class="modal" id="m-vault"><div class="modal__bg" data-close></div>
+  <div class="modal__box modal__wide"><div class="modal-grab"></div>
+    <div class="modal__head">
+      <div><div class="h3"><t-x data-i="kac263c5">金库套利记录</t-x></div>
+        <p class="scope mono" style="margin-top:5px" data-vaddr>0x7C1f9a…4bA93E</p></div>
+      <button class="modal__x" data-close aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 2l11 11M13 2L2 13"/></svg></button>
+    </div>
+    <div class="modal__body">
+      <div class="stats s3">
+        <div class="stat"><span class="stat-k"><t-x data-i="k90a9ba2">本金</t-x></span>
+          <span class="stat-v mono">$1,284,600</span></div>
+        <div class="stat"><span class="stat-k"><t-x data-i="kafceda8">近 30 日净利</t-x></span>
+          <span class="stat-v mono pos">+$186,420</span></div>
+        <div class="stat"><span class="stat-k"><t-x data-i="k374fb79">执行笔数</t-x></span>
+          <span class="stat-v mono">1,204</span></div>
+      </div>
+      <div class="tw"><div class="tscroll"><table class="tbl">
+        <thead><tr>
+          <th><t-x data-i="k19fcb9e">时间</t-x></th>
+          <th><t-x data-i="k4f35e80">路径</t-x></th>
+          <th><t-x data-i="kbafd024">借入</t-x></th>
+          <th><t-x data-i="k5d0a539">净利</t-x></th>
+          <th><t-x data-i="kee1ba23">交易哈希</t-x></th></tr></thead>
+        <tbody>
+          <tr><td class="num">09-07 04:08</td><td>PancakeV3 → Biswap</td><td class="num">$420,000</td>
+            <td class="num pos">+$1,842.60</td><td class="hash" data-copy="0x3d9a1c40…b721">0x3d9a1c40…b721</td></tr>
+          <tr><td class="num">09-07 03:51</td><td>Biswap → PancakeV2</td><td class="num">$260,000</td>
+            <td class="num pos">+$964.20</td><td class="hash" data-copy="0xa1704ef2…0c38">0xa1704ef2…0c38</td></tr>
+          <tr><td class="num">09-07 03:22</td><td>PancakeV2 → THENA</td><td class="num">$512,000</td>
+            <td class="num pos">+$2,318.40</td><td class="hash" data-copy="0x77c5b019…e4a6">0x77c5b019…e4a6</td></tr>
+          <tr><td class="num">09-07 02:47</td><td>THENA → PancakeV3</td><td class="num">$180,000</td>
+            <td class="num neg">−$96.80</td><td class="hash" data-copy="0x0be93a71…5d12">0x0be93a71…5d12</td></tr>
+          <tr><td class="num">09-07 02:15</td><td>PancakeV3 → Biswap</td><td class="num">$346,000</td>
+            <td class="num pos">+$1,406.90</td><td class="hash" data-copy="0xe24f8c05…9a70">0xe24f8c05…9a70</td></tr>
+        </tbody></table></div></div>
+      <p class="tiny"><t-x data-i="kd3d7f75">每笔都在单个区块内原子结算。失败回滚的也照样列出来，哈希可自行核对。</t-x></p>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn-quiet" data-close><t-x data-i="kb15d912">关闭</t-x></button>
+      <button class="btn btn-ghost" data-act="soon"><t-x data-i="k854bd95">在浏览器中查看地址</t-x> ↗</button>
+    </div>
+  </div></div>
+
+<script src="./app.js"></script>
+</body>
+</html>

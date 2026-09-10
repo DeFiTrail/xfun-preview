@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+<title>邀请 · X.FUN</title>
+<script>try{var l=localStorage.getItem('xfun.lang')||'zh';var d=document.documentElement;
+d.dataset.lang=l;d.lang=({zh:'zh-CN',ft:'zh-TW',en:'en',ja:'ja',ko:'ko',vi:'vi',th:'th',id:'id'})[l]||'zh-CN';
+if(l!=='zh')d.className='i18n-wait';}catch(e){}</script>
+<style>html.i18n-wait body{visibility:hidden}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../app.css">
+</head>
+<body data-page="invite">
+<!-- ============================ 邀请 ============================
+     对应源码 views/invite/index.vue（209行）+ components/ClaimWeek（周领取）
+       + components/Rebate/invitationList + rankingDate
+     文案键：invite.a3–a21
+================================================================= -->
+<section class="wrap page-head">
+  <span class="eyebrow"><t-x data-i="kd051008">邀请</t-x></span>
+  <h1 class="h1" style="margin-top:16px;font-size:clamp(26px,3vw,38px)">
+    <t-x data-i="k7c09e8e">邀请与<span class="accent-line">团队。</span></t-x></h1>
+</section>
+
+<!-- 未连钱包 -->
+<section class="wrap" data-no-wallet hidden>
+  <div class="card"><div class="empty">
+    <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.4">
+      <circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M17.5 8v6M14.5 11h6"/></svg>
+    <p><t-x data-i="k40ad4be">连接钱包后查看你的邀请码、团队与可兑换奖励。</t-x></p>
+    <button class="btn btn-primary" data-act="wallet"><t-x data-i="kbd246b1">连接钱包</t-x></button>
+  </div></div>
+</section>
+
+<section class="wrap" data-need-wallet hidden>
+  <div class="stats s4">
+    <div class="stat"><span class="stat-k"><t-x data-i="k616dad3">团队人数</t-x></span>
+      <span class="stat-v mono">142</span><span class="stat-n"><t-x data-i="k916f77b">直推 26</t-x></span></div>
+    <div class="stat"><span class="stat-k"><t-x data-i="ka863e52">队伍质押</t-x></span>
+      <span class="stat-v mono">486,200</span><span class="stat-n">FSD</span></div>
+    <div class="stat"><span class="stat-k"><t-x data-i="kf0f0dea">预估奖励</t-x></span>
+      <span class="stat-v mono">2,184.60</span><span class="stat-n"><t-x data-i="ked25bb1">以实际分配为准</t-x></span></div>
+    <div class="stat"><span class="stat-k"><t-x data-i="k2835073">榜单排名</t-x></span>
+      <span class="stat-v mono">#18</span><span class="stat-n"><t-x data-i="ke3c7ff5">队伍质押榜</t-x></span></div>
+  </div>
+
+  <div style="margin-top:16px">
+    <div class="card card-ac">
+      <div class="card-head">
+        <div>
+          <div class="h3 card-title"><t-x data-i="k1d483b4">我的邀请</t-x></div>
+          <p class="scope" style="margin-top:6px"><t-x data-i="kf40e1d1">分享链接给对方，对方绑定后计入你的团队</t-x></p>
+        </div>
+      </div>
+      <div class="grid g2" style="gap:12px">
+        <div>
+          <div class="lb" style="margin-bottom:8px"><t-x data-i="kfee0b67">邀请码</t-x></div>
+          <div class="addr-box" data-copy="XF7C1F9A">
+            <span style="font-size:15px;letter-spacing:.1em;color:var(--accent-2)">XF7C1F9A</span>
+            <span class="go"><t-x data-i="k79d3abe">复制</t-x> ›</span></div>
+        </div>
+        <div>
+          <div class="lb" style="margin-bottom:8px"><t-x data-i="k6122f7b">分享链接</t-x></div>
+          <div class="addr-box" data-copy="https://x.fun/?ref=XF7C1F9A">
+            <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">https://x.fun/?ref=XF7C1F9A</span>
+            <span class="go"><t-x data-i="k79d3abe">复制</t-x> ›</span></div>
+        </div>
+      </div>
+      <dl class="kv" style="margin-top:16px">
+        <div class="kv-row"><dt><t-x data-i="k43a4ef3">直推有效用户</t-x></dt><dd>18 / 26</dd></div>
+        <div class="kv-row"><dt><t-x data-i="kb760e08">团队有效用户</t-x></dt><dd>96 / 142</dd></div>
+        <div class="kv-row"><dt><t-x data-i="kb42e429">本月新增</t-x></dt><dd class="pos">+14</dd></div>
+      </dl>
+      <div class="note" style="margin-top:16px"><i>·</i>
+        <p><t-x data-i="k5be7348">直推有效用户会提升你的等级与收益加速，判定标准以合约为准。</t-x></p></div>
+    </div>
+
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="card-head">
+      <div class="h3 card-title"><t-x data-i="k87110b9">邀请列表</t-x></div>
+      <div class="tabs" data-group="inv">
+        <button data-tab="list" aria-selected="true"><t-x data-i="k237c7e9">我的直推</t-x></button>
+        <button data-tab="rank" aria-selected="false"><t-x data-i="k2835073">榜单排名</t-x></button>
+      </div>
+    </div>
+    <div class="tabpanel" data-group="inv" data-tab="list">
+      <div class="tscroll"><table class="tbl">
+        <thead><tr><th><t-x data-i="kfaaadc4">序号</t-x></th><th><t-x data-i="k7650487">地址</t-x></th>
+          <th><t-x data-i="kfee0b67">邀请码</t-x></th><th><t-x data-i="k6e1169e">质押数量</t-x></th>
+          <th><t-x data-i="kc8a2447">加入</t-x></th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td class="addr"><span class="cpcell" data-copy="0x2Cd814…0f6B">0x2Cd814…0f6B<b class="cpbtn"><t-x data-i="k79d3abe">复制</t-x></b></span></td>
+            <td class="addr"><span class="cpcell" data-copy="XF2CD814">XF2CD814<b class="cpbtn"><t-x data-i="k79d3abe">复制</t-x></b></span></td><td class="num">48,200</td><td>2026-08-14</td></tr>
+          <tr><td class="num">2</td><td class="addr"><span class="cpcell" data-copy="0x7a3B90…d418">0x7a3B90…d418<b class="cpbtn"><t-x data-i="k79d3abe">复制</t-x></b></span></td>
+            <td class="addr"><span class="cpcell" data-copy="XF7A3B90">XF7A3B90<b class="cpbtn"><t-x data-i="k79d3abe">复制</t-x></b></span></td><td class="num">26,400</td><td>2026-08-21</td></tr>
+          <tr><td class="num">3</td><td class="addr"><span class="cpcell" data-copy="0xE10c4f…35D2">0xE10c4f…35D2<b class="cpbtn"><t-x data-i="k79d3abe">复制</t-x></b></span></td>
+            <td class="addr"><span class="cpcell" data-copy="XFE10C4F">XFE10C4F<b class="cpbtn"><t-x data-i="k79d3abe">复制</t-x></b></span></td><td class="num">12,000</td><td>2026-08-29</td></tr>
+          <tr><td class="num">4</td><td class="addr"><span class="cpcell" data-copy="0x64Bb27…a908">0x64Bb27…a908<b class="cpbtn"><t-x data-i="k79d3abe">复制</t-x></b></span></td>
+            <td class="addr"><span class="cpcell" data-copy="XF64BB27">XF64BB27<b class="cpbtn"><t-x data-i="k79d3abe">复制</t-x></b></span></td><td class="num">0</td><td>2026-09-03</td></tr>
+        </tbody></table></div>
+    </div>
+    <div class="tabpanel" data-group="inv" data-tab="rank" hidden>
+      <div class="tscroll"><table class="tbl">
+        <thead><tr><th><t-x data-i="kfaaadc4">序号</t-x></th><th><t-x data-i="k7650487">地址</t-x></th>
+          <th><t-x data-i="ka863e52">队伍质押</t-x></th><th><t-x data-i="k616dad3">团队人数</t-x></th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td class="addr">0x4E82a1…7c3D</td><td class="num">2,486,200</td><td class="num">418</td></tr>
+          <tr><td class="num">2</td><td class="addr">0x91Fd0c…22Ae</td><td class="num">1,942,800</td><td class="num">356</td></tr>
+          <tr><td class="num">3</td><td class="addr">0x0aB37e…9104</td><td class="num">1,604,500</td><td class="num">302</td></tr>
+          <tr class="me"><td class="num" style="color:var(--accent-2)">18</td>
+            <td class="addr" style="color:var(--accent-2)">0x7C1f9a…4bA93E（<t-x data-i="k1681525">我</t-x>）</td>
+            <td class="num">486,200</td><td class="num">142</td></tr>
+        </tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<script src="../app.js"></script>
+</body>
+</html>

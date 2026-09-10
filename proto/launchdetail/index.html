@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+<title>发射详情 · X.FUN</title>
+<script>try{var l=localStorage.getItem('xfun.lang')||'zh';var d=document.documentElement;
+d.dataset.lang=l;d.lang=({zh:'zh-CN',ft:'zh-TW',en:'en',ja:'ja',ko:'ko',vi:'vi',th:'th',id:'id'})[l]||'zh-CN';
+if(l!=='zh')d.className='i18n-wait';}catch(e){}</script>
+<style>html.i18n-wait body{visibility:hidden}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../app.css">
+</head>
+<body data-page="launch">
+<!-- ============================ 发射详情 ============================
+     对应源码 views/launch/details.vue（694 行）+ components/PieCharts
+     文案键：launch.a13 倒计时 · a14–a21 参数组 · a25 代币经济 · a4 订阅 · a23 领取
+================================================================= -->
+<section class="wrap page-head">
+  <a class="btn btn-quiet btn-sm" href="../launch/">← <t-x data-i="kcd514c2">发行板</t-x></a>
+  <div style="display:flex;align-items:flex-start;gap:16px;margin-top:20px;flex-wrap:wrap">
+    <span style="width:60px;height:60px;border-radius:16px;flex:none;
+      background:linear-gradient(140deg,#9B6BFF,#FF7AC8);display:grid;place-items:center;
+      font-family:var(--font-mono);font-size:19px;color:#0B0612;font-weight:700">BK</span>
+    <div style="min-width:0;flex:1">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <h1 class="h1" style="font-size:clamp(24px,2.8vw,34px)">BabyKing Coin</h1>
+        <span class="chip chip-pos"><span class="dot dot-live"></span><t-x data-i="kfb852fc">进行中</t-x></span>
+        <span class="chip chip-quiet"><t-x data-i="k41a5567">公平发行</t-x></span>
+      </div>
+      <p class="scope" style="margin-top:6px">BKC · BSC</p>
+    </div>
+  </div>
+  <p class="lead" style="margin-top:16px">Gen-Z 的加密惊奇 —— 创新的「奶嘴采矿」把牛奶质押与摇篮 NFT 结合，面向全球家庭社区。</p>
+</section>
+
+<section class="wrap">
+  <div class="grid g-side">
+    <!-- 参数与代币经济 -->
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+      <div class="card">
+        <div class="card-head">
+          <div class="h3 card-title"><t-x data-i="k00db7c9">发行参数</t-x></div>
+          <span class="chip chip-quiet"><t-x data-i="k73050d2">合约返回</t-x></span>
+        </div>
+        <div class="grid g2" style="gap:0 28px">
+          <dl class="kv">
+            <div class="kv-row"><dt><t-x data-i="k189a1d8">代币名称</t-x></dt><dd>BabyKing / BKC</dd></div>
+            <div class="kv-row"><dt><t-x data-i="k2c3e216">币价</t-x></dt><dd>—</dd></div>
+            <div class="kv-row"><dt><t-x data-i="kecd56da">总代币供应量</t-x></dt><dd>—</dd></div>
+            <div class="kv-row"><dt><t-x data-i="kaf336ed">初始市值</t-x></dt><dd>—</dd></div>
+          </dl>
+          <dl class="kv">
+            <div class="kv-row"><dt><t-x data-i="kcafbbf4">每槽代币数量</t-x></dt><dd>—</dd></div>
+            <div class="kv-row"><dt><t-x data-i="ka18f8a1">参与槽位</t-x></dt><dd>—</dd></div>
+            <div class="kv-row"><dt><t-x data-i="k8ef0217">白名单槽位</t-x></dt><dd>—</dd></div>
+            <div class="kv-row"><dt><t-x data-i="k37fa773">总募集资金</t-x></dt><dd>—</dd></div>
+          </dl>
+        </div>
+        <p class="tiny" style="margin-top:14px"><t-x data-i="ka418f08">所有发行参数由 IDO 合约实时返回，页面展示与链上状态一致。</t-x></p>
+      </div>
+
+      <div class="card">
+        <div class="h3 card-title" style="margin-bottom:16px"><t-x data-i="k7cbbb1b">代币经济</t-x></div>
+        <div class="empty" style="padding:30px 16px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.3">
+            <circle cx="12" cy="12" r="9"/><path d="M12 3v9l6.4 6.4"/></svg>
+          <p><t-x data-i="k1f08d35">分配比例由项目方在创建发行时写入合约，与合约一并公布，发射后不可更改。</t-x></p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="h3 card-title" style="margin-bottom:14px"><t-x data-i="kec3141f">审核记录</t-x></div>
+        <dl class="kv">
+          <div class="kv-row"><dt><t-x data-i="k0f5c706">社区投票</t-x></dt>
+            <dd><span class="chip chip-pos"><t-x data-i="kecfa64c">已通过</t-x></span></dd></div>
+          <div class="kv-row"><dt><t-x data-i="ke76cdc5">合约审计</t-x></dt>
+            <dd><span class="chip chip-pos"><t-x data-i="kfad5222">已完成</t-x></span></dd></div>
+          <div class="kv-row"><dt><t-x data-i="k818f229">KOL 背书</t-x></dt>
+            <dd><span class="chip chip-pos"><t-x data-i="k5fc3bf0">已核实</t-x></span></dd></div>
+          <div class="kv-row"><dt><t-x data-i="kba9de5e">合约权限</t-x></dt>
+            <dd><t-x data-i="kf8685b8">已放弃</t-x></dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- 认购卡 -->
+    <div class="m-first" style="display:flex;flex-direction:column;gap:16px;min-width:0">
+      <div class="card card-ac">
+        <div class="card-head">
+          <div class="h3 card-title"><t-x data-i="ke5c1a4f">参与认购</t-x></div>
+          <span class="chip"><t-x data-i="k202f12f">倒计时</t-x></span>
+        </div>
+        <div class="countdown" data-tick="18">--:--:--</div>
+        <div style="margin-top:16px">
+          <div class="barmeta" style="margin:0 0 7px">
+            <span><t-x data-i="k272e4e3">募集资金</t-x></span><span class="mono">68%</span></div>
+          <div class="bar bar-lg"><i style="width:68%"></i></div>
+        </div>
+
+        <div data-need-wallet hidden style="margin-top:18px">
+          <dl class="kv">
+            <div class="kv-row"><dt><t-x data-i="kef89f71">资格</t-x></dt>
+              <dd><span class="chip chip-pos"><t-x data-i="k518d4a6">符合</t-x></span></dd></div>
+            <div class="kv-row"><dt><t-x data-i="k2ec2e04">可认购槽位</t-x></dt><dd>—</dd></div>
+            <div class="kv-row"><dt><t-x data-i="kc0b2c0f">已认购</t-x></dt><dd>0</dd></div>
+          </dl>
+          <button class="btn btn-primary btn-block" style="margin-top:16px" data-open="m-sub">
+            <t-x data-i="k02daf71">订阅</t-x></button>
+          <button class="btn btn-ghost btn-block is-off" style="margin-top:10px">
+            <t-x data-i="k0819830">领取（发射后开放）</t-x></button>
+        </div>
+        <button class="btn btn-primary btn-block" style="margin-top:18px" data-act="wallet" data-no-wallet hidden>
+          <t-x data-i="kbd246b1">连接钱包</t-x></button>
+
+        <div class="note" style="margin-top:16px"><i>·</i>
+          <p><t-x data-i="kd37b911">单钱包分阶段认购上限由合约控制。募集窗口结束后可在本页领取分配到的代币。</t-x></p></div>
+      </div>
+
+      <div class="card">
+        <div class="h3 card-title" style="margin-bottom:14px"><t-x data-i="k9ee55a2">项目链接</t-x></div>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <div class="addr-box" data-copy="0x8f21c4Ab0000000000000000000000000000BKC">
+            <span class="lb" style="letter-spacing:.12em">CA</span>
+            <span style="margin-left:auto">0x8f21c4…00BKC</span></div>
+          <button class="btn btn-quiet btn-sm btn-block" data-act="soon">Website</button>
+          <button class="btn btn-quiet btn-sm btn-block" data-act="soon">X / Telegram</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="m-sub"><div class="modal__bg" data-close></div>
+  <div class="modal__box"><div class="modal-grab"></div>
+    <div class="modal__head">
+      <div><div class="h3"><t-x data-i="k8927557">订阅 BabyKing Coin</t-x></div></div>
+      <button class="modal__x" data-close aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 2l11 11M13 2L2 13"/></svg></button>
+    </div>
+    <div class="modal__body">
+      <div class="field">
+        <div class="field-label"><span><t-x data-i="k5c74071">认购槽位</t-x></span>
+          <b><t-x data-i="ke158c72">上限由合约控制</t-x></b></div>
+        <label class="amt"><input type="text" inputmode="numeric" value="1"><span class="unit"><t-x data-i="k580dd19">槽</t-x></span></label>
+      </div>
+      <dl class="kv">
+        <div class="kv-row"><dt><t-x data-i="kd72adc6">每槽代币</t-x></dt><dd>—</dd></div>
+        <div class="kv-row"><dt><t-x data-i="k77c60d1">需支付</t-x></dt><dd>—</dd></div>
+        <div class="kv-row"><dt><t-x data-i="k03c168e">手续费</t-x></dt><dd>—</dd></div>
+      </dl>
+      <div class="note note-warn"><i>⚠</i><p><t-x data-i="k4e3d31b">认购后资金进入 IDO 合约。募集失败时按合约规则退回，成功后在本页领取代币。</t-x></p></div>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn-quiet" data-close><t-x data-i="k625fb26">取消</t-x></button>
+      <button class="btn btn-primary" data-close data-act="soon"><t-x data-i="k39d8b19">确认订阅</t-x></button>
+    </div>
+  </div></div>
+
+<script src="../app.js"></script>
+</body>
+</html>

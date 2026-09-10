@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="dark">
+<title>X.FUN 原型 · 页面索引</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;700&family=Syne:wght@700;800&display=swap">
+<style>
+  :root{
+    --bg:#000; --surface:#0C0913; --surface2:#120E1B;
+    --line:rgba(255,255,255,.08); --line-ac:rgba(160,120,255,.30);
+    --ink:#F5F2FC; --ink2:#CFC6E4; --muted:#948BAE; --muted2:#6E668A;
+    --ac:#9B6BFF; --ac2:#DDA9FF; --pos:#5CE1A6;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{background:var(--bg);-webkit-text-size-adjust:100%;overflow-x:hidden}
+  body{margin:0;background:var(--bg);color:var(--ink);overflow-x:hidden;
+    font-family:"Noto Sans SC",system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.65;
+    -webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:900px;margin-inline:auto;padding:clamp(38px,6vw,72px) 20px 56px;position:relative}
+  .wrap::before{content:"";position:absolute;inset:-120px -20% auto;height:400px;pointer-events:none;z-index:-1;
+    background:radial-gradient(46% 52% at 24% 10%,rgba(155,107,255,.20),transparent 68%);filter:blur(16px)}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:"JetBrains Mono",monospace;
+    font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ac2);
+    border:1px solid var(--line-ac);border-radius:999px;padding:5px 12px}
+  h1{font-family:Syne,system-ui,sans-serif;font-weight:800;letter-spacing:-.01em;
+    font-size:clamp(28px,4.4vw,42px);line-height:1.2;margin:18px 0 12px}
+  h1 b{font-weight:inherit;background:linear-gradient(96deg,var(--ac) 6%,var(--ac2) 58%,#FF7AC8 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);font-size:14px;max-width:60ch;margin:0}
+  h2{font-family:Syne,system-ui,sans-serif;font-weight:700;font-size:15px;letter-spacing:.01em;
+    margin:38px 0 4px;display:flex;align-items:center;gap:10px}
+  h2::before{content:"";width:3px;height:15px;border-radius:2px;background:var(--ac)}
+  .note{color:var(--muted);font-size:12.5px;margin:0 0 14px;padding-left:13px}
+
+  .grid{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(232px,1fr))}
+  .item{display:flex;align-items:center;gap:11px;padding:13px 14px;background:var(--surface);
+    border:1px solid var(--line);border-radius:12px;transition:.15s;min-height:52px;min-width:0}
+  .item > span:first-child{min-width:0;display:block}
+  .item .n,.item .p{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .item:hover{border-color:var(--line-ac);background:var(--surface2);transform:translateY(-1px)}
+  .item .n{font-size:14px;font-weight:500;color:var(--ink)}
+  .item .p{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted2);margin-top:2px}
+  .item .go{margin-left:auto;color:var(--muted2);font-size:15px;flex:none}
+  .item:hover .go{color:var(--ac2)}
+  .item.hot{border-color:var(--line-ac);
+    background:radial-gradient(80% 130% at 8% 0%,rgba(155,107,255,.16),transparent 62%),var(--surface)}
+  .tag{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.1em;
+    padding:2px 7px;border-radius:999px;border:1px solid var(--line-ac);color:var(--ac2);flex:none}
+
+  table{width:100%;border-collapse:collapse;margin-top:4px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top}
+  th{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);font-weight:500;background:var(--surface)}
+  tr:last-child td{border-bottom:none}
+  td code{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ac2);
+    background:rgba(155,107,255,.10);border:1px solid var(--line-ac);border-radius:6px;padding:1px 6px}
+  td .d{color:var(--muted);font-size:12px}
+  .tw{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+  .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+  .cta{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:11px 18px;border-radius:10px;
+    background:linear-gradient(100deg,var(--ac),#C77BFF);color:#12091F;font-weight:700;font-size:14px}
+  .cta:hover{filter:brightness(1.08)}
+  footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);
+    color:var(--muted2);font-size:11.5px;line-height:1.9}
+  @media(max-width:520px){
+    .grid{grid-template-columns:1fr}
+    th,td{padding:9px 10px;font-size:12.5px}
+    td code{font-size:11px}
+    .wrap{padding-inline:16px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">X.FUN · Prototype Index</span>
+  <h1>页面<b>索引。</b></h1>
+  <p class="sub">全站可点击原型，14 个页面 + 全部弹窗，8 国语言。页面内所有链上数据、地址与收益数字均为演示占位。</p>
+  <a class="cta" href="./proto/">从首页开始 →</a>
+
+  <h2>主流程</h2>
+  <p class="note">导航里能直接点到的页面。</p>
+  <div class="grid">
+    <a class="item" href="./proto/"><span><span class="n">首页</span><span class="p">/proto/</span></span><span class="go">›</span></a>
+    <a class="item" href="./proto/stake/"><span><span class="n">质押</span><span class="p">/proto/stake/</span></span><span class="go">›</span></a>
+    <a class="item hot" href="./proto/engine/"><span><span class="n">引擎质押</span><span class="p">/proto/engine/</span></span><span class="tag">NEW</span><span class="go">›</span></a>
+    <a class="item" href="./proto/queue/"><span><span class="n">排队详情</span><span class="p">/proto/queue/</span></span><span class="go">›</span></a>
+    <a class="item" href="./proto/launch/"><span><span class="n">发射板</span><span class="p">/proto/launch/</span></span><span class="go">›</span></a>
+    <a class="item" href="./proto/launchdetail/"><span><span class="n">发射详情</span><span class="p">/proto/launchdetail/</span></span><span class="go">›</span></a>
+    <a class="item" href="./proto/builder/"><span><span class="n">社区共建</span><span class="p">/proto/builder/</span></span><span class="go">›</span></a>
+    <a class="item" href="./proto/center/"><span><span class="n">我的中心</span><span class="p">/proto/center/</span></span><span class="go">›</span></a>
+    <a class="item" href="./proto/rewardpool/"><span><span class="n">共建激励池</span><span class="p">/proto/rewardpool/</span></span><span class="go">›</span></a>
+    <a class="item" href="./proto/invite/"><span><span class="n">邀请</span><span class="p">/proto/invite/</span></span><span class="go">›</span></a>
+    <a class="item" href="./proto/assets/"><span><span class="n">我的资产</span><span class="p">/proto/assets/</span></span><span class="go">›</span></a>
+    <a class="item" href="./proto/about/"><span><span class="n">关于</span><span class="p">/proto/about/</span></span><span class="go">›</span></a>
+  </div>
+
+  <h2>无导航入口的专版</h2>
+  <p class="note">站内点不到，只能用下面的链接直接打开。</p>
+  <div class="grid">
+    <a class="item hot" href="./proto/stake-x/?as=full">
+      <span><span class="n">项目方专版</span><span class="p">/proto/stake-x/</span></span><span class="go">›</span></a>
+    <a class="item hot" href="./proto/stake-open/?as=full">
+      <span><span class="n">单币质押开启版</span><span class="p">/proto/stake-open/</span></span><span class="go">›</span></a>
+  </div>
+
+  <h2>看不同身份的状态</h2>
+  <p class="note">任意页面后面加参数即可。参数会记住，之后站内点击都保持这个身份。</p>
+  <div class="tw"><div class="tscroll"><table>
+    <thead><tr><th>身份</th><th>参数</th><th>直接打开</th></tr></thead>
+    <tbody>
+      <tr><td>有数据的完整态<div class="d">钱包 + 共建者 + 早期共识份额</div></td>
+          <td><code>?as=full</code></td>
+          <td><a href="./proto/builder/?as=full" style="color:var(--ac2)">社区共建 ↗</a></td></tr>
+      <tr><td>已是共建者<div class="d">钱包 + 共建者，无机构轮份额</div></td>
+          <td><code>?as=builder</code></td>
+          <td><a href="./proto/center/?as=builder" style="color:var(--ac2)">我的中心 ↗</a></td></tr>
+      <tr><td>未连钱包<div class="d">看各页空状态</div></td>
+          <td><code>?as=guest</code></td>
+          <td><a href="./proto/stake/?as=guest" style="color:var(--ac2)">质押 ↗</a></td></tr>
+      <tr><td>现场手动切<div class="d">左下角出现身份切换条</div></td>
+          <td><code>?demo=1</code></td>
+          <td><a href="./proto/?demo=1" style="color:var(--ac2)">首页 ↗</a></td></tr>
+    </tbody>
+  </table></div></div>
+
+  <h2>早期共识（机构轮）</h2>
+  <p class="note">它是弹窗不是页面：打开下面这页，点标题下方的「早期共识」按钮。</p>
+  <div class="grid">
+    <a class="item hot" href="./proto/builder/?as=full">
+      <span><span class="n">社区共建 · 完整数据态</span><span class="p">/proto/builder/?as=full</span></span><span class="go">›</span></a>
+  </div>
+
+  <h2>语言</h2>
+  <p class="note">页面右上角地球图标切换，共 8 种：简体中文 · 繁體中文 · English · 日本語 · 한국어 · Tiếng Việt · ไทย · Indonesia。</p>
+
+  <h2>附：脑图 × 源码 包含关系核对</h2>
+  <p class="note">脑图 8 条主干逐条核到代码里：哪些已经有、哪些是有壳没芯、哪些真要新做。</p>
+  <div class="grid">
+    <a class="item" href="./map/"><span><span class="n">核对表</span><span class="p">/map/</span></span><span class="go">›</span></a>
+  </div>
+
+  <footer>
+    内部评审用途 · 未收录搜索引擎<br>
+    视觉与交互确认后，同步落地到 fist2 源码。
+  </footer>
+</div>
+</body>
+</html>

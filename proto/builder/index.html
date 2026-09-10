@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+<title>社区共建 · X.FUN</title>
+<script>try{var l=localStorage.getItem('xfun.lang')||'zh';var d=document.documentElement;
+d.dataset.lang=l;d.lang=({zh:'zh-CN',ft:'zh-TW',en:'en',ja:'ja',ko:'ko',vi:'vi',th:'th',id:'id'})[l]||'zh-CN';
+if(l!=='zh')d.className='i18n-wait';}catch(e){}</script>
+<style>html.i18n-wait body{visibility:hidden}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../app.css">
+</head>
+<body data-page="builder">
+<!-- ============================ 社区共建 ============================
+     对应源码 views/builder/index.vue（落地）+ center.vue + rewardPool.vue
+     改动：外层左侧按钮由「申请社区共建者」改为「早期共识」（机构轮入口）；
+           申请与购买节点挪进「我的中心」。
+================================================================= -->
+<section class="section" style="padding-block:clamp(40px,4.6vw,72px) clamp(24px,2.6vw,36px);position:relative;overflow:hidden">
+  <div style="position:absolute;inset:-160px -10% auto;height:520px;pointer-events:none;
+              background:radial-gradient(42% 46% at 22% 6%,rgba(155,107,255,.2),transparent 68%);filter:blur(14px)"></div>
+  <div class="wrap" style="position:relative">
+    <span class="eyebrow"><t-x data-i="kd583995">社区共建</t-x></span>
+    <h1 class="h1" style="margin:18px 0 16px;font-size:clamp(27px,3.4vw,42px);max-width:18ch">
+      <t-x data-i="k2dd5584">把生态建起来的人，<br><span class="accent-line">分生态的钱。</span></t-x></h1>
+    <p class="lead"><t-x data-i="k4643173">社区共建者共享生态建设分红池。在质押板块把等级做到 V9 及以上，即成为共建者。</t-x></p>
+
+    <!-- 两个主按钮：左「早期共识」右「我的中心」 -->
+    <div class="btn-row" style="margin-top:28px">
+      <button class="btn btn-ghost btn-lg" data-open="m-consensus">
+        <t-x data-i="k3d955ef">早期共识</t-x></button>
+      <a class="btn btn-primary btn-lg" href="../center/">
+        <t-x data-i="k307a4ff">我的中心</t-x></a>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 分红池 ---------- -->
+<section class="wrap">
+  <div class="grid g-side">
+    <div class="card card-ac">
+      <div class="card-head">
+        <div>
+          <div class="h3 card-title"><t-x data-i="k07a9e34">共建者分红池</t-x></div>
+          <p class="scope" style="margin-top:6px"><t-x data-i="k07a1e69">按共建者人数均分 · 每 10 天分配一次</t-x></p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span class="chip"><span class="dot dot-live"></span><t-x data-i="k325fe51">累积中</t-x></span>
+          <a class="btn btn-quiet btn-sm" href="../rewardpool/"><t-x data-i="k8b629ad">激励池明细</t-x> →</a>
+        </div>
+      </div>
+      <div class="grid g3" style="gap:12px">
+        <div style="background:rgba(0,0,0,.3);border-radius:var(--radius-sm);padding:14px 15px;min-width:0">
+          <div class="lb"><t-x data-i="k77e95a6">池内余额</t-x></div>
+          <div class="mono" style="font-size:clamp(20px,2.4vw,26px);margin-top:6px;color:var(--accent-2);letter-spacing:-.02em">184,620</div>
+          <div class="scope" style="margin-top:3px">FSD</div>
+        </div>
+        <div style="background:rgba(0,0,0,.3);border-radius:var(--radius-sm);padding:14px 15px;min-width:0">
+          <div class="lb"><t-x data-i="k684336b">累计总分红</t-x></div>
+          <div class="mono" style="font-size:clamp(20px,2.4vw,26px);margin-top:6px;letter-spacing:-.02em">1,444,444.44</div>
+          <div class="scope" style="margin-top:3px">FSD</div>
+        </div>
+        <div style="background:rgba(0,0,0,.3);border-radius:var(--radius-sm);padding:14px 15px;min-width:0">
+          <div class="lb"><t-x data-i="kcc111c8">距下次分配</t-x></div>
+          <div class="mono" style="font-size:clamp(20px,2.4vw,26px);margin-top:6px;letter-spacing:-.02em">6d 04h</div>
+          <div class="scope" style="margin-top:3px"><t-x data-i="kdf39e42">自动执行</t-x></div>
+        </div>
+      </div>
+      <div data-need-builder hidden style="margin-top:16px">
+        <dl class="kv">
+          <div class="kv-row"><dt><t-x data-i="k21ff100">我的预估分红</t-x></dt>
+            <dd class="pos">143.79 FSD</dd></div>
+          <div class="kv-row"><dt><t-x data-i="k0e63220">可提取</t-x></dt><dd>862.40 FSD</dd></div>
+        </dl>
+        <a class="btn btn-primary btn-block" style="margin-top:14px" href="../center/">
+          <t-x data-i="k60dc04d">去我的中心提取</t-x> →</a>
+      </div>
+      <div data-no-builder hidden style="margin-top:16px">
+        <div class="note"><i>·</i><p><t-x data-i="k8e860ac">你还不是社区共建者，暂时不参与这个池子的均分。</t-x></p></div>
+        <a class="btn btn-ghost btn-block" style="margin-top:14px" href="../center/">
+          <t-x data-i="kcca085c">了解怎么成为共建者</t-x> →</a>
+      </div>
+      <div data-no-wallet hidden style="margin-top:16px">
+        <button class="btn btn-primary btn-block" data-act="wallet">
+          <t-x data-i="kd6c54b2">连接钱包查看我的分红</t-x></button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="h3 card-title" style="margin-bottom:16px"><t-x data-i="k475088a">怎么成为共建者</t-x></div>
+      <div style="display:flex;gap:13px">
+        <span class="mono" style="color:var(--accent-2);flex:none;font-size:11px;padding-top:3px">V9</span>
+        <div><div class="h4"><t-x data-i="k18eefa5">质押达到 V9</t-x></div>
+          <p class="tiny" style="margin-top:4px"><t-x data-i="kb0327aa">在质押板块把等级做到 V9 及以上，自动获得共建者资格，参与生态建设均分。</t-x></p></div>
+      </div>
+      <div style="margin-top:18px">
+        <div class="barmeta" style="margin:0 0 8px">
+          <span><t-x data-i="k9792ef7">我的等级</t-x> <b class="mono" style="color:var(--accent-2)">V6</b></span>
+          <span><t-x data-i="k73e8255">目标</t-x> <b class="mono">V9</b></span>
+        </div>
+        <div class="bar bar-lg"><i style="width:62%"></i></div>
+        <div class="barmeta"><span class="scope"><t-x data-i="k3f86646">升级进度 62%</t-x></span></div>
+      </div>
+      <dl class="kv" style="margin-top:16px">
+        <div class="kv-row"><dt><t-x data-i="k2b67aec">当前共建者资格</t-x></dt>
+          <dd class="pos"><t-x data-i="k30ce102">已生效</t-x></dd></div>
+        <div class="kv-row"><dt><t-x data-i="ka1b4902">还差</t-x></dt><dd>3 <t-x data-i="k8ab800b">级</t-x></dd></div>
+      </dl>
+      <a class="btn btn-ghost btn-block btn-sm" style="margin-top:18px" href="../stake/">
+        <t-x data-i="ke980474">去质押升级</t-x> →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 共建者权益 ---------- -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><t-x data-i="ka0c5c5f">共建者权益</t-x></span>
+      <h2 class="h2" style="font-size:clamp(21px,2.4vw,30px)"><t-x data-i="k6973d0b">成为共建者<span class="accent-line">拿到什么。</span></t-x></h2>
+    </div>
+    <div class="grid g4">
+      <div class="card"><span class="lb" style="color:var(--accent)">01</span>
+        <div class="h4" style="margin:10px 0 8px"><t-x data-i="k9bbc2d8">邀请奖励手续费分红</t-x></div>
+        <p class="tiny"><t-x data-i="k81bb20a">下线产生的邀请奖励手续费按比例分给共建者。</t-x></p></div>
+      <div class="card"><span class="lb" style="color:var(--accent)">02</span>
+        <div class="h4" style="margin:10px 0 8px"><t-x data-i="kc07660d">质押奖励手续费分红</t-x></div>
+        <p class="tiny"><t-x data-i="k0e43510">质押奖励产生的手续费按比例分给共建者。</t-x></p></div>
+      <div class="card"><span class="lb" style="color:var(--accent)">03</span>
+        <div class="h4" style="margin:10px 0 8px"><t-x data-i="ka5d81b1">早期项目支持</t-x></div>
+        <p class="tiny"><t-x data-i="k8a260b0">新项目发射前的支持位，以及后续新增项目的持续扶持。</t-x></p></div>
+      <div class="card"><span class="lb" style="color:var(--accent)">04</span>
+        <div class="h4" style="margin:10px 0 8px"><t-x data-i="k46eb024">最早拿到项目 CA</t-x></div>
+        <p class="tiny"><t-x data-i="k9590d07">新项目合约地址在共建者渠道优先公布。</t-x></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 早期共识（机构轮用户侧） ============================
+     形态：弹窗，不是页面。落点为源码已有的 components/UnStake/ 共享弹窗组，加一个类型即可。
+     页面上只显示待释放 / 已释放 / 可领取 + 提取 + 释放明细。
+     不出现任何分配规则、倍率、分档 —— 分配在线下计算后直接空投。
+================================================================================= -->
+<div class="modal" id="m-consensus"><div class="modal__bg" data-close></div>
+  <div class="modal__box modal__wide"><div class="modal-grab"></div>
+    <div class="modal__head">
+      <div>
+        <div class="h3"><t-x data-i="k3d955ef">早期共识</t-x></div>
+        <p class="scope" style="margin-top:5px"><t-x data-i="kea65b65">释放情况与提取</t-x></p>
+      </div>
+      <button class="modal__x" data-close aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 2l11 11M13 2L2 13"/></svg></button>
+    </div>
+
+    <!-- 未连钱包 -->
+    <div class="modal__body" data-no-wallet hidden>
+      <div class="empty" style="padding:26px 10px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.3">
+          <rect x="2.5" y="6" width="19" height="13" rx="3"/><path d="M2.5 10h19"/><circle cx="17" cy="14.5" r="1.4"/></svg>
+        <p><t-x data-i="k700d032">连接钱包后查询该地址的早期共识记录。</t-x></p>
+        <button class="btn btn-primary btn-sm" data-act="wallet"><t-x data-i="kbd246b1">连接钱包</t-x></button>
+      </div>
+    </div>
+
+    <!-- 有份额：释放卡 -->
+    <div class="modal__body" data-need-consensus hidden>
+      <div class="xest">
+        <span class="lb"><t-x data-i="kf99c83c">已激活额度</t-x></span>
+        <b class="mono">1,000,000 FSD</b>
+      </div>
+      <div class="grid g3" style="gap:12px">
+        <div style="background:rgba(0,0,0,.32);border:1px solid var(--line-soft);border-radius:var(--radius-sm);padding:15px 16px;min-width:0">
+          <div class="lb"><t-x data-i="k19b6641">待释放</t-x></div>
+          <div class="mono" style="font-size:clamp(19px,2.4vw,24px);margin-top:6px;letter-spacing:-.02em">742,500</div>
+          <div class="scope" style="margin-top:3px">FSD</div>
+        </div>
+        <div style="background:rgba(0,0,0,.32);border:1px solid var(--line-soft);border-radius:var(--radius-sm);padding:15px 16px;min-width:0">
+          <div class="lb"><t-x data-i="k7f67327">已释放</t-x></div>
+          <div class="mono" style="font-size:clamp(19px,2.4vw,24px);margin-top:6px;letter-spacing:-.02em">257,500</div>
+          <div class="scope" style="margin-top:3px">FSD</div>
+        </div>
+        <div style="background:radial-gradient(80% 130% at 8% 0%,rgba(155,107,255,.2),transparent 62%),rgba(0,0,0,.32);
+                    border:1px solid var(--line);border-radius:var(--radius-sm);padding:15px 16px;min-width:0">
+          <div class="lb" style="color:var(--accent-2)"><t-x data-i="k46b6903">可领取</t-x></div>
+          <div class="mono pos" style="font-size:clamp(19px,2.4vw,24px);margin-top:6px;letter-spacing:-.02em">62,500</div>
+          <div class="scope" style="margin-top:3px">FSD</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="barmeta" style="margin:0 0 8px">
+          <span><t-x data-i="kde05574">释放进度</t-x></span>
+          <span class="mono">25.75%</span>
+        </div>
+        <div class="bar bar-lg"><i style="width:25.75%"></i></div>
+      </div>
+
+      <button class="btn btn-primary btn-block" data-act="soon">
+        <t-x data-i="k94a7d64">提取可领取部分</t-x></button>
+
+      <div>
+        <div class="lb" style="margin-bottom:10px"><t-x data-i="k672218d">释放明细</t-x></div>
+        <div class="tw" style="background:none;border-color:var(--line-soft)">
+          <div class="tscroll"><table class="tbl">
+            <thead><tr><th><t-x data-i="kfb1cc3c">期次</t-x></th><th><t-x data-i="k4ff1e74">日期</t-x></th>
+              <th><t-x data-i="k0bf60b3">数量</t-x></th><th><t-x data-i="k3fea7ca">状态</t-x></th></tr></thead>
+            <tbody>
+              <tr><td>01</td><td>2026-03-15</td><td class="num">50,000</td>
+                <td><span class="chip chip-pos"><t-x data-i="k8bd7297">已提取</t-x></span></td></tr>
+              <tr><td>02</td><td>2026-06-15</td><td class="num">75,000</td>
+                <td><span class="chip chip-pos"><t-x data-i="k8bd7297">已提取</t-x></span></td></tr>
+              <tr><td>03</td><td>2026-09-01</td><td class="num">62,500</td>
+                <td><span class="chip"><t-x data-i="k46b6903">可领取</t-x></span></td></tr>
+              <tr><td>04</td><td>2026-12-01</td><td class="num">62,500</td>
+                <td><span class="chip chip-off"><t-x data-i="kbc6601b">未到期</t-x></span></td></tr>
+              <tr><td>05</td><td>2027-03-01</td><td class="num">62,500</td>
+                <td><span class="chip chip-off"><t-x data-i="kbc6601b">未到期</t-x></span></td></tr>
+            </tbody></table></div>
+        </div>
+      </div>
+
+      <div class="note"><i>·</i>
+        <p><t-x data-i="k1046a18">释放的数量与节奏由平台核算后写进合约，提取后代币直接到你的钱包地址。</t-x></p></div>
+    </div>
+
+    <!-- 无份额：提示无记录 -->
+    <div class="modal__body" data-no-consensus hidden>
+      <div class="empty" style="padding:32px 10px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.3">
+          <circle cx="12" cy="12" r="9"/><path d="M8.5 12h7"/></svg>
+        <p><t-x data-i="k34623f3">当前钱包地址没有早期共识记录。</t-x></p>
+      </div>
+      <div class="addr-box" data-copy="0x7C1f9a4bA93E">
+        <span class="lb" style="letter-spacing:.12em"><t-x data-i="k0ff5b8f">查询地址</t-x></span>
+        <span style="margin-left:auto">0x7C1f9a…4bA93E</span>
+      </div>
+    </div>
+
+    <div class="modal__foot">
+      <button class="btn btn-quiet btn-block" data-close><t-x data-i="kb15d912">关闭</t-x></button>
+    </div>
+  </div></div>
+
+<script src="../app.js"></script>
+</body>
+</html>

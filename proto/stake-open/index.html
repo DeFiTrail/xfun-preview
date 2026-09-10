@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+<title>单币质押开启版 · X.FUN</title>
+<script>try{var l=localStorage.getItem('xfun.lang')||'zh';var d=document.documentElement;
+d.dataset.lang=l;d.lang=({zh:'zh-CN',ft:'zh-TW',en:'en',ja:'ja',ko:'ko',vi:'vi',th:'th',id:'id'})[l]||'zh-CN';
+if(l!=='zh')d.className='i18n-wait';}catch(e){}</script>
+<style>html.i18n-wait body{visibility:hidden}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../app.css">
+</head>
+<body data-page="stakeopen">
+<!-- ============================ 质押 ============================
+     完整复刻 FSD 源码的质押逻辑（脑图未覆盖 FSD 内容，以源码为准）。
+     质押池 = LP 与单币混合制，币名不带 -LP 后缀。
+     本页不提引擎质押 —— 引擎那边可以回到这里，反向不强推。
+================================================================= -->
+<section class="wrap page-head">
+  <span class="eyebrow"><t-x data-i="k71cd7c3">质押</t-x></span>
+  <h1 class="h1" style="margin-top:14px;font-size:clamp(27px,3.2vw,40px)">
+    <t-x data-i="k4d2bf44">质押建仓，<span class="accent-line">按档释放收益。</span></t-x></h1>
+  <span class="chip chip-new" style="margin-top:12px">
+    <t-x data-i="k829ce8d">单币质押已开放</t-x></span>
+</section>
+
+<!-- ---------- 未连钱包 ---------- -->
+<section class="wrap" data-no-wallet hidden>
+  <div class="card"><div class="empty">
+    <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.4">
+      <rect x="2.5" y="6" width="19" height="13" rx="3"/><path d="M2.5 10h19"/><circle cx="17" cy="14.5" r="1.4"/></svg>
+    <p><t-x data-i="kd943210">连接钱包后查看你的质押池与释放情况。</t-x></p>
+    <button class="btn btn-primary" data-act="wallet"><t-x data-i="kbd246b1">连接钱包</t-x></button>
+  </div></div>
+</section>
+
+<!-- ---------- 概览 ---------- -->
+<section class="wrap" data-need-wallet hidden>
+  <div class="stats s3">
+    <div class="stat">
+      <span class="stat-k"><t-x data-i="kc6fe00c">我的总质押</t-x></span>
+      <span class="stat-v mono">$24,860</span>
+      <span class="stat-n">SHARE · SENTIS · FSD</span>
+    </div>
+    <div class="stat">
+      <span class="stat-k"><t-x data-i="k1bafe37">累计已领取</t-x></span>
+      <span class="stat-v mono">6,428.20</span>
+      <span class="stat-n">FSD</span>
+    </div>
+    <div class="stat">
+      <span class="stat-k"><t-x data-i="k9792ef7">我的等级</t-x></span>
+      <span class="stat-v mono">V6</span>
+      <span class="stat-n"><t-x data-i="k3f86646">升级进度 62%</t-x></span>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 两种质押方式 ---------- -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><t-x data-i="k1d1e303">质押方式</t-x></span>
+      <h2 class="h2" style="font-size:clamp(21px,2.4vw,30px)"><t-x data-i="k4e484a0">LP 与<span class="accent-line">单币。</span></t-x></h2>
+    </div>
+
+    <div class="grid g2">
+      <!-- LP 流动性质押 -->
+      <div class="card">
+        <div class="card-head">
+          <div class="h3 card-title"><t-x data-i="k3cb0b98">LP 流动性质押</t-x></div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span class="estchip"><t-x data-i="k4584c09">预估</t-x>
+              ≈ <b data-xest="lp">2,480</b> <span data-xpartner="lp">FSD</span></span>
+            <span class="chip chip-pos"><t-x data-i="k44b3099">开放中</t-x></span>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-label"><span><t-x data-i="kb3781e8">选择代币</t-x></span></div>
+          <div class="pick" data-pick-group="lp" data-xpair="1">
+            <button data-pick="SHARE" aria-pressed="true"><span class="tokdot tok-SHARE"></span>SHARE</button>
+            <button data-pick="SENTIS" aria-pressed="false"><span class="tokdot tok-SENTIS"></span>SENTIS</button>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:16px" data-seg-target="#lp-amt">
+          <div class="field-label">
+            <span><t-x data-i="k6e1169e">质押数量</t-x></span>
+            <b><t-x data-i="ke05e6f3">余额</t-x> 62,400</b>
+          </div>
+          <label class="amt">
+            <input id="lp-amt" type="text" inputmode="decimal" placeholder="0.00" value="10,000">
+            <span class="unit" data-picked="lp">SHARE</span>
+            <button class="max" data-seg="62,400">MAX</button>
+          </label>
+          <div class="seg" style="margin-top:9px">
+            <button data-seg="15,600">25%</button><button data-seg="31,200">50%</button>
+            <button data-seg="46,800">75%</button><button data-seg="62,400">100%</button>
+          </div>
+        </div>
+
+        <dl class="kv" style="margin-top:18px">
+          <div class="kv-row"><dt><t-x data-i="k95094b7">当前 APY</t-x></dt><dd class="pos">184.6%</dd></div>
+          <div class="kv-row"><dt><t-x data-i="k02baedf">池内 TVL</t-x></dt><dd>$4.28M</dd></div>
+        </dl>
+        <button class="btn btn-primary btn-block" style="margin-top:16px" data-open="m-stake">
+          <t-x data-i="k71cd7c3">质押</t-x></button>
+      </div>
+
+      <!-- 单币质押：开启态，只有 FSD -->
+      <div class="card">
+        <div class="card-head">
+          <div class="h3 card-title"><t-x data-i="k897f1f6">单币质押</t-x></div>
+          <span class="chip chip-pos"><t-x data-i="k44b3099">开放中</t-x></span>
+        </div>
+
+        <div class="field">
+          <div class="field-label"><span><t-x data-i="kb3781e8">选择代币</t-x></span></div>
+          <div class="pick">
+            <button data-pick="FSD" aria-pressed="true"><span class="tokdot tok-FSD"></span>FSD</button>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:16px" data-seg-target="#sg-amt">
+          <div class="field-label">
+            <span><t-x data-i="k6e1169e">质押数量</t-x></span>
+            <b><t-x data-i="ke05e6f3">余额</t-x> 41,800</b>
+          </div>
+          <label class="amt">
+            <input id="sg-amt" type="text" inputmode="decimal" value="10,000">
+            <span class="unit">FSD</span>
+            <button class="max" data-seg="41,800">MAX</button>
+          </label>
+          <div class="seg" style="margin-top:9px">
+            <button data-seg="10,450">25%</button><button data-seg="20,900">50%</button>
+            <button data-seg="31,350">75%</button><button data-seg="41,800">100%</button>
+          </div>
+        </div>
+
+        <dl class="kv" style="margin-top:18px">
+          <div class="kv-row"><dt><t-x data-i="k95094b7">当前 APY</t-x></dt><dd class="pos">96.2%</dd></div>
+          <div class="kv-row"><dt><t-x data-i="k02baedf">池内 TVL</t-x></dt><dd>$1.86M</dd></div>
+        </dl>
+        <button class="btn btn-primary btn-block" style="margin-top:16px" data-open="m-single">
+          <t-x data-i="k71cd7c3">质押</t-x></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 我的质押池 ═══════════ -->
+<section class="section section-alt" data-need-wallet hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><t-x data-i="kcc386e8">我的质押池</t-x></span>
+      <h2 class="h2"><t-x data-i="kcc386e8">我的质押池</t-x></h2>
+    </div>
+
+    <div class="tw">
+      <div class="poolhead">
+        <span class="sub" style="line-height:1.4"><t-x data-i="k5aa0fb5">我的质押池总量</t-x></span>
+        <b class="pv">424,124 FSD</b>
+      </div>
+      <div class="tscroll">
+        <table class="tbl">
+          <thead><tr>
+            <th><t-x data-i="kda6a42d">池</t-x></th>
+            <th><t-x data-i="k5d18a26">质押量</t-x></th>
+            <th><t-x data-i="kc02d395">可提 LP 分红</t-x></th>
+            <th><t-x data-i="k66fd654">解除质押</t-x></th>
+            <th><t-x data-i="kbdc9881">可提取解押</t-x></th>
+            <th><t-x data-i="k1f61f5d">提取 LP 分红</t-x></th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="tokcell"><span class="tokdot tok-SHARE"></span>SHARE</span></td>
+              <td class="num">216,800</td>
+              <td class="num pos">2,164 FSD</td>
+              <td><button class="tact" data-open="m-unstake"><t-x data-i="k294fd50">解押</t-x></button></td>
+              <td class="num">12,000 <button class="tact" data-act="chain" style="margin-left:6px"><t-x data-i="kfc16b1f">提取</t-x></button></td>
+              <td><button class="tact" data-open="m-lpdiv"><t-x data-i="k9c1b276">领取</t-x></button></td>
+            </tr>
+            <tr>
+              <td><span class="tokcell"><span class="tokdot tok-SENTIS"></span>SENTIS</span></td>
+              <td class="num">124,500</td>
+              <td class="num pos">1,038 FSD</td>
+              <td><button class="tact" data-open="m-unstake"><t-x data-i="k294fd50">解押</t-x></button></td>
+              <td class="num blank">0 <button class="tact is-off" style="margin-left:6px"><t-x data-i="kfc16b1f">提取</t-x></button></td>
+              <td><button class="tact" data-open="m-lpdiv"><t-x data-i="k9c1b276">领取</t-x></button></td>
+            </tr>
+            <tr>
+              <td><span class="tokcell"><span class="tokdot tok-FSD"></span>FSD</span></td>
+              <td class="num">82,824</td>
+              <td class="blank">—</td>
+              <td><button class="tact" data-open="m-unstake"><t-x data-i="k294fd50">解押</t-x></button></td>
+              <td class="num">4,500 <button class="tact" data-act="chain" style="margin-left:6px"><t-x data-i="kfc16b1f">提取</t-x></button></td>
+              <td class="blank">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 释放 / 提取 / 额度 ═══════════ -->
+<section class="section" data-need-wallet hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><t-x data-i="k590801d">释放与提取</t-x></span>
+      <h2 class="h2"><t-x data-i="k590801d">释放与提取</t-x></h2>
+    </div>
+
+    <div class="grid g4">
+      <div class="ix">
+        <div class="ix-k"><t-x data-i="k04bac7c">可释放总量</t-x></div>
+        <div class="ix-v">18,420<small>FSD</small></div>
+        <p class="tiny"><t-x data-i="k71b5c84">选择 0 / 15 / 30 天释放档，手续费随时长递减。</t-x></p>
+        <button class="btn btn-primary btn-block btn-sm" data-open="m-release">
+          <t-x data-i="k9c1b276">领取</t-x></button>
+      </div>
+
+      <div class="ix">
+        <div class="ix-k"><t-x data-i="k3c25ed1">已释放待提取</t-x></div>
+        <div class="ix-v">6,150<small>FSD</small></div>
+        <p class="tiny"><t-x data-i="kc72a76c">已过释放期的额度，确认后提取到钱包。</t-x></p>
+        <button class="btn btn-ghost btn-block btn-sm" data-open="m-withdraw">
+          <t-x data-i="kfc16b1f">提取</t-x></button>
+      </div>
+
+      <div class="ix">
+        <div class="ix-k"><t-x data-i="ke639156">灵活提取</t-x></div>
+        <div class="ix-v">2,308<small>FSD</small></div>
+        <p class="tiny"><t-x data-i="k8fe41ab">随时提取，无释放期，直接触发链上交易。</t-x></p>
+        <button class="btn btn-ghost btn-block btn-sm" data-act="chain">
+          <t-x data-i="kdb79713">提现</t-x></button>
+      </div>
+
+      <div class="ix">
+        <div class="ix-k"><t-x data-i="kc72a828">贡献值额度</t-x></div>
+        <div class="ix-v">92,000<small>FSD</small></div>
+        <p class="tiny"><t-x data-i="kfeb55dd">贡献值可兑换 4 倍额度，用于提升分红提取上限。</t-x></p>
+        <button class="btn btn-ghost btn-block btn-sm" data-open="m-quota">
+          <t-x data-i="k64c2b4c">提升额度</t-x></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 链上数据 ═══════════ -->
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><t-x data-i="kba09f53">链上数据</t-x></span>
+      <h2 class="h2"><t-x data-i="kba09f53">链上数据</t-x></h2>
+    </div>
+
+    <div class="stats s4">
+      <div class="stat">
+        <div class="stat-k"><t-x data-i="k2bc74ca">销毁总量</t-x></div>
+        <div class="stat-v">12,846,200</div>
+        <div class="stat-n">FSD</div>
+      </div>
+      <div class="stat">
+        <div class="stat-k"><t-x data-i="kccba456">质押总量</t-x></div>
+        <div class="stat-v">38,204,500</div>
+        <div class="stat-n">FSD</div>
+      </div>
+      <div class="stat">
+        <div class="stat-k"><t-x data-i="kf91317a">质押 DAO 池</t-x></div>
+        <div class="stat-v">4,128,000</div>
+        <div class="stat-n">FSD</div>
+      </div>
+      <div class="stat">
+        <div class="stat-k"><t-x data-i="ke691483">流动性回流</t-x></div>
+        <div class="stat-v">$2.14M</div>
+        <div class="stat-n">USDT</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ 记录 ═══════════ -->
+<section class="section" data-need-wallet hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><t-x data-i="k5695c0d">我的记录</t-x></span>
+      <h2 class="h2"><t-x data-i="k5695c0d">我的记录</t-x></h2>
+    </div>
+
+    <div class="tabs" data-group="rec" style="margin-bottom:16px">
+      <button data-tab="r1" data-group="rec" aria-selected="true"><t-x data-i="k71cd7c3">质押</t-x></button>
+      <button data-tab="r2" data-group="rec" aria-selected="false"><t-x data-i="k294fd50">解押</t-x></button>
+      <button data-tab="r3" data-group="rec" aria-selected="false"><t-x data-i="k9c1b276">领取</t-x></button>
+    </div>
+
+    <div class="tabpanel" data-tab="r1" data-group="rec">
+      <div class="tw"><div class="tscroll"><table class="tbl">
+        <thead><tr>
+          <th><t-x data-i="k19fcb9e">时间</t-x></th>
+          <th><t-x data-i="kda6a42d">池</t-x></th>
+          <th><t-x data-i="k0bf60b3">数量</t-x></th>
+          <th><t-x data-i="kee1ba23">交易哈希</t-x></th>
+        </tr></thead>
+        <tbody>
+          <tr><td class="num">09-02 14:22</td><td>SHARE</td><td class="num">86,000</td><td class="hash">0x4f2a…81dc</td></tr>
+          <tr><td class="num">08-28 09:41</td><td>SENTIS</td><td class="num">124,500</td><td class="hash">0xa19b…5e02</td></tr>
+          <tr><td class="num">08-19 21:05</td><td>FSD</td><td class="num">82,824</td><td class="hash">0xc730…44af</td></tr>
+        </tbody>
+      </table></div></div>
+    </div>
+
+    <div class="tabpanel" data-tab="r2" data-group="rec" hidden>
+      <div class="tw"><div class="tscroll"><table class="tbl">
+        <thead><tr>
+          <th><t-x data-i="k19fcb9e">时间</t-x></th>
+          <th><t-x data-i="kda6a42d">池</t-x></th>
+          <th><t-x data-i="k0bf60b3">数量</t-x></th>
+          <th><t-x data-i="k3755f8d">释放档</t-x></th>
+          <th><t-x data-i="k3fea7ca">状态</t-x></th>
+        </tr></thead>
+        <tbody>
+          <tr><td class="num">09-01 11:30</td><td>SHARE</td><td class="num">12,000</td><td class="num">30D</td>
+            <td><span class="chip chip-pos"><t-x data-i="k0e63220">可提取</t-x></span></td></tr>
+          <tr><td class="num">08-30 16:12</td><td>FSD</td><td class="num">4,500</td><td class="num">60D</td>
+            <td><span class="chip chip-warn"><t-x data-i="k7e7aaa1">释放中</t-x></span></td></tr>
+        </tbody>
+      </table></div></div>
+    </div>
+
+    <div class="tabpanel" data-tab="r3" data-group="rec" hidden>
+      <div class="tw"><div class="tscroll"><table class="tbl">
+        <thead><tr>
+          <th><t-x data-i="k19fcb9e">时间</t-x></th>
+          <th><t-x data-i="k226b091">类型</t-x></th>
+          <th><t-x data-i="k0bf60b3">数量</t-x></th>
+          <th><t-x data-i="kee1ba23">交易哈希</t-x></th>
+        </tr></thead>
+        <tbody>
+          <tr><td class="num">09-03 08:14</td><td><t-x data-i="kdee51fe">LP 分红</t-x></td>
+            <td class="num pos">+2,164</td><td class="hash">0x91ce…7b30</td></tr>
+          <tr><td class="num">08-27 19:48</td><td><t-x data-i="ke368f1b">释放领取</t-x></td>
+            <td class="num pos">+6,150</td><td class="hash">0x2d84…0a17</td></tr>
+        </tbody>
+      </table></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 弹窗 ═══════════ -->
+
+<!-- 质押 -->
+<div class="modal" id="m-stake"><div class="modal__bg" data-close></div>
+  <div class="modal__box"><div class="modal-grab"></div>
+    <div class="modal__head">
+      <div><div class="h3"><t-x data-i="k71cd7c3">质押</t-x></div>
+        <p class="scope" style="margin-top:5px"><t-x data-i="kb13ece3">确认后触发链上交易</t-x></p></div>
+      <button class="modal__x" data-close aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 2l11 11M13 2L2 13"/></svg></button>
+    </div>
+    <div class="modal__body">
+      <div class="field">
+        <div class="field-label"><span><t-x data-i="kb3781e8">选择代币</t-x></span></div>
+        <div class="pick" data-pick-group="st" data-xpair="1">
+          <button data-pick="SHARE" aria-pressed="true"><span class="tokdot tok-SHARE"></span>SHARE</button>
+          <button data-pick="SENTIS" aria-pressed="false"><span class="tokdot tok-SENTIS"></span>SENTIS</button>
+        </div>
+      </div>
+      <div class="field" data-seg-target="#st-amt">
+        <div class="field-label"><span><t-x data-i="k6e1169e">质押数量</t-x></span>
+          <b><t-x data-i="ke05e6f3">余额</t-x> 128,400</b></div>
+        <label class="amt"><input id="st-amt" type="text" inputmode="decimal" value="50,000">
+          <span class="unit" data-picked="st">SHARE</span><button class="max" data-seg="128,400">MAX</button></label>
+        <div class="seg" style="margin-top:9px">
+          <button data-seg="32,100">25%</button><button data-seg="64,200">50%</button>
+          <button data-seg="96,300">75%</button><button data-seg="128,400">100%</button></div>
+      </div>
+      <dl class="kv">
+        <div class="kv-row"><dt><t-x data-i="k30f8b09">预估换得</t-x></dt>
+          <dd class="warnc">≈ <span data-xest="st">2,480</span> <span data-xpartner="st">FSD</span></dd></div>
+        <div class="kv-row"><dt><t-x data-i="k95094b7">当前 APY</t-x></dt><dd class="pos">184.6%</dd></div>
+        <div class="kv-row"><dt><t-x data-i="k741d3b2">获得贡献值</t-x></dt><dd>1 : 1</dd></div>
+      </dl>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn-quiet" data-close><t-x data-i="k625fb26">取消</t-x></button>
+      <button class="btn btn-primary" data-act="chain"><t-x data-i="k54f3eea">确认质押</t-x></button>
+    </div>
+  </div>
+</div>
+
+<!-- 解押 -->
+<div class="modal" id="m-unstake"><div class="modal__bg" data-close></div>
+  <div class="modal__box"><div class="modal-grab"></div>
+    <div class="modal__head">
+      <div><div class="h3"><t-x data-i="k66fd654">解除质押</t-x></div>
+        <p class="scope" style="margin-top:5px"><t-x data-i="k2935ed3">支付手续费后进入释放期</t-x></p></div>
+      <button class="modal__x" data-close aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 2l11 11M13 2L2 13"/></svg></button>
+    </div>
+    <div class="modal__body">
+      <div class="field">
+        <div class="field-label"><span><t-x data-i="kbffe58b">选择池</t-x></span></div>
+        <div class="pick" data-pick-group="us">
+          <button data-pick="SHARE" aria-pressed="true"><span class="tokdot tok-SHARE"></span>SHARE</button>
+          <button data-pick="SENTIS" aria-pressed="false"><span class="tokdot tok-SENTIS"></span>SENTIS</button>
+          <button data-pick="FSD" aria-pressed="false"><span class="tokdot tok-FSD"></span>FSD</button>
+        </div>
+      </div>
+      <div class="field" data-seg-target="#us-amt">
+        <div class="field-label"><span><t-x data-i="kadbff07">解押数量</t-x></span>
+          <b><t-x data-i="k20ad91b">已质押</t-x> 216,800</b></div>
+        <label class="amt"><input id="us-amt" type="text" inputmode="decimal" value="20,000">
+          <span class="unit" data-picked="us">SHARE</span><button class="max" data-seg="216,800">MAX</button></label>
+        <div class="seg" style="margin-top:9px">
+          <button data-seg="54,200">25%</button><button data-seg="108,400">50%</button>
+          <button data-seg="162,600">75%</button><button data-seg="216,800">100%</button></div>
+      </div>
+      <div class="field">
+        <div class="field-label"><span><t-x data-i="k3755f8d">释放档</t-x></span></div>
+        <div class="seg">
+          <button aria-pressed="true">30 <t-x data-i="k249aba7">天</t-x></button>
+          <button aria-pressed="false">60 <t-x data-i="k249aba7">天</t-x></button>
+          <button aria-pressed="false">90 <t-x data-i="k249aba7">天</t-x></button>
+        </div>
+      </div>
+      <dl class="kv">
+        <div class="kv-row"><dt>30 <t-x data-i="k249aba7">天</t-x></dt><dd class="warnc"><t-x data-i="k03c168e">手续费</t-x> 30%</dd></div>
+        <div class="kv-row"><dt>60 <t-x data-i="k249aba7">天</t-x></dt><dd class="warnc"><t-x data-i="k03c168e">手续费</t-x> 20%</dd></div>
+        <div class="kv-row"><dt>90 <t-x data-i="k249aba7">天</t-x></dt><dd class="warnc"><t-x data-i="k03c168e">手续费</t-x> 10%</dd></div>
+      </dl>
+      <div class="dashed">
+        <div class="lb" style="margin-bottom:9px"><t-x data-i="kf7a4462">手续费分配</t-x></div>
+        <dl class="kv">
+          <div class="kv-row"><dt><t-x data-i="ke5c9124">平台运营</t-x></dt><dd>10%</dd></div>
+          <div class="kv-row"><dt><t-x data-i="k19198ac">生态建设</t-x></dt><dd>20%</dd></div>
+          <div class="kv-row"><dt><t-x data-i="kb6e2ee9">流动性回流销毁</t-x></dt><dd>70%</dd></div>
+        </dl>
+      </div>
+      <div class="note note-warn"><i>⚠</i>
+        <p><t-x data-i="k89d32a3">支持分批解押。释放期结束后回到质押池点「提取」到账。</t-x></p></div>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn-quiet" data-close><t-x data-i="k625fb26">取消</t-x></button>
+      <button class="btn btn-primary" data-act="chain"><t-x data-i="kc9de595">支付手续费并解押</t-x></button>
+    </div>
+  </div>
+</div>
+
+<!-- 提取 LP 分红 -->
+<div class="modal" id="m-lpdiv"><div class="modal__bg" data-close></div>
+  <div class="modal__box"><div class="modal-grab"></div>
+    <div class="modal__head">
+      <div><div class="h3"><t-x data-i="k1f61f5d">提取 LP 分红</t-x></div>
+        <p class="scope" style="margin-top:5px"><t-x data-i="ke5f7112">消耗等量贡献值</t-x></p></div>
+      <button class="modal__x" data-close aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 2l11 11M13 2L2 13"/></svg></button>
+    </div>
+    <div class="modal__body">
+      <div class="field" data-seg-target="#lp-amt">
+        <div class="field-label"><span><t-x data-i="k5d65dd9">提取数量</t-x></span>
+          <b><t-x data-i="ke2257db">可提</t-x> 2,164</b></div>
+        <label class="amt"><input id="lp-amt" type="text" inputmode="decimal" value="2,164">
+          <span class="unit">FSD</span><button class="max" data-seg="2,164">MAX</button></label>
+      </div>
+      <dl class="kv">
+        <div class="kv-row"><dt><t-x data-i="k398fb30">贡献值余额</t-x></dt><dd>92,000</dd></div>
+        <div class="kv-row"><dt><t-x data-i="k3549fa3">预计消耗贡献值</t-x></dt><dd class="warnc">2,164</dd></div>
+        <div class="kv-row"><dt><t-x data-i="k4f60650">提取后贡献值余额</t-x></dt><dd>89,836</dd></div>
+      </dl>
+      <div class="note note-ac"><i>◈</i>
+        <p><t-x data-i="k8840c3b">提取将触发合约 <b>1:1 买入 FSD</b>，同时消耗 <b>1:1 贡献值</b>。</t-x></p></div>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn-quiet" data-close><t-x data-i="k625fb26">取消</t-x></button>
+      <button class="btn btn-primary" data-act="chain"><t-x data-i="k0c30262">确认领取</t-x></button>
+    </div>
+  </div>
+</div>
+
+<!-- 可释放领取 -->
+<div class="modal" id="m-release"><div class="modal__bg" data-close></div>
+  <div class="modal__box"><div class="modal-grab"></div>
+    <div class="modal__head">
+      <div><div class="h3"><t-x data-i="k4f8bcc8">领取可释放收益</t-x></div>
+        <p class="scope" style="margin-top:5px"><t-x data-i="k2935ed3">支付手续费后进入释放期</t-x></p></div>
+      <button class="modal__x" data-close aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 2l11 11M13 2L2 13"/></svg></button>
+    </div>
+    <div class="modal__body">
+      <div class="field" data-seg-target="#rl-amt">
+        <div class="field-label"><span><t-x data-i="kc6465d9">领取数量</t-x></span>
+          <b><t-x data-i="k94dbc30">可释放</t-x> 18,420</b></div>
+        <label class="amt"><input id="rl-amt" type="text" inputmode="decimal" value="18,420">
+          <span class="unit">FSD</span><button class="max" data-seg="18,420">MAX</button></label>
+      </div>
+      <div class="field">
+        <div class="field-label"><span><t-x data-i="k3755f8d">释放档</t-x></span></div>
+        <div class="seg">
+          <button aria-pressed="true">0 <t-x data-i="k249aba7">天</t-x></button>
+          <button aria-pressed="false">15 <t-x data-i="k249aba7">天</t-x></button>
+          <button aria-pressed="false">30 <t-x data-i="k249aba7">天</t-x></button>
+        </div>
+      </div>
+      <dl class="kv">
+        <div class="kv-row"><dt>0 <t-x data-i="k249aba7">天</t-x></dt><dd class="warnc"><t-x data-i="k03c168e">手续费</t-x> 30%</dd></div>
+        <div class="kv-row"><dt>15 <t-x data-i="k249aba7">天</t-x></dt><dd class="warnc"><t-x data-i="k03c168e">手续费</t-x> 20%</dd></div>
+        <div class="kv-row"><dt>30 <t-x data-i="k249aba7">天</t-x></dt><dd class="warnc"><t-x data-i="k03c168e">手续费</t-x> 10%</dd></div>
+      </dl>
+      <div class="dashed">
+        <div class="lb" style="margin-bottom:9px"><t-x data-i="kf7a4462">手续费分配</t-x></div>
+        <dl class="kv">
+          <div class="kv-row"><dt><t-x data-i="ke5c9124">平台运营</t-x></dt><dd>10%</dd></div>
+          <div class="kv-row"><dt><t-x data-i="k19198ac">生态建设</t-x></dt><dd>20%</dd></div>
+          <div class="kv-row"><dt><t-x data-i="kb6e2ee9">流动性回流销毁</t-x></dt><dd>70%</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn-quiet" data-close><t-x data-i="k625fb26">取消</t-x></button>
+      <button class="btn btn-primary" data-act="chain"><t-x data-i="k8a119d3">支付手续费并领取</t-x></button>
+    </div>
+  </div>
+</div>
+
+<!-- 已释放提取 -->
+<div class="modal" id="m-withdraw"><div class="modal__bg" data-close></div>
+  <div class="modal__box"><div class="modal-grab"></div>
+    <div class="modal__head">
+      <div><div class="h3"><t-x data-i="k06a49ef">提取已释放</t-x></div>
+        <p class="scope" style="margin-top:5px"><t-x data-i="kb13ece3">确认后触发链上交易</t-x></p></div>
+      <button class="modal__x" data-close aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 2l11 11M13 2L2 13"/></svg></button>
+    </div>
+    <div class="modal__body">
+      <div class="field" data-seg-target="#wd-amt">
+        <div class="field-label"><span><t-x data-i="k5d65dd9">提取数量</t-x></span>
+          <b><t-x data-i="k7f67327">已释放</t-x> 6,150</b></div>
+        <label class="amt"><input id="wd-amt" type="text" inputmode="decimal" value="6,150">
+          <span class="unit">FSD</span><button class="max" data-seg="6,150">MAX</button></label>
+      </div>
+      <div class="note note-ac"><i>◈</i>
+        <p><t-x data-i="kf72479b">提取将触发合约 <b>1:1 买入 FSD</b>，提取的 FSD 冷冻期 <b>25 小时</b>。</t-x></p></div>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn-quiet" data-close><t-x data-i="k625fb26">取消</t-x></button>
+      <button class="btn btn-primary" data-act="chain"><t-x data-i="k922a1cd">确认提取</t-x></button>
+    </div>
+  </div>
+</div>
+
+<!-- 提升额度 -->
+<div class="modal" id="m-quota"><div class="modal__bg" data-close></div>
+  <div class="modal__box"><div class="modal-grab"></div>
+    <div class="modal__head">
+      <div><div class="h3"><t-x data-i="k193bf64">提升贡献值额度</t-x></div>
+        <p class="scope" style="margin-top:5px"><t-x data-i="kb13ece3">确认后触发链上交易</t-x></p></div>
+      <button class="modal__x" data-close aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 2l11 11M13 2L2 13"/></svg></button>
+    </div>
+    <div class="modal__body">
+      <div class="field" data-seg-target="#qa-amt">
+        <div class="field-label"><span><t-x data-i="k21296a6">投入数量</t-x></span>
+          <b><t-x data-i="ke05e6f3">余额</t-x> 41,800 FSD</b></div>
+        <label class="amt"><input id="qa-amt" type="text" inputmode="decimal" value="10,000">
+          <span class="unit">FSD</span><button class="max" data-seg="41,800">MAX</button></label>
+        <div class="seg" style="margin-top:9px">
+          <button data-seg="10,450">25%</button><button data-seg="20,900">50%</button>
+          <button data-seg="31,350">75%</button><button data-seg="41,800">100%</button></div>
+      </div>
+      <dl class="kv">
+        <div class="kv-row"><dt><t-x data-i="k8b29420">当前额度</t-x></dt><dd>92,000 FSD</dd></div>
+        <div class="kv-row"><dt><t-x data-i="k374d962">本次新增</t-x></dt><dd class="pos">+40,000 FSD</dd></div>
+        <div class="kv-row"><dt><t-x data-i="k9be5fdc">提升后额度</t-x></dt><dd>132,000 FSD</dd></div>
+      </dl>
+      <div class="note note-ac"><i>◈</i>
+        <p><t-x data-i="ke6d4d33">投入的 FSD 按 <b>4 倍</b>折算为贡献值额度，用于提升 LP 分红提取上限。</t-x></p></div>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn-quiet" data-close><t-x data-i="k625fb26">取消</t-x></button>
+      <button class="btn btn-primary" data-act="chain"><t-x data-i="kc08fe9c">确认提升</t-x></button>
+    </div>
+  </div>
+</div>
+
+<!-- 单币质押 -->
+<div class="modal" id="m-single"><div class="modal__bg" data-close></div>
+  <div class="modal__box"><div class="modal-grab"></div>
+    <div class="modal__head">
+      <div><div class="h3"><t-x data-i="k897f1f6">单币质押</t-x></div>
+        <p class="scope" style="margin-top:5px"><t-x data-i="kb13ece3">确认后触发链上交易</t-x></p></div>
+      <button class="modal__x" data-close aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 2l11 11M13 2L2 13"/></svg></button>
+    </div>
+    <div class="modal__body">
+      <div class="field" data-seg-target="#sm-amt">
+        <div class="field-label"><span><t-x data-i="k6e1169e">质押数量</t-x></span>
+          <b><t-x data-i="ke05e6f3">余额</t-x> 41,800</b></div>
+        <label class="amt"><input id="sm-amt" type="text" inputmode="decimal" value="10,000">
+          <span class="unit">FSD</span><button class="max" data-seg="41,800">MAX</button></label>
+        <div class="seg" style="margin-top:9px">
+          <button data-seg="10,450">25%</button><button data-seg="20,900">50%</button>
+          <button data-seg="31,350">75%</button><button data-seg="41,800">100%</button></div>
+      </div>
+      <dl class="kv">
+        <div class="kv-row"><dt><t-x data-i="k95094b7">当前 APY</t-x></dt><dd class="pos">96.2%</dd></div>
+        <div class="kv-row"><dt><t-x data-i="k741d3b2">获得贡献值</t-x></dt><dd>1 : 1</dd></div>
+        <div class="kv-row"><dt><t-x data-i="k2048de7">换得引擎额度</t-x></dt><dd class="warnc">1 : 1</dd></div>
+      </dl>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn-quiet" data-close><t-x data-i="k625fb26">取消</t-x></button>
+      <button class="btn btn-primary" data-act="chain"><t-x data-i="k54f3eea">确认质押</t-x></button>
+    </div>
+  </div></div>
+
+<script src="../app.js"></script>
+</body>
+</html>
