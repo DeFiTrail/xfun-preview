@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+<title>共建激励池 · X.FUN</title>
+<script>try{var l=localStorage.getItem('xfun.lang')||'zh';var d=document.documentElement;
+d.dataset.lang=l;d.lang=({zh:'zh-CN',ft:'zh-TW',en:'en',ja:'ja',ko:'ko',vi:'vi',th:'th',id:'id'})[l]||'zh-CN';
+if(l!=='zh')d.className='i18n-wait';}catch(e){}</script>
+<style>html.i18n-wait body{visibility:hidden}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../app.css">
+</head>
+<body data-page="builder">
+<!-- ============================ 共建激励池 ============================
+     对应源码 views/builder/rewardPool.vue + components/Rebate/Sentis*（激活 / 释放 / 回滚）
+     文案键：newText.a2 社区共建者激励池 · a3 Alpha 生态共建奖励 · a5–a16
+================================================================= -->
+<section class="wrap page-head">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap">
+    <div>
+      <span class="eyebrow"><t-x data-i="k214d5d2">共建激励池</t-x></span>
+      <h1 class="h1" style="margin-top:16px;font-size:clamp(26px,3vw,38px)">
+        <t-x data-i="k26c90c0">社区共建者<span class="accent-line">激励池</span></t-x></h1>
+      <p class="lead" style="font-size:14.5px"><t-x data-i="ke4e143a">Alpha 生态共建奖励。发起或加入一个社区，把 DAO 真正做成能落地的东西。</t-x></p>
+    </div>
+    <a class="btn btn-quiet btn-sm" href="../builder/">← <t-x data-i="kd583995">社区共建</t-x></a>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="stats s4">
+    <div class="stat"><span class="stat-k"><t-x data-i="kea4807e">激励数量</t-x></span>
+      <span class="stat-v mono">184,620</span><span class="stat-n">FSD</span></div>
+    <div class="stat"><span class="stat-k"><t-x data-i="k8e9dbc8">达标数量</t-x></span>
+      <span class="stat-v mono">1,284</span><span class="stat-n"><t-x data-i="kee6445c">已达标社区</t-x></span></div>
+    <div class="stat"><span class="stat-k"><t-x data-i="k4a4375b">新增数量</t-x></span>
+      <span class="stat-v mono pos">+42</span><span class="stat-n"><t-x data-i="k8df161c">近 10 日</t-x></span></div>
+    <div class="stat"><span class="stat-k"><t-x data-i="k398fb30">贡献值余额</t-x></span>
+      <span class="stat-v mono">26,480</span><span class="stat-n" data-need-wallet hidden><t-x data-i="k07b1811">我的</t-x></span>
+      <span class="stat-n" data-no-wallet hidden><t-x data-i="k1530b64">连钱包后显示</t-x></span></div>
+  </div>
+</section>
+
+<!-- ---------- 基金：激活 / 释放 / 回滚 ---------- -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">SENTIS <t-x data-i="kbf8214c">基金</t-x></span>
+      <h2 class="h2" style="font-size:clamp(21px,2.4vw,30px)"><t-x data-i="kbf094cf">激活、释放<span class="accent-line">与回退。</span></t-x></h2>
+    </div>
+
+    <div class="grid g-side">
+      <div class="card">
+        <div class="card-head">
+          <div class="h3 card-title"><t-x data-i="k36fcbbb">我的基金</t-x></div>
+          <span class="chip chip-quiet" data-no-wallet hidden><t-x data-i="k7f3a55b">未连接</t-x></span>
+          <span class="chip chip-pos" data-need-wallet hidden><t-x data-i="kc5ea9c6">已连接</t-x></span>
+        </div>
+        <div class="grid g3" style="gap:12px">
+          <div style="background:rgba(0,0,0,.3);border-radius:var(--radius-sm);padding:14px 15px;min-width:0">
+            <div class="lb"><t-x data-i="kae9d4e6">待激活</t-x></div>
+            <div class="mono" style="font-size:20px;margin-top:6px;letter-spacing:-.02em">48,200</div></div>
+          <div style="background:rgba(0,0,0,.3);border-radius:var(--radius-sm);padding:14px 15px;min-width:0">
+            <div class="lb"><t-x data-i="kf6ebf8f">已激活</t-x></div>
+            <div class="mono" style="font-size:20px;margin-top:6px;letter-spacing:-.02em">126,400</div></div>
+          <div style="background:radial-gradient(80% 130% at 8% 0%,rgba(155,107,255,.18),transparent 62%),rgba(0,0,0,.3);
+                      border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 15px;min-width:0">
+            <div class="lb" style="color:var(--accent-2)"><t-x data-i="k0e63220">可提取</t-x></div>
+            <div class="mono pos" style="font-size:20px;margin-top:6px;letter-spacing:-.02em">18,940</div></div>
+        </div>
+        <div class="btn-row" style="margin-top:18px" data-need-wallet hidden>
+          <button class="btn btn-primary" style="flex:1" data-act="soon"><t-x data-i="k0ff13a9">激活释放</t-x></button>
+          <button class="btn btn-ghost" style="flex:1" data-act="soon"><t-x data-i="kfc16b1f">提取</t-x></button>
+          <button class="btn btn-quiet" style="flex:1" data-act="soon"><t-x data-i="k86ff959">退回已激活</t-x></button>
+        </div>
+        <button class="btn btn-primary btn-block" style="margin-top:18px" data-act="wallet" data-no-wallet hidden>
+          <t-x data-i="kbd246b1">连接钱包</t-x></button>
+        <div class="note" style="margin-top:16px"><i>·</i>
+          <p><t-x data-i="kb21de78">激活后按合约节奏线性释放，已释放的随时可提。退回会把已激活但未释放的部分转回待激活。</t-x></p></div>
+      </div>
+
+      <div class="card">
+        <div class="h3 card-title" style="margin-bottom:16px"><t-x data-i="kdee51fe">LP 分红</t-x></div>
+        <dl class="kv">
+          <div class="kv-row"><dt><t-x data-i="k22b08cd">可提取 LP 分红</t-x></dt><dd class="pos">1,462.80</dd></div>
+          <div class="kv-row"><dt><t-x data-i="k398fb30">贡献值余额</t-x></dt><dd>26,480</dd></div>
+          <div class="kv-row"><dt><t-x data-i="kf66dc00">本次消耗贡献值</t-x></dt><dd>1,462.80</dd></div>
+        </dl>
+        <button class="btn btn-primary btn-block" style="margin-top:18px" data-act="soon">
+          <t-x data-i="k1f61f5d">提取 LP 分红</t-x></button>
+        <div class="note note-warn" style="margin-top:14px"><i>⚠</i>
+          <p><t-x data-i="kd6ffd1c">提取 LP 分红会触发合约 1:1 买入，同时按 1:1 消耗贡献值。贡献值不足时按不足数量等比发放。</t-x></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 空投记录 ---------- -->
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="card">
+      <div class="card-head">
+        <div class="h3 card-title"><t-x data-i="kf19d7d6">生态共建空投</t-x></div>
+        <span class="chip chip-quiet"><t-x data-i="kf9064c8">每 10 天分配</t-x></span>
+      </div>
+      <div class="tscroll"><table class="tbl">
+        <thead><tr><th><t-x data-i="k4ff1e74">日期</t-x></th><th><t-x data-i="k7650487">地址</t-x></th>
+          <th><t-x data-i="kbf8959e">空投金额</t-x></th><th>Hash</th></tr></thead>
+        <tbody>
+          <tr><td>2026-09-01</td><td class="addr" data-copy="0x4E82a1…7c3D">0x4E82a1…7c3D</td>
+            <td class="num">143.79</td><td class="hash" data-copy="0xb47c…5f80">0xb47c…5f80</td></tr>
+          <tr><td>2026-09-01</td><td class="addr" data-copy="0x91Fd0c…22Ae">0x91Fd0c…22Ae</td>
+            <td class="num">143.79</td><td class="hash" data-copy="0x2d1a…c093">0x2d1a…c093</td></tr>
+          <tr><td>2026-08-22</td><td class="addr" data-copy="0x0aB37e…9104">0x0aB37e…9104</td>
+            <td class="num">138.42</td><td class="hash" data-copy="0x7f30…41de">0x7f30…41de</td></tr>
+          <tr><td>2026-08-22</td><td class="addr" data-copy="0xC5e419…6b7F">0xC5e419…6b7F</td>
+            <td class="num">138.42</td><td class="hash" data-copy="0x9c6e…7b25">0x9c6e…7b25</td></tr>
+        </tbody></table></div>
+      <div class="note" style="margin-top:16px"><i>·</i>
+        <p><t-x data-i="kb374425">每一笔空投都上链，哈希可核对地址与数量。达标口径与分配周期以站内公告为准。</t-x></p></div>
+    </div>
+  </div>
+</section>
+
+<script src="../app.js"></script>
+</body>
+</html>
