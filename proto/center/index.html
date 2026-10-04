@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+<title>我的中心 · X.FUN</title>
+<script>try{var l=localStorage.getItem('xfun.lang')||'zh';var d=document.documentElement;
+d.dataset.lang=l;d.lang=({zh:'zh-CN',ft:'zh-TW',en:'en',ja:'ja',ko:'ko',vi:'vi',th:'th',id:'id'})[l]||'zh-CN';
+if(l!=='zh')d.className='i18n-wait';}catch(e){}</script>
+<style>html.i18n-wait body{visibility:hidden}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../app.css">
+</head>
+<body data-page="builder">
+<!-- ============================ 我的中心 ============================
+     对应源码 views/builder/center.vue + components/Pop/JoinBuilder + Pop/Withdraw
+       + components/Rebate/（邀请列表、分红明细、排行）
+     改动：申请社区共建者 与 购买节点 的入口挪到这里（外层位置让给「早期共识」）。
+================================================================= -->
+<section class="wrap page-head">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap">
+    <div>
+      <span class="eyebrow"><t-x data-i="k307a4ff">我的中心</t-x></span>
+      <h1 class="h1" style="margin-top:16px;font-size:clamp(26px,3vw,38px)">
+        <t-x data-i="k307a4ff">我的中心</t-x></h1>
+    </div>
+    <a class="btn btn-quiet btn-sm" href="../builder/">← <t-x data-i="kd583995">社区共建</t-x></a>
+  </div>
+</section>
+
+<!-- ---------- 未连钱包 ---------- -->
+<section class="wrap" data-no-wallet hidden>
+  <div class="card"><div class="empty">
+    <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="1.4">
+      <rect x="2.5" y="6" width="19" height="13" rx="3"/><path d="M2.5 10h19"/><circle cx="17" cy="14.5" r="1.4"/></svg>
+    <p><t-x data-i="k16aa564">连接钱包后查看你的共建者状态、分红与提现。</t-x></p>
+    <button class="btn btn-primary" data-act="wallet"><t-x data-i="kbd246b1">连接钱包</t-x></button>
+  </div></div>
+</section>
+
+<!-- ---------- 未成为共建者：引导 ---------- -->
+<section class="wrap" data-no-builder hidden>
+  <div class="card card-ac">
+    <div class="card-head">
+      <div>
+        <div class="h3 card-title"><t-x data-i="k2c8c461">你还不是社区共建者</t-x></div>
+        <p class="scope" style="margin-top:6px"><t-x data-i="k416f8c1">质押等级到 V9 自动生效</t-x></p>
+      </div>
+      <span class="chip chip-off"><t-x data-i="kd70e9bd">未激活</t-x></span>
+    </div>
+
+    <div class="card card-flat" style="border-color:var(--line-soft)">
+      <span class="lb" style="color:var(--accent-2)"><t-x data-i="k607df51">质押升级</t-x></span>
+      <div class="h4" style="margin:11px 0 8px"><t-x data-i="ke022858">等级到 V9 自动获得</t-x></div>
+      <p class="tiny"><t-x data-i="k94ec236">在质押板块把等级做到 V9 及以上，共建者资格自动生效，参与生态建设均分。</t-x></p>
+      <div style="margin-top:16px">
+        <div class="barmeta" style="margin:0 0 8px">
+          <span><t-x data-i="k5cd8cb2">当前等级</t-x> <b class="mono" style="color:var(--accent-2)">V6</b></span>
+          <span><t-x data-i="k73e8255">目标</t-x> <b class="mono">V9</b></span>
+        </div>
+        <div class="bar"><i style="width:62%"></i></div>
+        <div class="barmeta"><span class="scope"><t-x data-i="k3f86646">升级进度 62%</t-x></span></div>
+      </div>
+      <a class="btn btn-primary btn-sm btn-block" style="margin-top:16px" href="../stake/">
+        <t-x data-i="k1e7a771">去质押</t-x> →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 已是共建者 ---------- -->
+<section class="wrap" data-need-builder hidden>
+  <div class="stats s3">
+    <div class="stat"><span class="stat-k"><t-x data-i="k015da1e">可提取余额</t-x></span>
+      <span class="stat-v mono pos">862.40</span><span class="stat-n">FSD</span></div>
+    <div class="stat"><span class="stat-k"><t-x data-i="kdd4b431">累计分红</t-x></span>
+      <span class="stat-v mono">4,182.60</span><span class="stat-n"><t-x data-i="k1a9ae98">全周期</t-x></span></div>
+    <div class="stat"><span class="stat-k"><t-x data-i="kcd4ac4d">预计本期获得</t-x></span>
+      <span class="stat-v mono">144.44</span><span class="stat-n">FSD</span></div>
+  </div>
+
+  <div class="grid g-side" style="margin-top:16px">
+    <div class="card">
+      <div class="card-head">
+        <div class="h3 card-title"><t-x data-i="kfc16b1f">提取</t-x></div>
+        <span class="chip chip-pos"><t-x data-i="k996a08e">共建者</t-x></span>
+      </div>
+      <dl class="kv">
+        <div class="kv-row"><dt><t-x data-i="k298263f">分红池均分</t-x></dt><dd class="pos">862.40 FSD</dd></div>
+        <div class="kv-row"><dt><t-x data-i="k3d4ab32">累计已提取</t-x></dt><dd>3,320.20 FSD</dd></div>
+        <div class="kv-row"><dt><t-x data-i="k01a10bf">提取手续费</t-x></dt><dd>2%</dd></div>
+      </dl>
+      <button class="btn btn-primary btn-block" style="margin-top:18px" data-open="m-withdraw">
+        <t-x data-i="kdb79713">提现</t-x></button>
+    </div>
+
+    <div class="card">
+      <div class="h3 card-title" style="margin-bottom:16px"><t-x data-i="k0dacc2d">绑定关系</t-x></div>
+      <dl class="kv">
+        <div class="kv-row"><dt><t-x data-i="k6015d54">我的邀请码</t-x></dt>
+          <dd style="color:var(--accent-2);cursor:pointer" data-copy="XF7C1F9A">XF7C1F9A</dd></div>
+        <div class="kv-row"><dt><t-x data-i="k6336b4d">上级</t-x></dt><dd>0x4E82a1…7c3D</dd></div>
+        <div class="kv-row"><dt><t-x data-i="kd129528">绑定时间</t-x></dt><dd>2026-06-14</dd></div>
+      </dl>
+      <div class="addr-box" style="margin-top:14px" data-copy="https://x.fun/?ref=XF7C1F9A">
+        <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">https://x.fun/?ref=XF7C1F9A</span>
+        <span class="go"><t-x data-i="k79d3abe">复制</t-x> ›</span>
+      </div>
+      <a class="btn btn-ghost btn-block" style="margin-top:14px" href="../invite/">
+        <t-x data-i="k309f981">查看邀请列表</t-x> →</a>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="card-head">
+      <div class="h3 card-title"><t-x data-i="k620bf82">记录</t-x></div>
+      <div class="tabs" data-group="crec">
+        <button data-tab="div" aria-selected="true"><t-x data-i="kee727fd">分红记录</t-x></button>
+        <button data-tab="wd" aria-selected="false"><t-x data-i="k768efdc">提取明细</t-x></button>
+      </div>
+    </div>
+    <div class="tabpanel" data-group="crec" data-tab="div">
+      <div class="tscroll"><table class="tbl">
+        <thead><tr><th><t-x data-i="k4ff1e74">日期</t-x></th><th><t-x data-i="k26ca20b">来源</t-x></th>
+          <th><t-x data-i="k4cf24ab">金额</t-x></th></tr></thead>
+        <tbody>
+          <tr><td>2026-09-01</td><td><t-x data-i="k298263f">分红池均分</t-x></td><td class="num pos">+143.79</td></tr>
+          <tr><td>2026-08-22</td><td><t-x data-i="k298263f">分红池均分</t-x></td><td class="num pos">+138.42</td></tr>
+          <tr><td>2026-08-12</td><td><t-x data-i="kdf14a09">节点分红</t-x></td><td class="num pos">+146.20</td></tr>
+          <tr><td>2026-08-12</td><td><t-x data-i="k298263f">分红池均分</t-x></td><td class="num pos">+129.06</td></tr>
+        </tbody></table></div>
+    </div>
+    <div class="tabpanel" data-group="crec" data-tab="wd" hidden>
+      <div class="tscroll"><table class="tbl">
+        <thead><tr><th><t-x data-i="k4ff1e74">日期</t-x></th><th><t-x data-i="k4cf24ab">金额</t-x></th>
+          <th><t-x data-i="k03c168e">手续费</t-x></th><th>Hash</th></tr></thead>
+        <tbody>
+          <tr><td>2026-08-30</td><td class="num">2,000.00</td><td class="num">—</td>
+            <td class="hash" data-copy="0x18cf…4a2b">0x18cf…4a2b</td></tr>
+          <tr><td>2026-07-19</td><td class="num">1,500.00</td><td class="num">—</td>
+            <td class="hash" data-copy="0xa9e2…7d61">0xa9e2…7d61</td></tr>
+        </tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 弹窗 ============================ -->
+<div class="modal" id="m-withdraw"><div class="modal__bg" data-close></div>
+  <div class="modal__box"><div class="modal-grab"></div>
+    <div class="modal__head">
+      <div><div class="h3"><t-x data-i="kdb79713">提现</t-x></div></div>
+      <button class="modal__x" data-close aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 2l11 11M13 2L2 13"/></svg></button>
+    </div>
+    <div class="modal__body">
+      <div class="field" data-seg-target="#wd-amt">
+        <div class="field-label"><span><t-x data-i="k654be11">提现数量</t-x></span>
+          <b><t-x data-i="ke05e6f3">余额</t-x> 862.40</b></div>
+        <label class="amt"><input id="wd-amt" type="text" inputmode="decimal" value="862.40">
+          <span class="unit">FSD</span><button class="max" data-seg="862.40">MAX</button></label>
+      </div>
+      <dl class="kv">
+        <div class="kv-row"><dt><t-x data-i="k03c168e">手续费</t-x></dt><dd>2%</dd></div>
+        <div class="kv-row"><dt><t-x data-i="k416d365">到账地址</t-x></dt><dd>0x7C1f9a…4bA93E</dd></div>
+        <div class="kv-row"><dt><t-x data-i="kc5e05bf">预计到账</t-x></dt><dd class="pos">845.15 FSD</dd></div>
+      </dl>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn-quiet" data-close><t-x data-i="k625fb26">取消</t-x></button>
+      <button class="btn btn-primary" data-close data-act="soon"><t-x data-i="k6b9c3db">确认提现</t-x></button>
+    </div>
+  </div></div>
+
+<script src="../app.js"></script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+<title>发射板 · X.FUN</title>
+<script>try{var l=localStorage.getItem('xfun.lang')||'zh';var d=document.documentElement;
+d.dataset.lang=l;d.lang=({zh:'zh-CN',ft:'zh-TW',en:'en',ja:'ja',ko:'ko',vi:'vi',th:'th',id:'id'})[l]||'zh-CN';
+if(l!=='zh')d.className='i18n-wait';}catch(e){}</script>
+<style>html.i18n-wait body{visibility:hidden}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../app.css">
+</head>
+<body data-page="launch">
+<!-- ============================ 发射板 ============================
+     对应源码 views/launch/index.vue + details.vue（1306 行）+ ido_router 合约
+     文案键：launch.a8 发行板 · a11 公平发行 · a12 Alpha Wl · a13 倒计时 · a4 订阅 …
+================================================================= -->
+<section class="wrap page-head">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap">
+    <div>
+      <span class="eyebrow"><t-x data-i="k3666c4a">发射板</t-x></span>
+      <h1 class="h1" style="margin-top:16px;font-size:clamp(27px,3.2vw,40px)">
+        <t-x data-i="k5bbdc81">社区审核过的<span class="accent-line">项目在这里发射。</span></t-x></h1>
+      <p class="lead" style="font-size:14.5px"><t-x data-i="kdc7f09a">单钱包分阶段认购上限、限时募集窗口、上线前三重审核。</t-x></p>
+    </div>
+    <button class="btn btn-ghost" data-open="m-submit"><t-x data-i="k3d68099">提交项目</t-x></button>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="tabs" data-group="lt">
+    <button data-tab="all" aria-selected="true"><t-x data-i="ka8b0c20">全部</t-x></button>
+    <button data-tab="live" aria-selected="false"><t-x data-i="kfb852fc">进行中</t-x></button>
+    <button data-tab="soon" aria-selected="false"><t-x data-i="k3f2ecc2">即将开始</t-x></button>
+    <button data-tab="done" aria-selected="false"><t-x data-i="k047fab6">已结束</t-x></button>
+  </div>
+</section>
+
+<section class="section" style="padding-top:20px">
+  <div class="wrap">
+    <div class="tabpanel" data-group="lt" data-tab="all">
+      <div class="grid g3">
+
+        <a class="card" href="../launchdetail/" style="display:flex;flex-direction:column">
+          <div class="card-head" style="margin-bottom:14px">
+            <div style="display:flex;align-items:center;gap:11px;min-width:0">
+              <span style="width:40px;height:40px;border-radius:12px;flex:none;
+                background:linear-gradient(140deg,#9B6BFF,#FF7AC8);display:grid;place-items:center;
+                font-family:var(--font-mono);font-size:13px;color:#0B0612;font-weight:700">BK</span>
+              <div style="min-width:0">
+                <div class="h4" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">BabyKing Coin</div>
+                <div class="scope">BKC</div></div>
+            </div>
+            <span class="chip chip-pos"><span class="dot dot-live"></span><t-x data-i="kfb852fc">进行中</t-x></span>
+          </div>
+          <p class="tiny" style="min-height:3.4em">Gen-Z 的加密惊奇。</p>
+          <div style="margin-top:14px">
+            <div class="barmeta" style="margin:0 0 7px">
+              <span><t-x data-i="k8dee97d">募集进度</t-x></span><span class="mono">68%</span></div>
+            <div class="bar"><i style="width:68%"></i></div>
+          </div>
+          <dl class="kv" style="margin-top:16px">
+            <div class="kv-row"><dt><t-x data-i="k226b091">类型</t-x></dt>
+              <dd><span class="chip chip-quiet"><t-x data-i="k41a5567">公平发行</t-x></span></dd></div>
+            <div class="kv-row"><dt><t-x data-i="k202f12f">倒计时</t-x></dt><dd>18h 24m</dd></div>
+          </dl>
+          <span class="btn btn-primary btn-sm btn-block" style="margin-top:16px">
+            <t-x data-i="k5b48dbb">查看详情</t-x> →</span>
+        </a>
+
+        <a class="card" href="../launchdetail/" style="display:flex;flex-direction:column">
+          <div class="card-head" style="margin-bottom:14px">
+            <div style="display:flex;align-items:center;gap:11px;min-width:0">
+              <span style="width:40px;height:40px;border-radius:12px;flex:none;
+                background:linear-gradient(140deg,#5CE1A6,#6BB8FF);display:grid;place-items:center;
+                font-family:var(--font-mono);font-size:13px;color:#0B0612;font-weight:700">MO</span>
+              <div style="min-width:0"><div class="h4">MoonOtter</div><div class="scope">MOO</div></div>
+            </div>
+            <span class="chip"><t-x data-i="k1449867">Alpha 白名单</t-x></span>
+          </div>
+          <p class="tiny" style="min-height:3.4em"><t-x data-i="kf0a2b69">社区自组织的水獭主题项目。合约权限已放弃，团队零预留。</t-x></p>
+          <div style="margin-top:14px">
+            <div class="barmeta" style="margin:0 0 7px">
+              <span><t-x data-i="ke491d21">白名单认购</t-x></span><span class="mono">42%</span></div>
+            <div class="bar"><i style="width:42%"></i></div>
+          </div>
+          <dl class="kv" style="margin-top:16px">
+            <div class="kv-row"><dt><t-x data-i="k226b091">类型</t-x></dt>
+              <dd><span class="chip chip-quiet">Alpha WL</span></dd></div>
+            <div class="kv-row"><dt><t-x data-i="k202f12f">倒计时</t-x></dt><dd>2d 06h</dd></div>
+          </dl>
+          <span class="btn btn-ghost btn-sm btn-block" style="margin-top:16px">
+            <t-x data-i="k5b48dbb">查看详情</t-x> →</span>
+        </a>
+
+        <div class="card" style="display:flex;flex-direction:column;opacity:.72">
+          <div class="card-head" style="margin-bottom:14px">
+            <div style="display:flex;align-items:center;gap:11px;min-width:0">
+              <span style="width:40px;height:40px;border-radius:12px;flex:none;
+                background:linear-gradient(140deg,#DDA9FF,#9B6BFF);display:grid;place-items:center;
+                font-family:var(--font-mono);font-size:13px;color:#0B0612;font-weight:700">GR</span>
+              <div style="min-width:0"><div class="h4">GrokFrog</div><div class="scope">GRK</div></div>
+            </div>
+            <span class="chip chip-off"><t-x data-i="kc293119">尚未开放</t-x></span>
+          </div>
+          <p class="tiny" style="min-height:3.4em"><t-x data-i="kecb7d7d">审核已通过，等待开放认购。开放时间以站内公告为准。</t-x></p>
+          <div style="margin-top:14px">
+            <div class="barmeta" style="margin:0 0 7px">
+              <span><t-x data-i="k8dee97d">募集进度</t-x></span><span class="mono">0%</span></div>
+            <div class="bar"><i style="width:0"></i></div>
+          </div>
+          <dl class="kv" style="margin-top:16px">
+            <div class="kv-row"><dt><t-x data-i="k226b091">类型</t-x></dt>
+              <dd><span class="chip chip-quiet"><t-x data-i="k41a5567">公平发行</t-x></span></dd></div>
+            <div class="kv-row"><dt><t-x data-i="k202f12f">倒计时</t-x></dt><dd>—</dd></div>
+          </dl>
+          <span class="btn btn-quiet btn-sm btn-block is-off" style="margin-top:16px">
+            <t-x data-i="kc293119">尚未开放</t-x></span>
+        </div>
+
+        <div class="card" style="display:flex;flex-direction:column;opacity:.6">
+          <div class="card-head" style="margin-bottom:14px">
+            <div style="display:flex;align-items:center;gap:11px;min-width:0">
+              <span style="width:40px;height:40px;border-radius:12px;flex:none;
+                background:linear-gradient(140deg,#6E668A,#3A3350);display:grid;place-items:center;
+                font-family:var(--font-mono);font-size:13px;color:#F5F2FC;font-weight:700">DG</span>
+              <div style="min-width:0"><div class="h4">DogeGarden</div><div class="scope">DGE</div></div>
+            </div>
+            <span class="chip chip-off"><t-x data-i="k047fab6">已结束</t-x></span>
+          </div>
+          <p class="tiny" style="min-height:3.4em"><t-x data-i="k5cbab9f">已完成发射并添加流动性。</t-x></p>
+          <div style="margin-top:14px">
+            <div class="barmeta" style="margin:0 0 7px">
+              <span><t-x data-i="k8dee97d">募集进度</t-x></span><span class="mono">100%</span></div>
+            <div class="bar"><i style="width:100%"></i></div>
+          </div>
+          <dl class="kv" style="margin-top:16px">
+            <div class="kv-row"><dt><t-x data-i="k226b091">类型</t-x></dt>
+              <dd><span class="chip chip-quiet"><t-x data-i="k41a5567">公平发行</t-x></span></dd></div>
+            <div class="kv-row"><dt><t-x data-i="kcf13b1a">审核</t-x></dt>
+              <dd><t-x data-i="kdff11bd">三重已通过</t-x></dd></div>
+          </dl>
+          <span class="btn btn-quiet btn-sm btn-block is-off" style="margin-top:16px">
+            <t-x data-i="k047fab6">已结束</t-x></span>
+        </div>
+
+      </div>
+      <div style="text-align:center;margin-top:24px">
+        <button class="btn btn-ghost" data-act="soon"><t-x data-i="k90ef7c4">查看更多</t-x></button>
+      </div>
+    </div>
+
+    <div class="tabpanel" data-group="lt" data-tab="live" hidden>
+      <div class="card"><div class="empty"><p><t-x data-i="kfb93685">当前没有符合条件的项目。</t-x></p></div></div>
+    </div>
+    <div class="tabpanel" data-group="lt" data-tab="soon" hidden>
+      <div class="card"><div class="empty"><p><t-x data-i="kfb93685">当前没有符合条件的项目。</t-x></p></div></div>
+    </div>
+    <div class="tabpanel" data-group="lt" data-tab="done" hidden>
+      <div class="card"><div class="empty"><p><t-x data-i="kfb93685">当前没有符合条件的项目。</t-x></p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 弹窗 ============================ -->
+<div class="modal" id="m-submit"><div class="modal__bg" data-close></div>
+  <div class="modal__box"><div class="modal-grab"></div>
+    <div class="modal__head">
+      <div><div class="h3"><t-x data-i="k3d68099">提交项目</t-x></div>
+        <p class="scope" style="margin-top:5px"><t-x data-i="k9bf7720">提交后进入三重审核</t-x></p></div>
+      <button class="modal__x" data-close aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 2l11 11M13 2L2 13"/></svg></button>
+    </div>
+    <div class="modal__body">
+      <div class="field">
+        <div class="field-label"><span><t-x data-i="k738a41f">项目名称</t-x></span></div>
+        <label class="amt"><input type="text" placeholder="MoonOtter"></label>
+      </div>
+      <div class="field">
+        <div class="field-label"><span><t-x data-i="k942e0b8">代币符号</t-x></span></div>
+        <label class="amt"><input type="text" placeholder="MOO"></label>
+      </div>
+      <div class="field">
+        <div class="field-label"><span><t-x data-i="kb317a44">合约地址</t-x></span>
+          <b><t-x data-i="k93a4386">选填</t-x></b></div>
+        <label class="amt"><input type="text" placeholder="0x…"></label>
+      </div>
+      <div class="field">
+        <div class="field-label"><span><t-x data-i="k8b851b4">发行类型</t-x></span></div>
+        <div class="seg">
+          <button aria-pressed="true"><t-x data-i="k41a5567">公平发行</t-x></button>
+          <button aria-pressed="false">Alpha WL</button>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label"><span><t-x data-i="k8ca525c">官网 / 社群</t-x></span></div>
+        <label class="amt"><input type="text" placeholder="https://"></label>
+      </div>
+      <div class="field">
+        <div class="field-label"><span><t-x data-i="kdcb8ee9">项目简介</t-x></span></div>
+        <label class="amt" style="align-items:flex-start"><input type="text" placeholder="一句话说明项目"></label>
+      </div>
+      <div class="field">
+        <div class="field-label"><span><t-x data-i="kb589431">联系方式</t-x></span></div>
+        <label class="amt"><input type="text" placeholder="@telegram"></label>
+      </div>
+      <div class="dashed">
+        <div class="lb" style="margin-bottom:9px"><t-x data-i="kf619491">三重审核</t-x></div>
+        <div class="steps">
+          <div class="step"><span class="step-n">1</span><t-x data-i="k0f5c706">社区投票</t-x></div>
+          <div class="step"><span class="step-n">2</span><t-x data-i="k9f6c16c">技术审计</t-x></div>
+          <div class="step"><span class="step-n">3</span><t-x data-i="kfd5e73b">KOL 核实</t-x></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn-quiet" data-close><t-x data-i="k625fb26">取消</t-x></button>
+      <button class="btn btn-primary" data-act="chain"><t-x data-i="k646db08">提交审核</t-x></button>
+    </div>
+  </div></div>
+
+<script src="../app.js"></script>
+</body>
+</html>

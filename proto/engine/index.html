@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+<title>引擎质押 · X.FUN</title>
+<script>try{var l=localStorage.getItem('xfun.lang')||'zh';var d=document.documentElement;
+d.dataset.lang=l;d.lang=({zh:'zh-CN',ft:'zh-TW',en:'en',ja:'ja',ko:'ko',vi:'vi',th:'th',id:'id'})[l]||'zh-CN';
+if(l!=='zh')d.className='i18n-wait';}catch(e){}</script>
+<style>html.i18n-wait body{visibility:hidden}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../app.css">
+</head>
+<body data-page="engine">
+<!-- ============================ 引擎质押 ============================
+     脑图中唯一标注为「新增」的主干。源码里没有对应页面，本页为新建。
+     口径：固定利率日结，与单笔套利盈亏无关 —— 页面如实说明，不做情绪渲染。
+     参数（利率、批次量、费率）由合约实时返回。
+================================================================= -->
+<section class="wrap page-head">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap">
+    <div>
+      <span class="eyebrow"><t-x data-i="k3714fde">引擎质押</t-x>
+        <i class="hot hot-i" aria-hidden="true"><svg viewBox="0 0 12 14"><path d="M6 .4c.7 2.2 2.2 3.1 3.1 4.5.9 1.5 1 3.2.1 4.7-.9 1.6-2.8 2.6-4.6 2.4-1.8-.2-3.4-1.6-3.8-3.4-.4-1.9.4-3.8 1.8-4.9.1 1 .6 1.8 1.3 2.1C4 3.7 4.8 1.8 6 .4Z"/></svg></i></span>
+      <h1 class="h1" style="margin-top:16px;font-size:clamp(27px,3.2vw,40px)">
+        <t-x data-i="k1cc4983">用额度参与，<span class="accent-line">按固定利率日结。</span></t-x></h1>
+      <p class="lead" style="font-size:14.5px"><t-x data-i="k889060b">每天 18:00 平台开放一批额度。用你在质押板块换到的排队额度参与分配，抢到即进入引擎。</t-x></p>
+    </div>
+    <a class="btn btn-ghost" href="../stake/"><t-x data-i="ke34a3d4">去拿额度</t-x> →</a>
+  </div>
+</section>
+
+
+<!-- ---------- 今日批次 ---------- -->
+<section class="section" style="padding-top:clamp(24px,2.6vw,36px)">
+  <div class="wrap">
+    <div class="grid g-side">
+      <div class="card card-ac">
+        <div class="card-head">
+          <div>
+            <div class="h3 card-title"><t-x data-i="k14f214d">今日开放批次</t-x></div>
+            <p class="scope" style="margin-top:6px"><t-x data-i="k4b85508">开放量由平台每日设定 · 18:00 (UTC+8) 分配</t-x></p>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span class="chip"><span class="dot dot-live"></span><t-x data-i="ke5ac1d2">排队中</t-x></span>
+            <a class="btn btn-quiet btn-sm" href="../queue/"><t-x data-i="ke413064">排队详情</t-x> →</a>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:18px">
+          <div>
+            <div class="lb"><t-x data-i="k7e62194">距离开抢</t-x></div>
+            <div class="countdown" data-tick="18">--:--:--</div>
+          </div>
+          <div style="flex:1;min-width:180px">
+            <div class="barmeta" style="margin:0 0 7px">
+              <span><t-x data-i="kb73400d">已排队</t-x> <b class="mono">1,240,000</b></span>
+              <span><t-x data-i="kad8aa0f">今日开放</t-x> <b class="mono">2,000,000</b></span>
+            </div>
+            <div class="bar bar-lg"><i style="width:62%"></i></div>
+            <div class="barmeta"><span class="scope"><t-x data-i="kdee6a4f">排队量超过开放量时按额度与时间顺序分配</t-x></span></div>
+          </div>
+        </div>
+
+        <div class="grid g4" style="gap:12px" data-need-wallet hidden>
+          <div style="background:rgba(0,0,0,.3);border-radius:var(--radius-sm);padding:13px 14px;min-width:0">
+            <div class="lb"><t-x data-i="k803b3b2">我的引擎余额</t-x></div>
+            <div class="mono" style="font-size:18px;margin-top:5px;color:var(--accent-2)">32,140</div>
+          </div>
+          <div style="background:rgba(0,0,0,.3);border-radius:var(--radius-sm);padding:13px 14px;min-width:0">
+            <div class="lb"><t-x data-i="k028c480">我的可用额度</t-x></div>
+            <div class="mono" style="font-size:18px;margin-top:5px">24,860</div>
+          </div>
+          <div style="background:rgba(0,0,0,.3);border-radius:var(--radius-sm);padding:13px 14px;min-width:0">
+            <div class="lb"><t-x data-i="k091072f">我已排队</t-x></div>
+            <div class="mono" style="font-size:18px;margin-top:5px">10,000</div>
+          </div>
+          <div style="background:rgba(0,0,0,.3);border-radius:var(--radius-sm);padding:13px 14px;min-width:0">
+            <div class="lb"><t-x data-i="k2b74d80">当前排位</t-x></div>
+            <div class="mono" style="font-size:18px;margin-top:5px">#38</div>
+          </div>
+        </div>
+
+        <div class="btn-row" style="margin-top:18px" data-need-wallet hidden>
+          <button class="btn btn-primary" style="flex:1" data-open="m-queue"><t-x data-i="k0b5880b">排队</t-x></button>
+          <button class="btn btn-ghost" style="flex:1" data-open="m-deposit"><t-x data-i="kb80e737">存 / 取</t-x></button>
+        </div>
+        <button class="btn btn-primary btn-block" style="margin-top:18px" data-act="wallet" data-no-wallet hidden>
+          <t-x data-i="k8232424">连接钱包参与</t-x></button>
+
+      </div>
+
+      <div class="card">
+        <div class="h3 card-title" style="margin-bottom:16px"><t-x data-i="k07fbb48">参与条件</t-x></div>
+        <ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px">
+          <li style="display:flex;gap:13px">
+            <span class="mono" style="color:var(--accent-2);flex:none;font-size:11px;padding-top:3px">01</span>
+            <div><div class="h4"><t-x data-i="k1a7ebc4">先在质押板块建仓</t-x></div>
+              <p class="tiny" style="margin-top:4px"><t-x data-i="kec6ac3d">LP 流动性质押按 1:1 换算排队额度；单币质押暂未开放。</t-x></p></div></li>
+          <li style="display:flex;gap:13px">
+            <span class="mono" style="color:var(--accent-2);flex:none;font-size:11px;padding-top:3px">02</span>
+            <div><div class="h4"><t-x data-i="k33c9608">额度随持仓时间增长</t-x></div>
+              <p class="tiny" style="margin-top:4px"><t-x data-i="kcb3b756">持仓每满 30 天，额度按总质押量再增长一档。</t-x></p></div></li>
+          <li style="display:flex;gap:13px">
+            <span class="mono" style="color:var(--accent-2);flex:none;font-size:11px;padding-top:3px">03</span>
+            <div><div class="h4"><t-x data-i="ke443b41">先存入，再排队</t-x></div>
+              <p class="tiny" style="margin-top:4px"><t-x data-i="kfae0a3a">用「存 / 取」把三种资产存进引擎余额，再在 18:00 之前排队。</t-x></p></div></li>
+          <li style="display:flex;gap:13px">
+            <span class="mono" style="color:var(--accent-2);flex:none;font-size:11px;padding-top:3px">04</span>
+            <div><div class="h4"><t-x data-i="k809d762">未中标可选优先排队</t-x></div>
+              <p class="tiny" style="margin-top:4px"><t-x data-i="k24efcb6">没抢到的默认排进次日优先队列，也可以在「排队详情」里取消。</t-x></p></div></li>
+        </ol>
+        <a class="btn btn-ghost btn-block" style="margin-top:20px" href="../stake/">
+          <t-x data-i="k98f69cf">去质押板块拿额度</t-x> →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 我的引擎持仓 ---------- -->
+<section class="section section-alt" data-need-wallet hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><t-x data-i="k10265c9">我的引擎持仓</t-x></span>
+      <h2 class="h2" style="font-size:clamp(21px,2.4vw,30px)"><t-x data-i="ke91e41a">持仓与<span class="accent-line">日结收益。</span></t-x></h2>
+    </div>
+
+    <div class="stats s4">
+      <div class="stat"><span class="stat-k"><t-x data-i="k812c9f0">引擎内总量</t-x></span>
+        <span class="stat-v mono">86,400</span><span class="stat-n">SHARE · SENTIS · FSD</span></div>
+      <div class="stat"><span class="stat-k"><t-x data-i="k703e54f">昨日结算</t-x></span>
+        <span class="stat-v mono pos">+259.20</span><span class="stat-n"><t-x data-i="k19b1efa">已到账钱包</t-x></span></div>
+      <div class="stat"><span class="stat-k"><t-x data-i="kddb5b9a">累计收益</t-x></span>
+        <span class="stat-v mono pos">+4,148.80</span><span class="stat-n"><t-x data-i="k1a9ae98">全周期</t-x></span></div>
+      <div class="stat"><span class="stat-k"><t-x data-i="k7319874">解押中</t-x></span>
+        <span class="stat-v mono">5,000</span><span class="stat-n"><t-x data-i="kebf0424">还剩 31 小时到账</t-x></span></div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="card-head">
+        <div class="h3 card-title"><t-x data-i="k7f14e91">分币种持仓</t-x></div>
+        <button class="btn btn-quiet btn-sm" data-open="m-eunstake"><t-x data-i="k66fd654">解除质押</t-x></button>
+      </div>
+      <div class="tscroll"><table class="tbl">
+        <thead><tr>
+          <th><t-x data-i="kfe5e876">代币</t-x></th>
+          <th><t-x data-i="k4569b18">引擎内数量</t-x></th>
+          <th><t-x data-i="k485a74f">进入时间</t-x></th>
+          <th><t-x data-i="k582a3d9">累计日结</t-x></th>
+          <th><t-x data-i="k3fea7ca">状态</t-x></th>
+          <th></th></tr></thead>
+        <tbody>
+          <tr><td><span class="tokdot tok-SHARE" style="display:inline-block;vertical-align:-2px;margin-right:8px"></span>SHARE</td>
+            <td class="num">42,000</td><td>08-21</td><td class="num pos">+2,268.00</td>
+            <td><span class="chip chip-pos"><t-x data-i="kc51ef75">计息中</t-x></span></td>
+            <td><button class="btn btn-quiet btn-sm" data-open="m-eunstake"><t-x data-i="k294fd50">解押</t-x></button></td></tr>
+          <tr><td><span class="tokdot tok-SENTIS" style="display:inline-block;vertical-align:-2px;margin-right:8px"></span>SENTIS</td>
+            <td class="num">24,400</td><td>08-29</td><td class="num pos">+1,244.40</td>
+            <td><span class="chip chip-pos"><t-x data-i="kc51ef75">计息中</t-x></span></td>
+            <td><button class="btn btn-quiet btn-sm" data-open="m-eunstake"><t-x data-i="k294fd50">解押</t-x></button></td></tr>
+          <tr><td><span class="tokdot tok-FSD" style="display:inline-block;vertical-align:-2px;margin-right:8px"></span>FSD</td>
+            <td class="num">20,000</td><td>09-02</td><td class="num pos">+636.40</td>
+            <td><span class="chip chip-pos"><t-x data-i="kc51ef75">计息中</t-x></span></td>
+            <td><button class="btn btn-quiet btn-sm" data-open="m-eunstake"><t-x data-i="k294fd50">解押</t-x></button></td></tr>
+          <tr><td><span class="tokdot tok-SHARE" style="display:inline-block;vertical-align:-2px;margin-right:8px"></span>SHARE</td>
+            <td class="num">5,000</td><td>08-15</td><td class="num">—</td>
+            <td><span class="chip chip-warn"><t-x data-i="kdd11bce">解押中 31h</t-x></span></td>
+            <td></td></tr>
+        </tbody></table></div>
+      <div class="note" style="margin-top:16px"><i>·</i>
+        <p><t-x data-i="k4816169">解押可分批发起，48 小时到账，按解押量的 98% 结算，2% 扣为社区代币。解押同时会重算你的排队额度。</t-x></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 福利序列 ---------- -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><t-x data-i="k8617129">福利序列</t-x></span>
+      <h2 class="h2" style="font-size:clamp(21px,2.4vw,30px)"><t-x data-i="k3ba92ed">每周一次，<span class="accent-line">链上发奖。</span></t-x></h2>
+      <p class="lead" style="font-size:14.5px"><t-x data-i="kf70bced">每周从引擎质押用户里抽一位，代币直接空投到中奖地址。每笔都带链上哈希，自己就能核。</t-x></p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="h3 card-title"><t-x data-i="kec0ee3a">历史发奖记录</t-x></div>
+        <span class="chip chip-quiet"><t-x data-i="k78e5174">每周更新</t-x></span>
+      </div>
+      <div class="tscroll"><table class="tbl">
+        <thead><tr>
+          <th><t-x data-i="k4ff1e74">日期</t-x></th>
+          <th><t-x data-i="k91f22df">中奖地址</t-x></th>
+          <th><t-x data-i="kfe5e876">代币</t-x></th>
+          <th><t-x data-i="k0bf60b3">数量</t-x></th>
+          <th><t-x data-i="k9d2cb6c">发奖哈希</t-x></th></tr></thead>
+        <tbody>
+          <tr><td>2026-09-01</td><td class="addr" data-copy="0x4E82a1…7c3D">0x4E82a1…7c3D</td>
+            <td>SHARE</td><td class="num">12,000</td>
+            <td class="hash" data-copy="0xb47c9e21…5f80">0xb47c9e21…5f80</td></tr>
+          <tr><td>2026-08-25</td><td class="addr" data-copy="0x91Fd0c…22Ae">0x91Fd0c…22Ae</td>
+            <td>SENTIS</td><td class="num">8,500</td>
+            <td class="hash" data-copy="0x2d1a86f4…c093">0x2d1a86f4…c093</td></tr>
+          <tr><td>2026-08-18</td><td class="addr" data-copy="0x0aB37e…9104">0x0aB37e…9104</td>
+            <td>FSD</td><td class="num">30,000</td>
+            <td class="hash" data-copy="0x7f30bb52…41de">0x7f30bb52…41de</td></tr>
+          <tr><td>2026-08-11</td><td class="addr" data-copy="0xC5e419…6b7F">0xC5e419…6b7F</td>
+            <td>SHARE</td><td class="num">12,000</td>
+            <td class="hash" data-copy="0x9c6e04a8…7b25">0x9c6e04a8…7b25</td></tr>
+        </tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 链上数据 ---------- -->
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><t-x data-i="kba09f53">链上数据</t-x></span>
+      <h2 class="h2" style="font-size:clamp(21px,2.4vw,30px)"><t-x data-i="k1d75d0d">引擎<span class="accent-line">链上数据。</span></t-x></h2>
+    </div>
+
+    <div class="stats s4">
+      <div class="stat"><span class="stat-k"><t-x data-i="k6d2b581">引擎在管总量</t-x></span>
+        <span class="stat-v mono">$8.42M</span><span class="stat-n">USDT</span></div>
+      <div class="stat"><span class="stat-k"><t-x data-i="kca38c91">累计日结发放</t-x></span>
+        <span class="stat-v mono pos">$1.26M</span><span class="stat-n"><t-x data-i="k1a9ae98">全周期</t-x></span></div>
+      <div class="stat"><span class="stat-k"><t-x data-i="k569bf68">参与地址数</t-x></span>
+        <span class="stat-v mono">3,842</span><span class="stat-n"><t-x data-i="ke6efc11">去重地址</t-x></span></div>
+      <div class="stat"><span class="stat-k"><t-x data-i="ka95fd7b">解押待发放</t-x></span>
+        <span class="stat-v mono">$214K</span><span class="stat-n"><t-x data-i="k562551e">48 小时内到账</t-x></span></div>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- ---------- 引擎战绩（引用首页板块，此处给入口） ---------- -->
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="card card-ac" style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;justify-content:space-between">
+      <div style="min-width:260px;flex:1">
+        <div class="h3 card-title"><t-x data-i="ka6727a7">想先看引擎的链上战绩？</t-x></div>
+        <p class="sub" style="margin-top:8px"><t-x data-i="k66152bd">金库地址、净值曲线、执行成功率、利润去向，全在首页的造血看板上，逐笔可查。</t-x></p>
+      </div>
+      <a class="btn btn-ghost" href="../#loop"><t-x data-i="k79ca5ab">看引擎盈利</t-x> →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 弹窗 ============================ -->
+<div class="modal" id="m-queue"><div class="modal__bg" data-close></div>
+  <div class="modal__box"><div class="modal-grab"></div>
+    <div class="modal__head">
+      <div><div class="h3"><t-x data-i="k0b5880b">排队</t-x></div>
+        <p class="scope" style="margin-top:5px"><t-x data-i="k7b41020">18:00 分配 · 从引擎余额中排队</t-x></p></div>
+      <button class="modal__x" data-close aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 2l11 11M13 2L2 13"/></svg></button>
+    </div>
+    <div class="modal__body">
+      <div class="field">
+        <div class="field-label"><span><t-x data-i="kb3781e8">选择代币</t-x></span></div>
+        <div class="pick" data-pick-group="q">
+          <button data-pick="SHARE" aria-pressed="true"><span class="tokdot tok-SHARE"></span>SHARE</button>
+          <button data-pick="SENTIS" aria-pressed="false"><span class="tokdot tok-SENTIS"></span>SENTIS</button>
+          <button data-pick="FSD" aria-pressed="false"><span class="tokdot tok-FSD"></span>FSD</button>
+        </div>
+      </div>
+      <div class="field" data-seg-target="#q-amt">
+        <div class="field-label"><span><t-x data-i="k884bdd5">排队数量</t-x></span>
+          <b><t-x data-i="k22ee9a5">可用额度</t-x> 24,860</b></div>
+        <label class="amt"><input id="q-amt" type="text" inputmode="decimal" value="10,000">
+          <span class="unit" data-picked="q">SHARE</span><button class="max" data-seg="24,860">MAX</button></label>
+        <div class="seg" style="margin-top:9px">
+          <button data-seg="6,215">25%</button><button data-seg="12,430">50%</button>
+          <button data-seg="18,645">75%</button><button data-seg="24,860">100%</button></div>
+      </div>
+      <dl class="kv">
+        <div class="kv-row"><dt><t-x data-i="ke4790d3">分配时间</t-x></dt><dd>18:00 UTC+8</dd></div>
+        <div class="kv-row"><dt><t-x data-i="k2612f08">排队期间收益</t-x></dt>
+          <dd><t-x data-i="kd81bb20">无</t-x></dd></div>
+        <div class="kv-row"><dt><t-x data-i="k33a8329">未中标处理</t-x></dt>
+          <dd class="warnc"><t-x data-i="ke079a58">优先排队 / 取消</t-x></dd></div>
+      </dl>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn-quiet" data-close><t-x data-i="k625fb26">取消</t-x></button>
+      <button class="btn btn-primary" data-act="chain"><t-x data-i="k6f7ff9b">确认排队</t-x></button>
+    </div>
+  </div></div>
+
+<div class="modal" id="m-deposit"><div class="modal__bg" data-close></div>
+  <div class="modal__box"><div class="modal-grab"></div>
+    <div class="modal__head">
+      <div><div class="h3"><t-x data-i="k60af0ea">存入 / 提取</t-x></div>
+        <p class="scope" style="margin-top:5px"><t-x data-i="k5c45c6c">收益与解押到账都进入引擎余额</t-x></p></div>
+      <button class="modal__x" data-close aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 2l11 11M13 2L2 13"/></svg></button>
+    </div>
+    <div class="modal__body">
+      <div class="tabs" data-group="dw" style="align-self:flex-start">
+        <button data-tab="dw1" data-group="dw" aria-selected="true"><t-x data-i="k4cc6a2f">存入</t-x></button>
+        <button data-tab="dw2" data-group="dw" aria-selected="false"><t-x data-i="kfc16b1f">提取</t-x></button>
+      </div>
+
+      <!-- 存入 -->
+      <div class="tabpanel" data-tab="dw1" data-group="dw">
+        <div class="modal__body">
+          <div class="field">
+            <div class="field-label"><span><t-x data-i="kb3781e8">选择代币</t-x></span>
+              <b><t-x data-i="k6ba7e87">地址余额</t-x> 41,800</b></div>
+            <div class="pick" data-pick-group="dp">
+              <button data-pick="SHARE" aria-pressed="true"><span class="tokdot tok-SHARE"></span>SHARE</button>
+              <button data-pick="SENTIS" aria-pressed="false"><span class="tokdot tok-SENTIS"></span>SENTIS</button>
+              <button data-pick="FSD" aria-pressed="false"><span class="tokdot tok-FSD"></span>FSD</button>
+            </div>
+          </div>
+          <div class="field" data-seg-target="#dp-amt">
+            <div class="field-label"><span><t-x data-i="k851a63c">存入数量</t-x></span></div>
+            <label class="amt"><input id="dp-amt" type="text" inputmode="decimal" value="12,430">
+              <span class="unit" data-picked="dp">SHARE</span><button class="max" data-seg="41,800">MAX</button></label>
+            <div class="seg" style="margin-top:9px">
+              <button data-seg="10,450">25%</button><button data-seg="20,900">50%</button>
+              <button data-seg="31,350">75%</button><button data-seg="41,800">100%</button></div>
+          </div>
+          <p class="tiny"><t-x data-i="k03e10c1">＊ 存入后进入引擎余额，可用于排队。</t-x></p>
+          <div class="modal__foot">
+            <button class="btn btn-quiet" data-close><t-x data-i="k625fb26">取消</t-x></button>
+            <button class="btn btn-primary" data-act="chain"><t-x data-i="kb749e8d">确定存入</t-x></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 提取 -->
+      <div class="tabpanel" data-tab="dw2" data-group="dw" hidden>
+        <div class="modal__body">
+          <div class="field">
+            <div class="field-label"><span><t-x data-i="kb3781e8">选择代币</t-x></span>
+              <b><t-x data-i="k653e07c">引擎余额</t-x> 24,860</b></div>
+            <div class="pick" data-pick-group="wd">
+              <button data-pick="SHARE" aria-pressed="true"><span class="tokdot tok-SHARE"></span>SHARE</button>
+              <button data-pick="SENTIS" aria-pressed="false"><span class="tokdot tok-SENTIS"></span>SENTIS</button>
+              <button data-pick="FSD" aria-pressed="false"><span class="tokdot tok-FSD"></span>FSD</button>
+            </div>
+          </div>
+          <div class="field" data-seg-target="#wd-amt2">
+            <div class="field-label"><span><t-x data-i="k5d65dd9">提取数量</t-x></span></div>
+            <label class="amt"><input id="wd-amt2" type="text" inputmode="decimal" value="12,430">
+              <span class="unit" data-picked="wd">SHARE</span><button class="max" data-seg="24,860">MAX</button></label>
+            <div class="seg" style="margin-top:9px">
+              <button data-seg="6,215">25%</button><button data-seg="12,430">50%</button>
+              <button data-seg="18,645">75%</button><button data-seg="24,860">100%</button></div>
+          </div>
+          <p class="tiny warnc"><t-x data-i="kffccdcf">＊ 提取将提取至钱包地址。</t-x></p>
+          <div class="modal__foot">
+            <button class="btn btn-quiet" data-close><t-x data-i="k625fb26">取消</t-x></button>
+            <button class="btn btn-primary" data-act="chain"><t-x data-i="k5704099">确定提取</t-x></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+
+<div class="modal" id="m-eunstake"><div class="modal__bg" data-close></div>
+  <div class="modal__box"><div class="modal-grab"></div>
+    <div class="modal__head">
+      <div><div class="h3"><t-x data-i="ke570101">解除引擎质押</t-x></div>
+        <p class="scope" style="margin-top:5px"><t-x data-i="k73a53ec">可分批 · 48 小时到账</t-x></p></div>
+      <button class="modal__x" data-close aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 2l11 11M13 2L2 13"/></svg></button>
+    </div>
+    <div class="modal__body">
+      <div class="field">
+        <div class="field-label"><span><t-x data-i="ka2dd9da">选择币种</t-x></span></div>
+        <div class="pick" data-pick-group="eu">
+          <button data-pick="SHARE" aria-pressed="true"><span class="tokdot tok-SHARE"></span>SHARE</button>
+          <button data-pick="SENTIS" aria-pressed="false"><span class="tokdot tok-SENTIS"></span>SENTIS</button>
+          <button data-pick="FSD" aria-pressed="false"><span class="tokdot tok-FSD"></span>FSD</button>
+        </div>
+      </div>
+      <div class="field" data-seg-target="#eu-amt">
+        <div class="field-label"><span><t-x data-i="kadbff07">解押数量</t-x></span>
+          <b><span data-picked="eu">SHARE</span> 42,000</b></div>
+        <label class="amt"><input id="eu-amt" type="text" inputmode="decimal" value="10,000">
+          <span class="unit" data-picked="eu">SHARE</span><button class="max" data-seg="42,000">MAX</button></label>
+        <div class="seg" style="margin-top:9px">
+          <button data-seg="10,500">25%</button><button data-seg="21,000">50%</button>
+          <button data-seg="31,500">75%</button><button data-seg="42,000">100%</button></div>
+      </div>
+      <dl class="kv">
+        <div class="kv-row"><dt><t-x data-i="k3b46746">到账比例</t-x></dt><dd>98%</dd></div>
+        <div class="kv-row"><dt><t-x data-i="kd150042">扣除</t-x></dt>
+          <dd class="neg"><t-x data-i="ka6926c5">2% 社区代币</t-x></dd></div>
+        <div class="kv-row"><dt><t-x data-i="k4b6e64a">到账时间</t-x></dt>
+          <dd><t-x data-i="ke94fcee">发起后 48 小时</t-x></dd></div>
+        <div class="kv-row"><dt><t-x data-i="kc5e05bf">预计到账</t-x></dt><dd class="pos">9,800 <span data-picked="eu">SHARE</span></dd></div>
+      </dl>
+      <div class="note note-warn"><i>⚠</i>
+        <p><t-x data-i="k7b9b18b">解押会同步影响排队额度：若引擎内剩余量仍高于你在质押板块的总质押量，额度暂为 0，30 天后按总质押量恢复。</t-x></p></div>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn-quiet" data-close><t-x data-i="k625fb26">取消</t-x></button>
+      <button class="btn btn-primary" data-act="chain"><t-x data-i="kdb22e59">确认解押</t-x></button>
+    </div>
+  </div></div>
+
+<script src="../app.js"></script>
+</body>
+</html>
